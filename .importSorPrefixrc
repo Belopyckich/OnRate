@@ -1,0 +1,8 @@
+{
+    "groupings": [
+        "@src",
+        [
+            "@components"
+        ]
+    ]
+}
