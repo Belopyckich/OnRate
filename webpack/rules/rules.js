@@ -24,8 +24,8 @@ export const postCssLoader = {
     postcssOptions: {
       config: join(WEBPACK_DIR, "./postcss.js"),
     },
+    sourceMap: true,
   },
-  sourceMap: true,
 };
 
 /***
