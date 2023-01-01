@@ -1,13 +1,13 @@
-import { join } from "path";
+import {join} from 'path';
 
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import { ROOT_DIR } from "../constants";
+import {ROOT_DIR} from '../constants';
 
 const config = {
-  filename: "index.html",
-  inject: true,
-  template: join(ROOT_DIR, "./src/index.html"),
+    filename: 'index.html',
+    inject: true,
+    template: join(ROOT_DIR, 'src/index.html'),
 };
 
 export const htmlWebpackPlugin = new HtmlWebpackPlugin(config);
