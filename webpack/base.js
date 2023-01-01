@@ -30,8 +30,6 @@ export default {
   },
   devtool: 'source-map',
   devServer: {
-    inline: false,
-    contentBase: join(ROOT_DIR, "dist"),
   },
   module: {
     rules: arrayFilterEmpty([
@@ -44,7 +42,6 @@ export default {
       ...rules.lessRules,
       ...rules.sassRules,
       ...rules.svgRules,
-      ...dependingOnConditionPlugins
     ]),
   },
   plugins: arrayFilterEmpty([
@@ -53,6 +50,7 @@ export default {
     plugins.definePlugin,
     plugins.forkTsCheckerWebpackPlugin,
     plugins.esLintPlugin,
+    ...dependingOnConditionPlugins
   ]),
   resolve: {
     alias: {

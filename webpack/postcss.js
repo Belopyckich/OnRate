@@ -1,8 +1,8 @@
 /*
  * @see https://github.com/postcss/postcss
  */
-import { IS_PROD } from "../constants";
-import { arrayFilterEmpty } from "../helpers";
+import { IS_PROD } from "./constants";
+import { arrayFilterEmpty } from "./helpers";
 
 module.exports = () => {
   const plugins = arrayFilterEmpty([
