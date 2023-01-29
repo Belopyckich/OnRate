@@ -1,54 +1,48 @@
 @font-face {
-  font-family: "Roboto";
-  font-weight: 300;
-  src: url("./fonts/Roboto-Light.woff2") format("woff2");
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Roboto';
+    font-weight: 300;
+    src: url('./fonts/Roboto-Light.woff2') format('woff2');
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto";
-  font-weight: 400;
-  src: url("./fonts/Roboto-Regular.woff2") format("woff2");
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Roboto';
+    font-weight: 400;
+    src: url('./fonts/Roboto-Regular.woff2') format('woff2');
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto";
-  font-weight: 500;
-  src: url("./fonts/Roboto-Medium.woff2") format("woff2");
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Roboto';
+    font-weight: 500;
+    src: url('./fonts/Roboto-Medium.woff2') format('woff2');
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto";
-  font-weight: 700;
-  src: url("./fonts/Roboto-Bold.woff2") format("woff2");
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Roboto';
+    font-weight: 700;
+    src: url('./fonts/Roboto-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-display: swap;
 }
 
 body,
 html {
-  position: relative;
-  font-family: Roboto, "sans-serif";
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  height: 100%;
-  width: 100%;
-
-  > div {
+    position: relative;
+    font-family: Roboto, 'sans-serif';
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
     height: 100%;
     width: 100%;
-  }
 
-  :global {
-    .ant-layout.ant-layout-has-sider {
-      height: 100%;
+    > div {
+        height: 100%;
+        width: 100%;
     }
-  }
 }
