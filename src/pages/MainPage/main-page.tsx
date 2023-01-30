@@ -7,12 +7,7 @@ const {Footer, Content} = Layout;
 
 const MainPage = () => {
     console.log('app');
-    return (
-        <Layout className={styles.mainLayout}>
-            <Content>Content</Content>
-            <Footer>Footer</Footer>
-        </Layout>
-    );
+    return <div>Content</div>;
 };
 
 export default MainPage;

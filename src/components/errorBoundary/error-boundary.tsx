@@ -1,6 +1,8 @@
+import {APP_ROUTES} from '@src/constants';
 import {devLog} from '@src/helpers/dev-log';
 import ErrorPage from '@src/pages/ErrorPage/error-page';
 import React, {ErrorInfo} from 'react';
+import {Navigate} from 'react-router-dom';
 
 interface Props {
     children: React.ReactNode;
@@ -31,7 +33,7 @@ class ErrorBoundary extends React.Component<Props, State> {
         } = this;
 
         if (hasError) {
-            return <ErrorPage title="Что-то пошло не так" />;
+            return <Navigate to={APP_ROUTES.ERROR} />;
         }
 
         return children;

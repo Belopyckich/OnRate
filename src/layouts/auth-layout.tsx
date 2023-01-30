@@ -1,4 +1,5 @@
 import {Layout} from 'antd';
+import {Footer, Header} from 'antd/es/layout/layout';
 import React from 'react';
 
 const {Content} = Layout;
@@ -9,11 +10,13 @@ interface AuthProps {
 
 const AuthLayout = ({children}: AuthProps) => (
     <Layout style={{minHeight: '100vh'}}>
-        <div>ХЕДЕР АУТЕНФИКАЦИИ</div>
+        <Header style={{padding: 0}} />
 
         <Layout>
-            <Content>{children}</Content>
+            <Content style={{backgroundColor: '#2a2a2a'}}>{children}</Content>
         </Layout>
+
+        <Footer>Footer</Footer>
     </Layout>
 );
 

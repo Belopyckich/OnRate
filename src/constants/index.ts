@@ -20,6 +20,7 @@ export const HTML5toTouch = {
 };
 
 export const APP_ROUTES = {
+    AUTH: '/auth',
     MAIN: '/main',
-    ERROR: '*',
+    ERROR: '/error',
 };
