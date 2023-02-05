@@ -9,14 +9,18 @@ interface AuthProps {
 }
 
 const AuthLayout = ({children}: AuthProps) => (
-    <Layout style={{minHeight: '100vh'}}>
+    <Layout style={{height: '100%'}}>
         <Header style={{padding: 0}} />
 
-        <Layout>
-            <Content style={{backgroundColor: '#2a2a2a'}}>{children}</Content>
-        </Layout>
-
-        <Footer>Footer</Footer>
+        <Content
+            style={{
+                backgroundColor: '#2a2a2a',
+                height: 'calc(100vh - 64px)',
+                overflow: 'auto',
+            }}
+        >
+            {children}
+        </Content>
     </Layout>
 );
 

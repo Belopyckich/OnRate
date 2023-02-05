@@ -1,7 +1,10 @@
-.test {
-    text-align: center;
+.app {
+    height: 100%;
+    width: 100%;
 
-    &-other-class {
-        text-align: end;
+    :global {
+        .ant-form-item {
+            margin-bottom: 0;
+        }
     }
 }

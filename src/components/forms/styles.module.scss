@@ -1,0 +1,33 @@
+.auth-form {
+    min-height: 484px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 370px;
+    margin: 40px auto;
+    padding: 50px 30px 30px;
+    background: cyan;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &-logo {
+        font-size: 146px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-title {
+        font-size: 24px;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    &-content {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-auto-rows: max-content;
+        row-gap: 14px;
+    }
+}
