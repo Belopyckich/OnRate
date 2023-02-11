@@ -1,5 +1,12 @@
+import {AuthForm} from '@src/components/forms/auth-form';
 import React from 'react';
 
-const AuthPage = <div>ЗДАРОВА</div>;
+import styles from './styles.module.scss';
+
+const AuthPage = () => (
+    <div className={styles.mainPage}>
+        <AuthForm />
+    </div>
+);
 
 export default AuthPage;

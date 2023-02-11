@@ -1,5 +1,7 @@
 import {APP_ROUTES} from '@src/constants';
-import React, {Suspense, lazy, useEffect, useState} from 'react';
+import {selectUser} from '@src/redux/user/selectors';
+import React, {lazy, useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {Navigate, Route, Routes} from 'react-router-dom';
 
 import {AppRouteElement} from '../appRouteElement/app-route-element';
@@ -8,18 +10,20 @@ import styles from './styles.module.scss';
 
 const AuthLayout = lazy(() => import('@src/layouts/auth-layout'));
 
-const AuthPage = lazy(() => import('@src/pages/MainPage/main-page'));
+const AuthPage = lazy(() => import('@src/pages/AuthPage/auth-page'));
 
 const ErrorPage = lazy(() => import('@src/pages/ErrorPage/error-page'));
 
 export const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const user = useSelector(selectUser);
+
     useEffect(() => {
-        setTimeout(() => {
-            setIsLoggedIn(false);
-        }, 5000);
-    }, []);
+        if (user) {
+            setIsLoggedIn(true);
+        }
+    }, [user]);
 
     return (
         <div className={styles.app}>

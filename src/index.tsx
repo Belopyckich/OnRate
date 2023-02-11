@@ -1,5 +1,6 @@
 import './normalize.css';
 import './style.scss';
+import './styles/themes.scss';
 
 import {StyleProvider} from '@ant-design/cssinjs';
 import {App} from '@components/app/index';
@@ -15,6 +16,7 @@ import {BreakpointProvider, setDefaultBreakpoints} from 'react-socks';
 
 import ErrorBoundary from './components/errorBoundary/error-boundary';
 import {HTML5toTouch} from './constants';
+import {ThemeProvider} from './themes/theme-provider';
 
 setDefaultBreakpoints([
     {xs: 0},
@@ -35,11 +37,13 @@ root.render(
             <BreakpointProvider>
                 <BrowserRouter>
                     <DndProvider options={HTML5toTouch}>
-                        <ErrorBoundary>
-                            <StyleProvider hashPriority="high">
-                                <App />
-                            </StyleProvider>
-                        </ErrorBoundary>
+                        <ThemeProvider>
+                            <ErrorBoundary>
+                                <StyleProvider hashPriority="high">
+                                    <App />
+                                </StyleProvider>
+                            </ErrorBoundary>
+                        </ThemeProvider>
                     </DndProvider>
                 </BrowserRouter>
             </BreakpointProvider>

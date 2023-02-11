@@ -1,0 +1,9 @@
+@import 'colors';
+
+$theme-map-light: (
+    --black-white: $black,
+);
+
+$theme-map-dark: (
+    --black-white: $white,
+);

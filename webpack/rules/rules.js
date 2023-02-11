@@ -1,4 +1,4 @@
-import {join} from 'path';
+import {join, resolve} from 'path';
 
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -7,6 +7,17 @@ import {ROOT_DIR} from '../constants';
 
 export const cssLoader = {
     loader: 'css-loader',
+};
+
+export const sassResources = {
+    loader: 'sass-resources-loader',
+    options: {
+        resources: [
+            resolve(ROOT_DIR, './src/styles/colors.scss'),
+            resolve(ROOT_DIR, './src/styles/mixins.scss'),
+            resolve(ROOT_DIR, './src/styles/variables.scss'),
+        ],
+    },
 };
 
 export const sassLoaderItems = [

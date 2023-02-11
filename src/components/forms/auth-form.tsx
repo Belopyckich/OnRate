@@ -1,7 +1,9 @@
 import Icon from '@ant-design/icons';
+import {setUser} from '@src/redux/user/actions';
 import {Button, Form, Input} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import React from 'react';
+import {useDispatch} from 'react-redux';
 
 import LogoIcon from '../../assets/logo.component.svg';
 import {
@@ -9,20 +11,24 @@ import {
     AUTH_FORM_LABELS,
     AUTH_FORM_PLACEHOLDERS,
 } from './constants';
-import {AuthFormValues} from './interfaces';
+import {User} from './interfaces';
 import styles from './styles.module.scss';
 
 export const AuthForm = () => {
-    const [form] = useForm<AuthFormValues>();
+    const dispatch = useDispatch();
 
-    const onFinish = (formValues: AuthFormValues) => {
-        console.log(formValues);
+    const [form] = useForm<User>();
+
+    const onFinish = (formValues: User) => {
+        dispatch(setUser(formValues));
     };
 
     return (
         <div className={styles.authForm}>
             <Icon component={LogoIcon} className={styles.authFormLogo} />
+
             <div className={styles.authFormTitle}>Autorization</div>
+
             <Form
                 name="authForm"
                 form={form}

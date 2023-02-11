@@ -8,6 +8,7 @@ import {
     postCssLoader,
     resolveUrlLoader,
     sassLoaderItems,
+    sassResources,
 } from './rules';
 
 /** css **/
@@ -47,6 +48,7 @@ export const sassModulesRule = {
         postCssLoader,
         resolveUrlLoader,
         ...sassLoaderItems,
+        sassResources,
     ]),
 };
 
@@ -58,6 +60,7 @@ export const sassRule = {
         postCssLoader,
         resolveUrlLoader,
         ...sassLoaderItems,
+        sassResources,
     ]),
 };
 
