@@ -1,6 +1,4 @@
-import './normalize.css';
 import './style.scss';
-import './styles/themes.scss';
 
 import {StyleProvider} from '@ant-design/cssinjs';
 import {App} from '@components/app/index';
@@ -20,6 +18,7 @@ import {ThemeProvider} from './themes/theme-provider';
 
 setDefaultBreakpoints([
     {xs: 0},
+    {ss: 415},
     {sm: 576},
     {md: 768},
     {lg: 992},

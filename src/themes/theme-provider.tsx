@@ -1,5 +1,5 @@
 import {Theme} from '@src/typings';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createContext, useState} from 'react';
 
 import {ThemeProviderProps, ThemeSwitcherContextProps} from './interfaces';
@@ -10,6 +10,8 @@ export const ThemeContext = createContext<ThemeSwitcherContextProps>(
 
 export const ThemeProvider = ({children}: ThemeProviderProps) => {
     const [theme, setTheme] = useState(Theme.Dark);
+
+    useEffect(() => document.documentElement.classList.add(theme), []);
 
     const switchTheme = (currentTheme: Theme) => {
         if (theme !== currentTheme) {

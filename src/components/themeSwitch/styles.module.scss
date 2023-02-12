@@ -1,0 +1,9 @@
+.theme-switch {
+    display: grid;
+    column-gap: 8px;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-auto-columns: max-content;
+    justify-items: center;
+    font-size: 12px;
+}

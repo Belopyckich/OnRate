@@ -1,6 +1,6 @@
-import {ThemeSwitch} from '@src/components/themeSwitch/theme-switch';
+import {MainHeader} from '@src/components/header/header';
+import {Sidebar} from '@src/components/sidebar/sidebar';
 import {Layout} from 'antd';
-import Sider from 'antd/es/layout/Sider';
 import React from 'react';
 
 import styles from './styles.module.scss';
@@ -11,17 +11,16 @@ interface AuthProps {
     children: React.ReactNode;
 }
 
-const AuthLayout = ({children}: AuthProps) => (
-    <Layout style={{minHeight: '100vh'}}>
-        <div className={styles.mainPage}>ОСНОВНОЙ ХЕДЕР</div>
+const MainLayout = ({children}: AuthProps) => (
+    <Layout style={{height: '100vh', overflow: 'hidden'}}>
+        <Sidebar />
+
         <Layout>
-            <Sider>
-                <span>Sider</span>
-                <ThemeSwitch />
-            </Sider>
+            <MainHeader />
+
             <Content>{children}</Content>
         </Layout>
     </Layout>
 );
 
-export default AuthLayout;
+export default MainLayout;

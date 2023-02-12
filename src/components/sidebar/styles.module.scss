@@ -1,0 +1,42 @@
+.sidebar {
+    :global {
+        .ant-layout-sider-children {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: max-content 1fr;
+            overflow: hidden;
+        }
+
+        .ant-menu {
+            height: 100%;
+            padding-right: 6px;
+            overflow-y: auto;
+        }
+    }
+
+    &-content {
+        height: 100%;
+        padding-bottom: 24px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr max-content;
+        row-gap: 12px;
+        align-content: space-between;
+        overflow: hidden;
+    }
+
+    &-logo {
+        font-size: 64px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            fill: $white;
+
+            path {
+                fill: $white;
+            }
+        }
+    }
+}

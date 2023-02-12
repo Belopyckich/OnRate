@@ -1,3 +1,6 @@
+@import './normalize.css';
+@import './styles/themes.scss';
+
 @font-face {
     font-family: 'Roboto';
     font-weight: 300;
@@ -41,9 +44,4 @@ html {
     height: 100%;
     width: 100%;
     line-height: unset;
-
-    > div {
-        height: 100%;
-        width: 100%;
-    }
 }
