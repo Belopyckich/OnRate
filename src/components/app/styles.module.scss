@@ -7,8 +7,18 @@
             margin-bottom: 0;
         }
 
-        .ant-layout-header {
-            padding-inline: 24px;
+        .ant-layout {
+            background: themed(--lightGrayishBlue-mostlyBlackBlue);
+        }
+
+        .ant-layout-content {
+            height: calc(100vh - 56px) !important;
+        }
+
+        .ant-layout .ant-layout-header {
+            padding-inline: 0 24px;
+            height: 56px;
+            line-height: normal;
         }
     }
 }

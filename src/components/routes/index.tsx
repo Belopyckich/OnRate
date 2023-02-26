@@ -11,8 +11,6 @@ const MainLayout = lazy(() => import('@src/layouts/main-layout'));
 const ErrorPage = lazy(() => import('@src/pages/ErrorPage/error-page'));
 
 const MainRoutes = () => {
-    console.log('mainLayout');
-
     return (
         <Routes>
             <Route

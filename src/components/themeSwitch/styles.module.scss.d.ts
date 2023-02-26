@@ -3,6 +3,7 @@
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         themeSwitch: string;
+        themeSwitchFolded: string;
     }
 }
 

@@ -1,16 +1,17 @@
 import {AppState, appReducer} from './app/reducer';
 import {GamesState, gamesReducer} from './games/reducer';
-import {UserState, userReducer} from './user/reducer';
+import {UsersState} from './users/interfaces';
+import {userReducer} from './users/reducer';
 
 export interface State {
     games: GamesState;
-    user: UserState;
+    users: UsersState;
     app: AppState;
 }
 
 const stateToReducer = {
     games: gamesReducer,
-    user: userReducer,
+    users: userReducer,
     app: appReducer,
 };
 

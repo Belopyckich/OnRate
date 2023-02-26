@@ -6,4 +6,8 @@
     grid-auto-columns: max-content;
     justify-items: center;
     font-size: 12px;
+
+    &-folded {
+        justify-content: center;
+    }
 }

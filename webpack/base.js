@@ -2,7 +2,7 @@ import {join, resolve} from 'path';
 
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-import {IS_DEV_SERVER, IS_PROD, ROOT_DIR} from './constants';
+import {DEFAULT_PORT, IS_DEV_SERVER, IS_PROD, ROOT_DIR} from './constants';
 import {arrayFilterEmpty} from './helpers';
 import * as plugins from './plugins';
 import * as rules from './rules';
@@ -40,6 +40,7 @@ export default {
         },
         headers: {'Access-Control-Allow-Origin': '*'},
         historyApiFallback: true,
+        port: DEFAULT_PORT,
         hot: true,
         static: {
             publicPath: '/',

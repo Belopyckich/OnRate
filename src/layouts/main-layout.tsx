@@ -12,13 +12,13 @@ interface AuthProps {
 }
 
 const MainLayout = ({children}: AuthProps) => (
-    <Layout style={{height: '100vh', overflow: 'hidden'}}>
+    <Layout className={styles.mainLayout}>
         <Sidebar />
 
         <Layout>
             <MainHeader />
 
-            <Content>{children}</Content>
+            <Content className={styles.mainLayoutContent}>{children}</Content>
         </Layout>
     </Layout>
 );

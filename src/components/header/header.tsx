@@ -7,6 +7,7 @@ import {Header} from 'antd/es/layout/layout';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
+import {PhotoBox} from '../photoBox/photo-box';
 import styles from './styles.module.scss';
 
 export const MainHeader = () => {
@@ -14,16 +15,8 @@ export const MainHeader = () => {
 
     const isSidebarOpen = useSelector(selectIsSidebarOpen);
 
-    const isMobileSidebar = checkIsMobile(['ss']);
-
     return (
-        <Header
-            style={{
-                paddingInline:
-                    isSidebarOpen && isMobileSidebar ? '0px' : '24px',
-            }}
-            className={styles.header}
-        >
+        <Header className={styles.header}>
             {isSidebarOpen ? (
                 <MenuFoldOutlined
                     className={styles.headerControlSidebarIcon}
@@ -35,7 +28,9 @@ export const MainHeader = () => {
                     onClick={() => dispatch(setIsSidebarOpen(!isSidebarOpen))}
                 />
             )}
-            HEADER
+            <div className={styles.headerContent}>
+                <PhotoBox />
+            </div>
         </Header>
     );
 };

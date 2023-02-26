@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 50px;
     grid-auto-flow: column;
+    background-color: themed(--moderateBlue-veryDarkBlue);
 
     &-control-sidebar-icon {
         height: 100%;
@@ -13,5 +14,14 @@
         path {
             fill: white;
         }
+    }
+
+    &-content {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: 32px;
+        height: 100%;
+        justify-content: flex-end;
+        align-items: center;
     }
 }

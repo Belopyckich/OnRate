@@ -1,5 +1,9 @@
 import Icon from '@ant-design/icons';
-import {setUser} from '@src/redux/user/actions';
+import {
+    getUsers,
+    loginCurrentUser,
+    setCurrentUser,
+} from '@src/redux/users/actions';
 import {Button, Form, Input} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import React from 'react';
@@ -20,7 +24,7 @@ export const AuthForm = () => {
     const [form] = useForm<User>();
 
     const onFinish = (formValues: User) => {
-        dispatch(setUser(formValues));
+        dispatch(loginCurrentUser(formValues));
     };
 
     return (

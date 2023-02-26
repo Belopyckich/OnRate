@@ -2,8 +2,7 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        mainLayout: string;
-        mainLayoutContent: string;
+        photoBox: string;
     }
 }
 

@@ -11,6 +11,12 @@
             height: 100%;
             padding-right: 6px;
             overflow-y: auto;
+            background: inherit;
+        }
+
+        .ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected,
+        .ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-active {
+            background-color: themed(--vividBlue-bostonBlue);
         }
     }
 
@@ -23,13 +29,15 @@
         row-gap: 12px;
         align-content: space-between;
         overflow: hidden;
+        background: themed(--mostlyDarkBlue-veryDarkBlue);
     }
 
     &-logo {
-        font-size: 64px;
+        font-size: 56px;
         display: flex;
         justify-content: center;
         align-items: center;
+        background: themed(--strongBlue-oxfordBlue);
 
         svg {
             fill: $white;

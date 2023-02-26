@@ -2,9 +2,19 @@
 @import 'colors';
 
 $theme-map-light: (
-    --black-white: $black,
+    --white-black: $white,
+    --moderateBlue-veryDarkBlue: $moderateBlue,
+    --strongBlue-oxfordBlue: $strongBlue,
+    --lightGrayishBlue-mostlyBlackBlue: $lightGrayishBlue,
+    --mostlyDarkBlue-veryDarkBlue: $mostlyDarkBlue,
+    --vividBlue-bostonBlue: $vividBlue,
 );
 
 $theme-map-dark: (
-    --black-white: $white,
+    --white-black: $black,
+    --moderateBlue-veryDarkBlue: $veryDarkBlue,
+    --strongBlue-oxfordBlue: $oxfordBlue,
+    --lightGrayishBlue-mostlyBlackBlue: $mostlyBlackBlue,
+    --mostlyDarkBlue-veryDarkBlue: $veryDarkBlue,
+    --vividBlue-bostonBlue: $bostonBlue,
 );

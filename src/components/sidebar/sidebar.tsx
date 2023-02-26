@@ -13,7 +13,7 @@ import styles from './styles.module.scss';
 export const Sidebar = () => {
     const isSidebarOpen = useSelector(selectIsSidebarOpen);
 
-    const isMobileSidebar = checkIsMobile(['ss']);
+    const isMobileSidebar = checkIsMobile(['ss', 'xs']);
 
     return (
         <Sider
@@ -80,7 +80,7 @@ export const Sidebar = () => {
                     ]}
                 />
 
-                <ThemeSwitch />
+                <ThemeSwitch isSidebarOpen={isSidebarOpen} />
             </div>
         </Sider>
     );
