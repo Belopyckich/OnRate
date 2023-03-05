@@ -4,7 +4,7 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 
 import {AppRouteElement} from '../appRouteElement/app-route-element';
 
-const MainPage = lazy(() => import('@src/pages/MainPage/main-page'));
+const KanbanPage = lazy(() => import('@src/pages/KanbanPage/kanban-page'));
 
 const MainLayout = lazy(() => import('@src/layouts/main-layout'));
 
@@ -14,9 +14,12 @@ const MainRoutes = () => {
     return (
         <Routes>
             <Route
-                path={APP_ROUTES.MAIN}
+                path={APP_ROUTES.KANBAN}
                 element={
-                    <AppRouteElement component={MainPage} layout={MainLayout} />
+                    <AppRouteElement
+                        component={KanbanPage}
+                        layout={MainLayout}
+                    />
                 }
             />
 
@@ -30,7 +33,7 @@ const MainRoutes = () => {
                 }
             />
 
-            <Route path="*" element={<Navigate to={APP_ROUTES.MAIN} />} />
+            <Route path="*" element={<Navigate to={APP_ROUTES.KANBAN} />} />
         </Routes>
     );
 };

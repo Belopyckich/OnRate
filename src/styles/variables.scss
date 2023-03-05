@@ -3,18 +3,26 @@
 
 $theme-map-light: (
     --white-black: $white,
+    --black-white: $black,
     --moderateBlue-veryDarkBlue: $moderateBlue,
     --strongBlue-oxfordBlue: $strongBlue,
     --lightGrayishBlue-mostlyBlackBlue: $lightGrayishBlue,
     --mostlyDarkBlue-veryDarkBlue: $mostlyDarkBlue,
     --vividBlue-bostonBlue: $vividBlue,
+    --blue-astral: $blue,
+    --solitude-fiord: $solitude,
+    --darkGrey-disaturatedBlue: $darkGrey,
 );
 
 $theme-map-dark: (
     --white-black: $black,
+    --black-white: $white,
     --moderateBlue-veryDarkBlue: $veryDarkBlue,
     --strongBlue-oxfordBlue: $oxfordBlue,
     --lightGrayishBlue-mostlyBlackBlue: $mostlyBlackBlue,
     --mostlyDarkBlue-veryDarkBlue: $veryDarkBlue,
     --vividBlue-bostonBlue: $bostonBlue,
+    --blue-astral: $astral,
+    --solitude-fiord: $fiord,
+    --darkGrey-disaturatedBlue: $disaturatedBlue,
 );

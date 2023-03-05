@@ -2,7 +2,8 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        mainPage: string;
+        kanbanPage: string;
+        kanbanPageFilter: string;
     }
 }
 

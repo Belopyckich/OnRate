@@ -1,0 +1,43 @@
+@import 'src/styles/variables';
+
+$basicBtnSize: 32px;
+
+%icon {
+    display: block;
+    color: #fff;
+    padding: 9px;
+    width: $basicBtnSize;
+    height: $basicBtnSize;
+}
+
+.button-with-icon {
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+    background-color: themed(--solitude-fiord);
+    border-radius: 19px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &-disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
+    &-icon {
+        list-style: none;
+        width: $basicBtnSize;
+        height: $basicBtnSize;
+        background-color: themed(--blue-astral);
+        border-radius: $basicBtnSize;
+
+        & svg {
+            @extend %icon;
+        }
+    }
+
+    &-title {
+        font-size: 12px;
+        padding: 4px 12px;
+    }
+}

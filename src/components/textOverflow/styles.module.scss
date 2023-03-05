@@ -1,0 +1,12 @@
+.text-overflow {
+    width: 100%;
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: themed(--black-white);
+
+    &-underline {
+        text-decoration: underline;
+    }
+}

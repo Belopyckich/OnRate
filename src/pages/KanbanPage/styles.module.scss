@@ -1,0 +1,16 @@
+.kanban-page {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 10px;
+    grid-template-rows: max-content 1fr;
+    overflow: hidden;
+
+    &-filter {
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        column-gap: 10px;
+        width: 100%;
+    }
+}
