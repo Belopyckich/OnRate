@@ -2,10 +2,9 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        kanbanColumn: string;
-        kanbanColumnContent: string;
-        kanbanColumnContentWrap: string;
-        kanbanColumnHeader: string;
+        kanbanTask: string;
+        kanbanTaskText: string;
+        kanbanTaskTitle: string;
     }
 }
 

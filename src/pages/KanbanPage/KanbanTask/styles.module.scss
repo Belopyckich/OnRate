@@ -1,0 +1,22 @@
+.kanban-task {
+    background-color: themed(--white-midnight);
+    border: 1px solid themed(--mercury-blackPearl);
+    border-radius: 4px;
+    box-shadow: 0 0 5px themed(--alto-zeus);
+    cursor: pointer;
+    padding: 16px 12px 12px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: max-content;
+    row-gap: 4px;
+    grid-auto-flow: row;
+
+    &-title {
+        color: themed(--black-white);
+    }
+
+    &-text {
+        color: themed(--darkGrey-rockBlue);
+        word-break: break-all;
+    }
+}

@@ -3,6 +3,7 @@
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         emptyBlock: string;
+        emptyBlockIcon: string;
         emptyBlockText: string;
     }
 }

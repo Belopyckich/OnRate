@@ -10,17 +10,17 @@ const gamesState: KanbanState = {
         {
             uid: 1,
             title: 'Колонка 1',
-            color: '00000',
+            color: 'rgb(255, 202, 47)',
         },
         {
             uid: 2,
             title: 'Колонка 2',
-            color: '132342',
+            color: 'rgb(81, 154, 68)',
         },
         {
             uid: 3,
             title: 'Колонка 3',
-            color: 'fdd1323',
+            color: 'rgb(255, 255, 255)',
         },
     ],
     kanbanBoardDeals: {

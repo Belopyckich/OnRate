@@ -24,3 +24,7 @@ export const APP_ROUTES = {
     KANBAN: '/kanban',
     ERROR: '/error',
 };
+
+export const COLOR_WHITE = '#FFFFFF';
+
+export const COLOR_BLACK = '#000000';

@@ -40,7 +40,9 @@ export const EmptyBlock = ({
 
     return (
         <div className={cn(styles.emptyBlock, extraClassName)}>
-            <CurrentIcon className={extraClassNameIcon} />
+            <CurrentIcon
+                className={cn(styles.emptyBlockIcon, extraClassNameIcon)}
+            />
 
             {description && (
                 <div className={cn(styles.emptyBlockText, extraTextClassName)}>

@@ -3,6 +3,7 @@
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         app: string;
+        rcVirtualListScrollbarShow: string;
     }
 }
 

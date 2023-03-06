@@ -9,10 +9,16 @@
 
         .ant-layout {
             background: themed(--lightGrayishBlue-mostlyBlackBlue);
+            height: 100%;
         }
 
         .ant-layout-content {
-            height: calc(100vh - 56px) !important;
+            height: calc(100vh - 56px);
+            overflow: auto;
+
+            @media screen and (max-width: $sm-min) {
+                padding: 24px 6px 6px;
+            }
         }
 
         .ant-layout .ant-layout-header {
@@ -20,5 +26,49 @@
             height: 56px;
             line-height: normal;
         }
+
+        .ant-input {
+            background-color: themed(--white-midnight);
+            border: 1px solid themed(--alto-licorice);
+            color: themed(--darkGrey-rockBlue);
+
+            &-affix-wrapper {
+                background-color: themed(--white-midnight);
+                border: 1px solid themed(--alto-licorice);
+            }
+
+            &:focus {
+                border: 1px solid themed(--blue-bostonBlue);
+            }
+        }
+
+        .anticon.ant-input-password-icon {
+            color: themed(--nobel-rockBlue) !important;
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .rc-virtual-list-scrollbar-show {
+        display: block;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: themed(--alto-oxfordBlue);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-corner {
+        background: themed(--white-mirage);
+    }
+
+    * {
+        scrollbar-width: 10px;
+        scrollbar-color: themed(--alto-oxfordBlue) transparent;
+        scroll-padding: 0;
+        scrollbar-width: 5px;
     }
 }

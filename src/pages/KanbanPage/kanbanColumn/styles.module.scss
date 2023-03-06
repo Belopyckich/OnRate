@@ -1,4 +1,37 @@
-.kanban-columns {
+.kanban-column {
     height: 100%;
     width: 100%;
+    background-color: themed(--white-mirage);
+    box-shadow: 0 0 5px themed(--alto-zeus);
+    display: grid;
+    row-gap: 12px;
+    grid-template-columns: 100%;
+    grid-template-rows: max-content 1fr;
+    overflow: hidden;
+    border-radius: 10px;
+
+    &-header {
+        height: 42px;
+        padding: 10px;
+        position: relative;
+        text-align: center;
+    }
+
+    &-content {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        grid-template-columns: 100%;
+        grid-auto-rows: min-content;
+        grid-auto-flow: row;
+        row-gap: 12px;
+        overflow-y: auto;
+
+        &-wrap {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            padding: 10px;
+        }
+    }
 }

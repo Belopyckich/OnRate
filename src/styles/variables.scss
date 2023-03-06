@@ -3,6 +3,7 @@
 
 $theme-map-light: (
     --white-black: $white,
+    --white-mirage: $white,
     --black-white: $black,
     --moderateBlue-veryDarkBlue: $moderateBlue,
     --strongBlue-oxfordBlue: $strongBlue,
@@ -12,10 +13,19 @@ $theme-map-light: (
     --blue-astral: $blue,
     --solitude-fiord: $solitude,
     --darkGrey-disaturatedBlue: $darkGrey,
+    --alto-zeus: $alto,
+    --alto-oxfordBlue: $alto,
+    --mercury-blackPearl: $mercury,
+    --white-midnight: $white,
+    --darkGrey-rockBlue: $darkGrey,
+    --alto-licorice: $alto,
+    --blue-bostonBlue: $blue,
+    --nobel-rockBlue: $nobel,
 );
 
 $theme-map-dark: (
     --white-black: $black,
+    --white-mirage: $mirage,
     --black-white: $white,
     --moderateBlue-veryDarkBlue: $veryDarkBlue,
     --strongBlue-oxfordBlue: $oxfordBlue,
@@ -25,4 +35,12 @@ $theme-map-dark: (
     --blue-astral: $astral,
     --solitude-fiord: $fiord,
     --darkGrey-disaturatedBlue: $disaturatedBlue,
+    --alto-zeus: $zeus,
+    --alto-oxfordBlue: $oxfordBlue,
+    --mercury-blackPearl: $blackPearl,
+    --white-midnight: $midnight,
+    --darkGrey-rockBlue: $rockBlue,
+    --alto-licorice: $licorice,
+    --blue-bostonBlue: $bostonBlue,
+    --nobel-rockBlue: $rockBlue,
 );

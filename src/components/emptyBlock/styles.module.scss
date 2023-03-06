@@ -1,14 +1,24 @@
 .empty-block {
     height: 100%;
     width: 100%;
-    display: flex;
+    display: grid;
+    row-gap: 10px;
+    grid-template-columns: 120px;
+    grid-auto-rows: max-content;
+    grid-auto-flow: row;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    align-content: center;
+    justify-items: center;
 
     &-text {
         color: themed(--darkGrey-disaturatedBlue);
         text-align: center;
         position: relative;
+    }
+
+    &-icon {
+        height: 6rem;
+        width: 6rem;
     }
 }

@@ -10,9 +10,11 @@ import LogoIcon from '../../assets/logo.component.svg';
 import {ThemeSwitch} from '../themeSwitch/theme-switch';
 import styles from './styles.module.scss';
 
-export const Sidebar = () => {
-    const isSidebarOpen = useSelector(selectIsSidebarOpen);
+export interface SidebarProps {
+    isSidebarOpen: boolean;
+}
 
+export const Sidebar = ({isSidebarOpen}: SidebarProps) => {
     const isMobileSidebar = checkIsMobile(['ss', 'xs']);
 
     return (

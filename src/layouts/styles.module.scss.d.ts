@@ -4,6 +4,7 @@ declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         mainLayout: string;
         mainLayoutContent: string;
+        mainLayoutContentCollapsed: string;
     }
 }
 
