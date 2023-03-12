@@ -29,6 +29,6 @@
         "importsNotUsedAsValues": "preserve",
         "incremental": true
     },
-    "include": ["src", "@types"],
+    "include": ["src", "@types", "api"],
     "exclude": ["**/node_modules", "**/.*/"]
 }

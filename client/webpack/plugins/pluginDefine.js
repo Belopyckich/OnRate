@@ -1,6 +1,6 @@
 import {DefinePlugin} from 'webpack';
 
-import {IS_DEV, IS_PROD, MODE} from '../constants';
+import {API_URL, IS_DEV, IS_PROD, MODE} from '../constants';
 
 const config = {
     'process.env': {
@@ -8,6 +8,7 @@ const config = {
     },
     IS_PROD: IS_PROD,
     IS_DEV: IS_DEV,
+    API_URL: API_URL,
 };
 
 export const definePlugin = new DefinePlugin(config);

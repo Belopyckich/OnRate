@@ -1,9 +1,5 @@
 import Icon from '@ant-design/icons';
-import {
-    getUsers,
-    loginCurrentUser,
-    setCurrentUser,
-} from '@src/redux/users/actions';
+import {loginUser} from '@src/redux/app/actions';
 import {Button, Form, Input} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import React from 'react';
@@ -15,16 +11,16 @@ import {
     AUTH_FORM_LABELS,
     AUTH_FORM_PLACEHOLDERS,
 } from './constants';
-import {User} from './interfaces';
+import {UserForm} from './interfaces';
 import styles from './styles.module.scss';
 
 export const AuthForm = () => {
     const dispatch = useDispatch();
 
-    const [form] = useForm<User>();
+    const [form] = useForm<UserForm>();
 
-    const onFinish = (formValues: User) => {
-        dispatch(loginCurrentUser(formValues));
+    const onFinish = (formValues: UserForm) => {
+        dispatch(loginUser(formValues));
     };
 
     return (
@@ -42,13 +38,13 @@ export const AuthForm = () => {
                 className={styles.authFormContent}
             >
                 <Form.Item
-                    label={AUTH_FORM_LABELS[AUTH_FORM_FIELDS.login]}
-                    name={AUTH_FORM_FIELDS.login}
+                    label={AUTH_FORM_LABELS[AUTH_FORM_FIELDS.email]}
+                    name={AUTH_FORM_FIELDS.email}
                     rules={[
                         {
                             required: true,
                             message:
-                                AUTH_FORM_PLACEHOLDERS[AUTH_FORM_FIELDS.login],
+                                AUTH_FORM_PLACEHOLDERS[AUTH_FORM_FIELDS.email],
                         },
                     ]}
                 >

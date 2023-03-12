@@ -1,5 +1,4 @@
 import {APP_ROUTES} from '@src/constants';
-import {selectCurrentUser} from '@src/redux/users/selectors';
 import React, {lazy, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Navigate, Route, Routes} from 'react-router-dom';
@@ -17,13 +16,11 @@ const ErrorPage = lazy(() => import('@src/pages/ErrorPage/error-page'));
 export const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const user = useSelector(selectCurrentUser);
-
-    useEffect(() => {
-        if (user) {
-            setIsLoggedIn(true);
-        }
-    }, [user]);
+    // useEffect(() => {
+    //     if (user) {
+    //         setIsLoggedIn(true);
+    //     }
+    // }, []);
 
     return (
         <div className={styles.app}>

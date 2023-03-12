@@ -1,14 +1,14 @@
 export const AUTH_FORM_FIELDS = {
-    login: 'login',
+    email: 'email',
     password: 'password',
 } as const;
 
 export const AUTH_FORM_LABELS = {
-    login: 'Login',
+    email: 'Email',
     password: 'Password',
 } as const;
 
 export const AUTH_FORM_PLACEHOLDERS = {
-    login: 'Please enter Login',
+    email: 'Please enter Email',
     password: 'Please enter Password',
 } as const;

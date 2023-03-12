@@ -7,12 +7,11 @@ import {createApiEndpointInstance} from './endpointInstance';
  * если добавятся новые контроллеры, внесите их ручками
  */
 export enum EndpointsTypes {
-    RandomUser = 'RandomUser',
+    Auth = 'Auth',
 }
 
 const endpointList: {[x in EndpointsTypes]: () => AxiosInstance} = {
-    [EndpointsTypes.RandomUser]: () =>
-        createApiEndpointInstance('/randomuser.me/api'),
+    [EndpointsTypes.Auth]: () => createApiEndpointInstance('/auth'),
 };
 
 export default endpointList;

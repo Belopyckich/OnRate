@@ -2,8 +2,8 @@ import {AppState, appReducer} from './app/reducer';
 import {GamesState, gamesReducer} from './games/reducer';
 import {KanbanState} from './kanban/interfaces';
 import {kanbanReducer} from './kanban/reducer';
-import {UsersState} from './users/interfaces';
-import {userReducer} from './users/reducer';
+import {UsersState} from './randomUsers/interfaces';
+import {userReducer} from './randomUsers/reducer';
 
 export interface State {
     games: GamesState;

@@ -20,3 +20,4 @@ declare module '*.mp3' {
 
 declare let IS_DEV: boolean;
 declare let IS_PROD: boolean;
+declare let API_URL: string;
