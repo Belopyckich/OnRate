@@ -1,9 +1,11 @@
+import {Nullable} from '@src/typings';
 import {ActionType, createReducer} from 'typesafe-actions';
 
 import * as actions from './actions';
+import {User} from './interfaces';
 
 export interface AppState {
-    user: any;
+    user: Nullable<User>;
     isSidebarOpen: boolean;
 }
 

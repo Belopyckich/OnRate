@@ -6,7 +6,6 @@ import {AxiosResponse} from 'axios';
 import qs from 'qs';
 
 export const baseConfig: AxiosRequestConfig = {
-    withCredentials: true,
     paramsSerializer: {
         serialize: (params: any) =>
             qs.stringify(params, {arrayFormat: 'brackets'}),

@@ -6,9 +6,9 @@ const config = {
     'process.env': {
         NODE_ENV: JSON.stringify(MODE),
     },
-    IS_PROD: IS_PROD,
-    IS_DEV: IS_DEV,
-    API_URL: API_URL,
+    IS_PROD: JSON.stringify(IS_PROD),
+    IS_DEV: JSON.stringify(IS_DEV),
+    API_URL: JSON.stringify(API_URL),
 };
 
 export const definePlugin = new DefinePlugin(config);

@@ -23,7 +23,8 @@ export const createApiEndpointInstance = (url: string): AxiosInstance => {
     if (!foundInstance) {
         const config: AxiosRequestConfig = {
             ...baseConfig,
-            baseURL: `http://localhost:5000/api/auth`,
+            withCredentials: true,
+            baseURL: `${API_URL}${url}`,
         };
 
         const instance = axios.create(config);

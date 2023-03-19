@@ -2,6 +2,7 @@ import {all, call, put, takeLatest} from 'typed-redux-saga';
 import {getType} from 'typesafe-actions';
 
 import {showNotification} from '../../components/showNotification/show-notification';
+import {User} from './../app/interfaces';
 import * as actions from './actions';
 import * as requests from './requests';
 
@@ -10,7 +11,15 @@ function* getUsersWorker() {
         const data = yield* call(requests.getUsersRequest);
 
         if (data.results?.length) {
-            yield* put(actions.setUsers(data.results));
+            const users = data.results.map(
+                (user) =>
+                    ({
+                        ...user,
+                        id: user.id.value,
+                    } as User),
+            );
+
+            yield* put(actions.setUsers(users));
         } else {
             throw new Error();
         }

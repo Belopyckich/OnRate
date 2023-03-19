@@ -51,10 +51,6 @@ class UserService {
 
   async login(email, password) {
     const user = await UserModel.findOne({ email });
-    console.log(
-      "🚀 ~ file: user-service.js:54 ~ UserService ~ login ~ user:",
-      user
-    );
 
     if (!user) {
       throw ApiError.BadRequest("Пользователь с таким email не найден");

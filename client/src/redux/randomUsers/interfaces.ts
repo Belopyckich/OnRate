@@ -1,60 +1,45 @@
-import {UserForm} from '@src/components/forms/interfaces';
-import {Nullable} from '@src/typings';
+import {Dob, User, UserInitials, UserPicture} from '../app/interfaces';
 
-// export interface UserInitials {
-//     title: string;
-//     first: string;
-//     last: string;
-// }
+export interface RandomUser {
+    email: string;
+    id: RandomUserId;
+    name: UserInitials;
+    location: RandomUserLocation;
+    picture: UserPicture;
+    dob: Dob;
+}
 
-// export interface Street {
-//     number: number;
-//     name: string;
-// }
+export interface RandomUserId {
+    name: string;
+    value: string;
+}
 
-// export interface Coordinates {
-//     latitude: string;
-//     longitude: string;
-// }
+export interface RandomUserLocation {
+    street: Street;
+    city: string;
+    state: string;
+    country: string;
+    postcode: string;
+    coordinates: Coordinates;
+    timezone: Timezone;
+}
 
-// export interface Timezone {
-//     offset: string;
-//     description: string;
-// }
+export interface Street {
+    number: number;
+    name: string;
+}
 
-// export interface Location {
-//     street: Street;
-//     city: string;
-//     state: string;
-//     country: string;
-//     postcode: string;
-//     coordinates: Coordinates;
-//     timezone: Timezone;
-// }
+export interface Coordinates {
+    latitude: string;
+    longitude: string;
+}
 
-// export interface Dob {
-//     date: string;
-//     age: number;
-// }
-
-// export interface UserPicture {
-//     large: string;
-//     medium: string;
-//     thumbnail: string;
-// }
-
-// export interface User {
-//     gender: 'female' | 'male';
-//     name: UserInitials;
-//     location: Location;
-//     email: string;
-//     dob: Dob;
-//     phone: string;
-//     nat: string;
-// }
-
+export interface Timezone {
+    offset: string;
+    description: string;
+}
 export interface UsersState {
-    users: any[];
+    users: User[];
     isLoading: boolean;
 }
 
