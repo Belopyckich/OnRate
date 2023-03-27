@@ -2,10 +2,8 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        authPage: string;
-        authPageForm: string;
-        authPageLogo: string;
-        authPageTitle: string;
+        loginForm: string;
+        loginFormDescription: string;
     }
 }
 

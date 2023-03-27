@@ -3,7 +3,7 @@ import {RandomUserLocation} from './../randomUsers/interfaces';
 export interface User {
     email: string;
     id: string;
-    name?: UserInitials;
+    name: string;
     location?: UserLocation;
     picture?: UserPicture;
     dob?: Dob;

@@ -15,6 +15,7 @@ function* getUsersWorker() {
                 (user) =>
                     ({
                         ...user,
+                        name: `${user.name.first} ${user.name.last}`,
                         id: user.id.value,
                     } as User),
             );

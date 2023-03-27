@@ -8,4 +8,6 @@ export const messages = {
     accessSuccess: 'Вы успешно вошли',
     accessError: 'Произошла ошибка авторизации',
     serverError: 'Ошибка на сервере',
+    emailInvalid: 'Некорректный адрес электронной почты',
+    emailSingle: 'Адрес электронной почты может быть только один',
 };

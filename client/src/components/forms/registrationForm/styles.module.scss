@@ -1,0 +1,12 @@
+.registration-form {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: max-content;
+    row-gap: 14px;
+
+    &-description {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

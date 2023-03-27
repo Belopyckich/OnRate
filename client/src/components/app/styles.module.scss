@@ -21,6 +21,22 @@
             }
         }
 
+        .ant-btn-default {
+            @include btn;
+        }
+
+        .ant-btn-dangerous {
+            @include btn-danger;
+        }
+
+        .ant-btn-primary {
+            @include btn-primary;
+        }
+
+        .ant-btn-dangerous.ant-btn-primary {
+            @include btn-primary-dangerous;
+        }
+
         .ant-layout .ant-layout-header {
             padding-inline: 0 24px;
             height: 56px;
@@ -42,8 +58,14 @@
             }
         }
 
-        .anticon.ant-input-password-icon {
-            color: themed(--nobel-rockBlue) !important;
+        .ant-input-affix-wrapper .anticon.ant-input-password-icon,
+        .ant-input-affix-wrapper .ant-input-suffix,
+        .ant-input-affix-wrapper .ant-input-clear-icon {
+            color: themed(--nobel-rockBlue);
+
+            &:hover {
+                color: themed(--nobel-rockBlue);
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 import {extractData} from '@src/api/config';
 import {EndpointsTypes, endpointRequest} from '@src/api/endpointRequest';
+import {UserForm} from '@src/components/forms/loginForm/interfaces';
 
-import {UserForm} from './../../components/forms/interfaces';
 import {ApiResponse} from '../randomUsers/interfaces';
 import {LoginResponse} from './interfaces';
 

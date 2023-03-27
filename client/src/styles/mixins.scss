@@ -16,3 +16,82 @@
         @return var($key);
     }
 }
+
+@mixin btn(
+    $bg: themed(--aliceBlue-bigStone),
+    $border: themed(--blue-summerSky),
+    $color: themed(--blue-summerSky),
+    $bgHover: themed(--aliceBlue-bigStone),
+    $borderHover: themed(--dodgerLightBlue-aquaBlue),
+    $colorHover: themed(--dodgerLightBlue-aquaBlue)
+) {
+    background: $bg;
+    border: 1px solid $border;
+    color: $color;
+    &:hover,
+    &:focus,
+    &:active {
+        background: $bgHover;
+        border: 1px solid $borderHover;
+        color: $colorHover;
+    }
+    &[disabled] {
+        background: $bg;
+        border: 1px solid $border;
+        color: $color;
+        opacity: 0.6;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background: $bg;
+            border: 1px solid $border;
+            color: $color;
+            opacity: 0.6;
+        }
+    }
+}
+
+@mixin btn-danger {
+    @include btn(
+        $bg: themed(--cosmos-redRobin),
+        $border: themed(--indianRed-sweetPink),
+        $color: themed(--indianRed-sweetPink),
+        $bgHover: themed(--cosmos-redRobin),
+        $borderHover: themed(--apricot-pink),
+        $colorHover: themed(--apricot-pink)
+    );
+}
+
+@mixin btn-primary {
+    @include btn(
+        $bg: themed(--blue-bostonBlue),
+        $border: themed(--blue-bostonBlue),
+        $color: $white,
+        $bgHover: themed(--lightblue-summerSky),
+        $borderHover: themed(--lightblue-summerSky),
+        $colorHover: $white
+    );
+}
+
+@mixin btn-primary-dangerous {
+    @include btn(
+        $bg: themed(--outrageousOrange-orangeRoughy),
+        $border: themed(--outrageousOrange-orangeRoughy),
+        $color: $white,
+        $bgHover: themed(--lightRed-brightOrange),
+        $borderHover: themed(--lightRed-brightOrange),
+        $colorHover: $white
+    );
+}
+
+@mixin btn-success {
+    @include btn(
+        $bg: themed(--bitterDandelion-darkLime) !important,
+        $border: themed(--bitterDandelion-darkLime) !important,
+        $color: $white !important,
+        $bgHover: themed(--vividLime-darkLime1) !important,
+        $borderHover: themed(--vividLime-darkLime1) !important,
+        $colorHover: $white !important
+    );
+}
