@@ -7,34 +7,48 @@ const tokenService = require("./token-service");
 const ApiError = require("../exceptions/api-error");
 
 class UserService {
-  async registration(email, password) {
-    const hasCandidateWithSameEmail = await UserModel.findOne({ email });
+  async registration(name, email, password) {
+    try {
+      const hasCandidateWithSameEmail = await UserModel.findOne({ email });
+      const hasCandidateWithSameName = await UserModel.findOne({ name });
 
-    if (hasCandidateWithSameEmail) {
-      throw new ApiError.BadRequest(
-        `Пользователь с почтовым адресом ${email} уже существует`
+      if (hasCandidateWithSameEmail) {
+        throw new ApiError.BadRequest(
+          `Пользователь с почтовым адресом ${email} уже существует`
+        );
+      }
+
+      if (hasCandidateWithSameName) {
+        throw new ApiError.BadRequest(
+          `Пользователь с таким именем ${name} уже существует`
+        );
+      }
+
+      const hashPassword = await bcrypt.hash(password, 3);
+      const activationLink = uuid.v4();
+
+      const user = await UserModel.create({
+        name,
+        email,
+        password: hashPassword,
+        activationLink,
+      });
+
+      await mailService.sendActivationMail(
+        email,
+        `${process.env.API_URL}/api/activate/${activationLink}`
       );
+
+      const userDto = new UserDto(user);
+      const tokens = tokenService.generateTokens({ ...userDto });
+      await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+      console.log("ТУТА Я ДОШЕЛ");
+
+      return { ...tokens, user: userDto };
+    } catch (e) {
+      console.log(e, "KZKZKZK");
     }
-
-    const hashPassword = await bcrypt.hash(password, 3);
-    const activationLink = uuid.v4();
-
-    const user = await UserModel.create({
-      email,
-      password: hashPassword,
-      activationLink,
-    });
-
-    await mailService.sendActivationMail(
-      email,
-      `${process.env.API_URL}/api/activate/${activationLink}`
-    );
-
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
-    return { ...tokens, user: userDto };
   }
 
   async activate(activationLink) {

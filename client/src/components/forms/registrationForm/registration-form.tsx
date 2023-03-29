@@ -1,6 +1,6 @@
 import {validateEmail} from '@src/helpers/validators/validators';
 import {AuthForm} from '@src/pages/AuthPage/constants';
-import {loginUser} from '@src/redux/app/actions';
+import {loginUser, registrateUser} from '@src/redux/app/actions';
 import {Button, Form, Input} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import React from 'react';
@@ -20,7 +20,7 @@ export const RegistrationForm = ({setAuthForm}: LoginFormProps) => {
     const [form] = useForm<RegistrateUserForm>();
 
     const onFinish = (formValues: RegistrateUserForm) => {
-        dispatch(loginUser(formValues));
+        dispatch(registrateUser(formValues));
     };
 
     return (

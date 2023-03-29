@@ -26,9 +26,9 @@ function* registrateUserWorker({
     payload,
 }: ReturnType<typeof actions.registrateUser>) {
     const data = yield* requestHandler({
-        request: call(requests.loginRequest, payload),
-        successMessage: messages.accessSuccess,
-        errorMessage: messages.accessError,
+        request: call(requests.registrateRequest, payload),
+        successMessage: messages.registrateSuccess,
+        errorMessage: messages.registrateError,
     });
 
     if (data) {
