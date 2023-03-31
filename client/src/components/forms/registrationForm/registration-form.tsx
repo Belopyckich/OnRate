@@ -76,7 +76,7 @@ export const RegistrationForm = ({setAuthForm}: LoginFormProps) => {
                     },
                 ]}
             >
-                <Input.Password />
+                <Input.Password allowClear={true} />
             </Form.Item>
 
             <Button htmlType="submit">Sign Up</Button>

@@ -31,3 +31,14 @@ export interface Dob {
 export interface LoginResponse extends User {
     isActivated: boolean;
 }
+
+export interface AuthorizeResponse {
+    accessToken: string;
+    refreshToken: string;
+    user: User;
+}
+
+export interface ApiResponse<T> {
+    success: boolean;
+    data?: T;
+}

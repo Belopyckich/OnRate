@@ -30,7 +30,9 @@ export const createApiEndpointInstance = (url: string): AxiosInstance => {
         const instance = axios.create(config);
 
         instance.interceptors.request.use(async (value) => {
-            const accessToken = getLocalStorageValue(LOCAL_STORAGE_KEYS.Token);
+            const accessToken = getLocalStorageValue(
+                LOCAL_STORAGE_KEYS.accessToken,
+            );
 
             if (accessToken) {
                 return {
@@ -38,7 +40,7 @@ export const createApiEndpointInstance = (url: string): AxiosInstance => {
                     headers: {
                         ...config.headers,
                         Authorization: `Bearer ${getLocalStorageValue(
-                            LOCAL_STORAGE_KEYS.Token,
+                            LOCAL_STORAGE_KEYS.accessToken,
                         )}`,
                     },
                 } as InternalAxiosRequestConfig<any>;

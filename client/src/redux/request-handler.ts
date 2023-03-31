@@ -84,7 +84,11 @@ export function* requestHandler<T extends SagaEffect>({
     try {
         const response = yield* request;
 
-        if (response instanceof Array || response instanceof Blob) {
+        if (
+            response instanceof Array ||
+            response instanceof Blob ||
+            response.success
+        ) {
             const action =
                 typeof successAction === 'boolean'
                     ? errorAction
@@ -95,7 +99,11 @@ export function* requestHandler<T extends SagaEffect>({
             return response as EffectReturnType<T>;
         }
 
-        return response;
+        const {data} = response;
+
+        throw data?.message || data?.errors || data?.additional
+            ? data
+            : messages.serverError;
     } catch (error) {
         console.log(error, 'error');
         devLog(request, 'requestHandler');

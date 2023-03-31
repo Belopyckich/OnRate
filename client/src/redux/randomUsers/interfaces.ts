@@ -43,6 +43,6 @@ export interface UsersState {
     isLoading: boolean;
 }
 
-export interface ApiResponse<T> {
+export interface RandomUserResponse<T> {
     results?: T;
 }
