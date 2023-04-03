@@ -2,7 +2,10 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        app: string;
+        dialog: string;
+        dialogHeader: string;
+        dialogHeaderContent: string;
+        dialogHeaderIcons: string;
     }
 }
 

@@ -92,7 +92,10 @@ class UserService {
 
   async logout(refreshToken) {
     const token = await tokenService.removeToken(refreshToken);
-    return token;
+    return new ResponseDto({
+      data: { token },
+      success: true,
+    });
   }
 
   async refresh(refreshToken) {

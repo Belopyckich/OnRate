@@ -6,6 +6,8 @@ export const messages = {
     error: 'Произошла ошибка на сервере',
     noData: 'Нету данных',
     accessSuccess: 'Вы успешно вошли',
+    logoutError: 'При попытке выхода произошла ошибка',
+    logoutSuccess: 'Вы успешно вышли',
     registrateSuccess:
         'На ваш электронный адрес было послано сообщение о регистрации',
     registrateError: 'Произошла ошибка регистрации',

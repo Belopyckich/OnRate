@@ -2,7 +2,9 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        photoBox: string;
+        userPhoto: string;
+        userPhotoEmpty: string;
+        userPhotoEmptyWrapper: string;
     }
 }
 

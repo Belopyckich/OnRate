@@ -1,5 +1,3 @@
-import {showNotification} from '@src/components/showNotification/show-notification';
-import {messages} from '@src/constants/messages';
 import {
     LOCAL_STORAGE_KEYS,
     getLocalStorageValue,

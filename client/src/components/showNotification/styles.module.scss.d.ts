@@ -3,8 +3,6 @@
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         notification: string;
-        notificationCloseIcon: string;
-        notificationIcon: string;
     }
 }
 

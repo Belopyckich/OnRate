@@ -58,6 +58,19 @@
             }
         }
 
+        .ant-dropdown-trigger {
+            cursor: pointer;
+        }
+
+        .ant-switch.ant-switch-checked,
+        .ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+            background: themed(--blue-bostonBlue);
+
+            &:hover {
+                background: themed(--blue-bostonBlue);
+            }
+        }
+
         .ant-input-affix-wrapper .anticon.ant-input-password-icon,
         .ant-input-affix-wrapper .ant-input-suffix,
         .ant-input-affix-wrapper .ant-input-clear-icon {
@@ -72,10 +85,6 @@
     ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
-    }
-
-    .rc-virtual-list-scrollbar-show {
-        display: block;
     }
 
     ::-webkit-scrollbar-thumb {

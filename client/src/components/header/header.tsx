@@ -7,7 +7,7 @@ import {Header} from 'antd/es/layout/layout';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {PhotoBox} from '../photoBox/photo-box';
+import {UserDropdown} from './components/userDropdown/user-dropdown';
 import styles from './styles.module.scss';
 
 export const MainHeader = () => {
@@ -29,7 +29,7 @@ export const MainHeader = () => {
                 />
             )}
             <div className={styles.headerContent}>
-                <PhotoBox />
+                <UserDropdown />
             </div>
         </Header>
     );

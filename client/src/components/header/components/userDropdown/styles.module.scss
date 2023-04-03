@@ -1,0 +1,8 @@
+.user-dropdown {
+    height: 56px;
+    display: grid;
+    grid-template-columns: 32px auto;
+    column-gap: 10px;
+    overflow: hidden;
+    align-items: center;
+}

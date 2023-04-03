@@ -10,9 +10,11 @@ export const loginRequest = (user: UserForm) =>
         .post<ApiResponse<AuthorizeResponse>>(`/login`, user)
         .then(extractData);
 
-export const logoutRequest = () =>
+export const logoutRequest = (token: string) =>
     endpointRequest(EndpointsTypes.Auth)
-        .post<ApiResponse<AuthorizeResponse>>(`/logout`)
+        .post<ApiResponse<AuthorizeResponse>>(`/logout`, {
+            refreshToken: token,
+        })
         .then(extractData);
 
 export const registrateRequest = (user: RegistrateUserForm) =>

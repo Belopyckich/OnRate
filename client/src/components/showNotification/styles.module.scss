@@ -1,65 +1,20 @@
 .notification {
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0;
-    margin-bottom: 10px;
-    width: 457px;
-    height: 150px;
-    right: 100px;
-    bottom: 25px;
-    // background-color: themed(--socket-notification-background);
-
-    @media (max-width: $sm-min) {
-        width: 100%;
-        right: 0;
-    }
-
-    svg {
-        align-items: center;
-        justify-content: center;
-        width: 100px;
-        height: 70px;
-    }
+    background: themed(--white-mirage);
 
     :global {
-        .ant-notification-notice-close {
-            color: #e5e5e5;
-            cursor: pointer;
-            svg {
-                width: 1em;
-                height: 1em;
+        .ant-notification-notice {
+            &-message {
+                color: themed(--black-white);
             }
-        }
 
-        .ant-notification-notice-with-icon
-            .ant-notification-notice-description {
-            // color: themed(--darkGrey-rockBlue);
-            width: 70%;
-            margin-left: 110px;
-            font-size: 13px;
-        }
+            &-description {
+                color: themed(--darkGrey-rockBlue);
+            }
 
-        .ant-notification-notice-with-icon .ant-notification-notice-message {
-            // color: themed(--chestnutRose-scarlet);
-            font-weight: bold;
-            margin-left: 110px;
-        }
-    }
-
-    &-icon {
-        position: fixed;
-        bottom: 10%;
-    }
-
-    &-close-icon {
-        svg:hover path {
-            // fill: themed(--suvaGrey-rockBlue);
-        }
-        svg path {
-            transition: fill 0.3s;
-            // fill: themed(--nobel-rockBlue);
+            &-close,
+            &-close:hover {
+                color: themed(--black-white);
+            }
         }
     }
 }

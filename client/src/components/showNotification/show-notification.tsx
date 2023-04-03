@@ -7,7 +7,7 @@ import {ArgsProps} from 'antd/lib/notification/interface';
 import {nanoid} from 'nanoid';
 import React from 'react';
 
-import {notificationCloseIcon} from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export interface ErrorObject {
     field: string;
@@ -19,7 +19,7 @@ export interface ErrorArray {
         {message: string | KeyData<string>}[];
 }
 
-export type MessageInfo = string | React.ReactElement;
+export type MessageInfo = string | string[] | React.ReactNode;
 
 export enum MessageType {
     Success = 'success',
@@ -27,24 +27,6 @@ export enum MessageType {
     Info = 'info',
     Warning = 'warning',
 }
-
-const NotificationWrapper = ({
-    message,
-}: {
-    message: string | React.ReactElement;
-}) => {
-    if (React.isValidElement(message)) {
-        return message;
-    }
-
-    return (
-        <>
-            {message.split('\n').map((msg, i) => (
-                <div key={i}>{msg}</div>
-            ))}
-        </>
-    );
-};
 
 const getHeaderMessage = (typeMessage: MessageType) => {
     switch (typeMessage) {
@@ -62,7 +44,7 @@ const getHeaderMessage = (typeMessage: MessageType) => {
 let openedNotifications: string[] = [];
 
 export const showNotification = (
-    message: string | MessageInfo = messages.error,
+    message: MessageInfo = messages.error,
     messageType: MessageType = MessageType.Error,
     config?: ArgsProps,
 ) => {
@@ -74,13 +56,8 @@ export const showNotification = (
         key: notificationKey,
         type: messageType,
         onClose: () => removeKeyFromNotificationStore(notificationKey),
-        // closeIcon: (
-        //     <Icon
-        //         component={CloseDialogIcon}
-        //         className={notificationCloseIcon}
-        //     />
-        // ),
-        description: <NotificationWrapper message={message} />,
+        description: message,
+        className: styles.notification,
     } as ArgsProps;
 
     openedNotifications.push(notificationKey);

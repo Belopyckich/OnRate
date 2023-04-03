@@ -1,4 +1,5 @@
 import {APP_ROUTES} from '@src/constants';
+import {selectCurrentUser} from '@src/redux/app/selectors';
 import {getUsers} from '@src/redux/randomUsers/actions';
 import React, {lazy, useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
@@ -16,15 +17,13 @@ const AuthPage = lazy(() => import('@src/pages/AuthPage/auth-page'));
 const ErrorPage = lazy(() => import('@src/pages/ErrorPage/error-page'));
 
 export const App = () => {
-    const dispatch = useDispatch();
+    const currentUser = useSelector(selectCurrentUser);
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        dispatch(getUsers());
-        if (false) {
-            setIsLoggedIn(true);
-        }
-    }, []);
+        setIsLoggedIn(Boolean(currentUser));
+    }, [currentUser]);
 
     return (
         <div className={styles.app}>

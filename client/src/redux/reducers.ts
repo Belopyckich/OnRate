@@ -1,4 +1,7 @@
+import {DialogState} from '@src/components/dialog/interface';
+
 import {AppState, appReducer} from './app/reducer';
+import {DialogsState, dialogsReducer} from './dialog/reducer';
 import {GamesState, gamesReducer} from './games/reducer';
 import {KanbanState} from './kanban/interfaces';
 import {kanbanReducer} from './kanban/reducer';
@@ -10,6 +13,7 @@ export interface State {
     users: UsersState;
     app: AppState;
     kanban: KanbanState;
+    dialogs: DialogsState;
 }
 
 const stateToReducer = {
@@ -17,6 +21,7 @@ const stateToReducer = {
     users: userReducer,
     app: appReducer,
     kanban: kanbanReducer,
+    dialogs: dialogsReducer,
 };
 
 export default stateToReducer;

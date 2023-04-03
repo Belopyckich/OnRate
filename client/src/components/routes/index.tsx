@@ -1,4 +1,5 @@
 import {APP_ROUTES} from '@src/constants';
+import {KanbanDialog} from '@src/pages/KanbanPage/kanban-dialog';
 import React, {lazy} from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
 

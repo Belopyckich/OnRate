@@ -2,7 +2,7 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        app: string;
+        dropdown: string;
     }
 }
 
