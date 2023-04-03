@@ -1,4 +1,5 @@
 import {ButtonWithIcon} from '@src/components/buttonWithIcon/button-with-icon';
+import {devLog} from '@src/helpers/dev-log';
 import {selectKanbanColumns} from '@src/redux/kanban/selectors';
 import {Input} from 'antd';
 import React, {useMemo} from 'react';
@@ -18,7 +19,7 @@ export const KanbanColumns = () => {
 
     return (
         <div className={styles.kanbanColumns}>
-            <DragDropContext onDragEnd={() => console.log('text')}>
+            <DragDropContext onDragEnd={() => devLog('hello')}>
                 {columnsListMemo}
             </DragDropContext>
         </div>

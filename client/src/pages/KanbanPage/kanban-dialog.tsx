@@ -14,7 +14,6 @@ export const KanbanDialog = () => (
 );
 
 export const DialogBody = (props: object) => {
-    console.log(props, 'props');
     return <div>{JSON.stringify(props)}</div>;
 };
 
@@ -25,6 +24,6 @@ export const showKanbanDialog = (dialogProps?: any) =>
             title: 'ДАРОВА',
         },
         dialogProps: {
-            JOPPA: 'Я ЛЮБЛЮ КАКАТЬ',
+            response: true,
         },
     });

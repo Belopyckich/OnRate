@@ -7,7 +7,7 @@ import {USER_PHOTO_DEFAULT_STYLES} from './constants';
 import styles from './styles.module.scss';
 
 export interface UserPhotoProps {
-    user: Nullable<User>;
+    user: Nullable<Pick<User, 'name' | 'picture'>>;
     style?: CSSProperties;
 }
 

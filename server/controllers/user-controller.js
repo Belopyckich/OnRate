@@ -1,11 +1,13 @@
 const userService = require("../service/user-service");
 const { validationResult } = require("express-validator");
 const ApiError = require("../exceptions/api-error");
+const ResponseDto = require("../dtos/response-dto");
 
 class UserController {
   async registration(req, res, next) {
     try {
       const validationResults = validationResult(req);
+      console.log("🚀 ~ validationResults:", validationResults);
 
       if (!validationResults.isEmpty()) {
         return next(
@@ -17,13 +19,19 @@ class UserController {
 
       const userData = await userService.registration(name, email, password);
 
-      res.cookie("refreshToken", userData.refreshToken, {
+      res.cookie("accessToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
 
-      return res.json(userData);
+      return res.json(
+        new ResponseDto({
+          data: userData,
+          success: true,
+        })
+      );
     } catch (error) {
+      console.log(error, "error");
       next(error);
     }
   }
@@ -32,11 +40,18 @@ class UserController {
     try {
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
-      res.cookie("refreshToken", userData.refreshToken, {
+
+      res.cookie("accessToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json(userData);
+
+      return res.json(
+        new ResponseDto({
+          data: userData,
+          success: true,
+        })
+      );
     } catch (error) {
       next(error);
     }
@@ -45,9 +60,17 @@ class UserController {
   async logout(req, res, next) {
     try {
       const { refreshToken } = req.cookies;
+
       const token = await userService.logout(refreshToken);
-      res.clearCookie("refreshToken");
-      return res.json(token);
+
+      res.clearCookie("accessToken");
+
+      return res.json(
+        new ResponseDto({
+          data: token,
+          success: true,
+        })
+      );
     } catch (error) {
       next(error);
     }
@@ -56,7 +79,9 @@ class UserController {
   async activate(req, res, next) {
     try {
       const activationLink = req.params.link;
+
       await userService.activate(activationLink);
+
       return res.redirect(process.env.CLIENT_URL);
     } catch (error) {
       next(error);
@@ -65,12 +90,21 @@ class UserController {
 
   async refresh(req, res, next) {
     try {
-      const userData = await userService.refresh(refreshToken);
-      res.cookie("refreshToken", userData.refreshToken, {
+      const { accessToken } = req.cookies;
+
+      const userData = await userService.refresh(accessToken);
+
+      res.cookie("accessToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json(userData);
+
+      return res.json(
+        new ResponseDto({
+          data: userData,
+          success: true,
+        })
+      );
     } catch (error) {
       next(error);
     }
@@ -79,7 +113,13 @@ class UserController {
   async getUsers(req, res, next) {
     try {
       const users = await userService.getAllUsers();
-      return res.json(users);
+
+      return res.json(
+        new ResponseDto({
+          data: users,
+          success: true,
+        })
+      );
     } catch (error) {
       next(error);
     }

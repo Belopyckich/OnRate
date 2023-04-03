@@ -1,6 +1,5 @@
 const UserModel = require("../models/user-model");
 const UserDto = require("../dtos/user-dto");
-const ResponseDto = require("../dtos/response-dto");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
 const mailService = require("./mail-service");
@@ -35,7 +34,6 @@ class UserService {
       //Когда настрою почту надо будет убрать
       isActivated: true,
     });
-    console.log("🚀 ~ user:", user);
 
     // Пока закомичена в связи с блокировкой емэила
     // await mailService.sendActivationMail(
@@ -44,14 +42,10 @@ class UserService {
     // );
 
     const userDto = new UserDto(user);
-    console.log("🚀 ~ userDto:", userDto);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-    return new ResponseDto({
-      data: { ...tokens, user: userDto },
-      success: true,
-    });
+    return { ...tokens, user: userDto };
   }
 
   async activate(activationLink) {
@@ -79,34 +73,31 @@ class UserService {
       throw ApiError.BadRequest("Неверный пароль");
     }
     const userDto = new UserDto(user);
-    console.log("🚀 ~ userDto:", userDto);
     const tokens = tokenService.generateTokens({ ...userDto });
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-    return new ResponseDto({
-      data: { ...tokens, user: userDto },
-      success: true,
-    });
+    return { ...tokens, user: userDto };
   }
 
   async logout(refreshToken) {
     const token = await tokenService.removeToken(refreshToken);
-    return new ResponseDto({
-      data: { token },
-      success: true,
-    });
+    return token;
   }
 
   async refresh(refreshToken) {
     if (!refreshToken) {
       throw ApiError.UnauthorizedError();
     }
-    const userData = tokenService.validateRefreshToken({ refreshToken });
+
+    const userData = tokenService.validateRefreshToken(refreshToken);
+
     const tokenFromDb = await tokenService.findToken(refreshToken);
+
     if (!userData || !tokenFromDb) {
       throw ApiError.UnauthorizedError();
     }
+
     const user = await UserModel.findById(userData.id);
 
     const userDto = new UserDto(user);
@@ -114,10 +105,7 @@ class UserService {
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-    return new ResponseDto({
-      data: { ...tokens, user: userDto },
-      success: true,
-    });
+    return { ...tokens, user: userDto };
   }
 
   async getAllUsers() {

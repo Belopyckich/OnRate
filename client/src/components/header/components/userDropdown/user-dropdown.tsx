@@ -47,7 +47,10 @@ export const UserDropdown = () => {
             <div className={styles.userDropdown}>
                 <UserPhoto user={currentUser} />
 
-                <TextOverflow text={currentUser?.name} />
+                <TextOverflow
+                    text={currentUser?.name}
+                    extraClassName={styles.userDropdownText}
+                />
             </div>
         </Dropdown>
     );

@@ -23,7 +23,9 @@ export const APP_ROUTES = {
     AUTH: '/auth',
     KANBAN: '/kanban',
     ERROR: '/error',
-};
+    USER_SETTINGS: '/user-settings',
+    ENVIRONMENT_SETTINGS: '/environment-settings',
+} as const;
 
 export const COLOR_WHITE = '#FFFFFF';
 

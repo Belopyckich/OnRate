@@ -1,9 +1,8 @@
 import {APP_ROUTES} from '@src/constants';
+import {checkAuth} from '@src/redux/app/actions';
 import {selectCurrentUser} from '@src/redux/app/selectors';
-import {getUsers} from '@src/redux/randomUsers/actions';
 import React, {lazy, useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Navigate, Route, Routes} from 'react-router-dom';
 
 import {AppRouteElement} from '../appRouteElement/app-route-element';
@@ -17,9 +16,15 @@ const AuthPage = lazy(() => import('@src/pages/AuthPage/auth-page'));
 const ErrorPage = lazy(() => import('@src/pages/ErrorPage/error-page'));
 
 export const App = () => {
+    const dispatch = useDispatch();
+
     const currentUser = useSelector(selectCurrentUser);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        dispatch(checkAuth());
+    }, []);
 
     useEffect(() => {
         setIsLoggedIn(Boolean(currentUser));

@@ -1,8 +1,9 @@
 import SettingsIcon from '@src/assets/settings.component.svg';
 import {ButtonWithIcon} from '@src/components/buttonWithIcon/button-with-icon';
+import {selectAccessToken} from '@src/redux/app/selectors';
 import {Input} from 'antd';
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {showKanbanDialog} from './kanban-dialog';
 import {KanbanColumns} from './kanbanColumns/kanban-columns';

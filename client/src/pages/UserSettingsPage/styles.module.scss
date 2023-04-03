@@ -1,0 +1,11 @@
+.user-settings-page {
+    height: 100%;
+    overflow: hidden;
+
+    :global {
+        .ant-card-body {
+            height: 100%;
+            overflow-y: hidden;
+        }
+    }
+}

@@ -1,13 +1,17 @@
 import Icon from '@ant-design/icons';
+import {APP_ROUTES} from '@src/constants';
 import {checkIsMobile} from '@src/helpers/check-is-mobile';
-import {selectIsSidebarOpen} from '@src/redux/app/selectors';
 import {Menu} from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router-dom';
 
+import KanbanIcon from '../../assets/kanban.component.svg';
 import LogoIcon from '../../assets/logo.component.svg';
+import SettingsIcon from '../../assets/settings.component.svg';
+import UserSettingsIcon from '../../assets/user-settings.component.svg';
 import {ThemeSwitch} from '../themeSwitch/theme-switch';
+import {SIDEBAR_TITLE} from './constants';
 import styles from './styles.module.scss';
 
 export interface SidebarProps {
@@ -16,6 +20,10 @@ export interface SidebarProps {
 
 export const Sidebar = ({isSidebarOpen}: SidebarProps) => {
     const isMobileSidebar = checkIsMobile(['ss', 'xs']);
+
+    const {pathname} = useLocation();
+
+    const history = useNavigate();
 
     return (
         <Sider
@@ -32,54 +40,27 @@ export const Sidebar = ({isSidebarOpen}: SidebarProps) => {
                 <Menu
                     theme="dark"
                     mode="inline"
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[pathname]}
                     items={[
                         {
-                            key: '1',
-                            icon: <LogoIcon />,
-                            label: 'nav 1',
+                            key: APP_ROUTES.KANBAN,
+                            icon: <KanbanIcon />,
+                            label: SIDEBAR_TITLE[APP_ROUTES.KANBAN],
                         },
                         {
-                            key: '2',
-                            icon: <LogoIcon />,
-                            label: 'nav 2',
+                            key: APP_ROUTES.USER_SETTINGS,
+                            icon: <UserSettingsIcon />,
+                            label: SIDEBAR_TITLE[APP_ROUTES.USER_SETTINGS],
                         },
                         {
-                            key: '3',
-                            icon: <LogoIcon />,
-                            label: 'nav 3',
-                        },
-                        {
-                            key: '4',
-                            icon: <LogoIcon />,
-                            label: 'nav 1',
-                        },
-                        {
-                            key: '5',
-                            icon: <LogoIcon />,
-                            label: 'nav 2',
-                        },
-                        {
-                            key: '6',
-                            icon: <LogoIcon />,
-                            label: 'nav 3',
-                        },
-                        {
-                            key: '7',
-                            icon: <LogoIcon />,
-                            label: 'nav 1',
-                        },
-                        {
-                            key: '8',
-                            icon: <LogoIcon />,
-                            label: 'nav 2',
-                        },
-                        {
-                            key: '9',
-                            icon: <LogoIcon />,
-                            label: 'nav 3',
+                            key: APP_ROUTES.ENVIRONMENT_SETTINGS,
+                            icon: <SettingsIcon />,
+                            label: SIDEBAR_TITLE[
+                                APP_ROUTES.ENVIRONMENT_SETTINGS
+                            ],
                         },
                     ]}
+                    onSelect={({key}) => history(key)}
                 />
 
                 <ThemeSwitch isSidebarOpen={isSidebarOpen} />

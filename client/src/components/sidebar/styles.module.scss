@@ -12,10 +12,18 @@
             padding-right: 6px;
             overflow-y: auto;
             background: inherit;
+
+            &-item-icon {
+                path {
+                    fill: $white;
+                }
+            }
         }
 
         .ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected,
-        .ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-active {
+        .ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-active,
+        .ant-menu-dark:not(.ant-menu-horizontal)
+            .ant-menu-item:not(.ant-menu-item-selected):active {
             background-color: themed(--vividBlue-bostonBlue);
         }
     }

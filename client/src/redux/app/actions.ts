@@ -11,7 +11,13 @@ export const setIsSidebarOpen = createAction(
 
 export const loginUser = createAction('APP/LOGIN_USER')<UserForm>();
 
+export const checkAuth = createAction('APP/CHECK_AUTH')();
+
 export const logoutUser = createAction('APP/LOGOUT_USER')();
+
+export const setAccessToken = createAction('APP/SET_ACCESS_TOKEN')<
+    Nullable<string>
+>();
 
 export const registrateUser = createAction(
     'APP/REGISTRATE_USER',

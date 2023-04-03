@@ -2,19 +2,16 @@ import {
     MessageType,
     showNotification,
 } from '@src/components/showNotification/show-notification';
-import {LOCAL_STORAGE_KEYS} from '@src/constants/local-storage-keys';
+import {COOKIE_KEYS} from '@src/constants/cookie-keys';
 import {messages} from '@src/constants/messages';
-import {all, call, put, takeLatest} from 'typed-redux-saga';
+import Cookies from 'js-cookie';
+import {all, call, put, select, takeLatest} from 'typed-redux-saga';
 import {getType} from 'typesafe-actions';
 
-import {MessageInfo} from './../../components/showNotification/show-notification';
-import {
-    getLocalStorageValue,
-    setLocalStorageValue,
-} from './../../helpers/localStorageManagement/local-storage-management';
 import {requestHandler} from '../request-handler';
 import * as actions from './actions';
 import * as requests from './requests';
+import {selectAccessToken} from './selectors';
 
 function* loginUserWorker({payload}: ReturnType<typeof actions.loginUser>) {
     const response = yield* requestHandler({
@@ -24,12 +21,10 @@ function* loginUserWorker({payload}: ReturnType<typeof actions.loginUser>) {
     });
 
     if (response?.data && response.success) {
-        const {user, refreshToken, accessToken} = response.data;
-
-        setLocalStorageValue(LOCAL_STORAGE_KEYS.accessToken, accessToken);
-        setLocalStorageValue(LOCAL_STORAGE_KEYS.refreshToken, refreshToken);
-
-        yield* put(actions.setUser(response.data.user));
+        const {user, refreshToken} = response.data;
+        Cookies.set(COOKIE_KEYS.accessToken, refreshToken);
+        yield* put(actions.setAccessToken(refreshToken));
+        yield* put(actions.setUser(user));
     }
 }
 
@@ -37,21 +32,40 @@ function* loginUserWatcher() {
     yield takeLatest(getType(actions.loginUser), loginUserWorker);
 }
 
-function* logoutUserWorker() {
-    const refreshToken = getLocalStorageValue(LOCAL_STORAGE_KEYS.refreshToken);
-    console.log('🚀 ~ refreshToken:', refreshToken);
+function* checkAuthWorker() {
+    const response = yield* requestHandler({
+        request: call(requests.checkAuthRequest),
+        successMessage: messages.accessSuccess,
+        errorMessage: messages.accessError,
+    });
 
-    if (refreshToken && typeof refreshToken === 'string') {
+    if (response?.data && response.success) {
+        const {user, refreshToken} = response.data;
+
+        Cookies.set(COOKIE_KEYS.accessToken, refreshToken);
+        yield* put(actions.setAccessToken(refreshToken));
+        yield* put(actions.setUser(user));
+    }
+}
+
+function* checkAuthWatcher() {
+    yield takeLatest(getType(actions.checkAuth), checkAuthWorker);
+}
+
+function* logoutUserWorker() {
+    const accessToken = yield* select(selectAccessToken);
+    console.log('🚀 ~ accessToken:', accessToken);
+
+    if (accessToken && typeof accessToken === 'string') {
         const response = yield* requestHandler({
-            request: call(requests.logoutRequest, refreshToken),
+            request: call(requests.logoutRequest, accessToken),
             successMessage: messages.logoutSuccess,
             errorMessage: messages.logoutError,
         });
 
         if (response?.success) {
-            localStorage.removeItem(LOCAL_STORAGE_KEYS.accessToken);
-            localStorage.removeItem(LOCAL_STORAGE_KEYS.refreshToken);
-
+            Cookies.remove(COOKIE_KEYS.accessToken);
+            yield* put(actions.setAccessToken(null));
             yield* put(actions.setUser(null));
         }
     } else {
@@ -73,11 +87,10 @@ function* registrateUserWorker({
     });
 
     if (response?.data && response.success) {
-        const {user, refreshToken, accessToken} = response.data;
+        const {user, refreshToken} = response.data;
 
-        setLocalStorageValue(LOCAL_STORAGE_KEYS.accessToken, accessToken);
-        setLocalStorageValue(LOCAL_STORAGE_KEYS.refreshToken, refreshToken);
-
+        Cookies.set(COOKIE_KEYS.accessToken, refreshToken);
+        yield* put(actions.setAccessToken(refreshToken));
         yield* put(actions.setUser(user));
     }
 }
@@ -91,5 +104,6 @@ export default function* appWatchers() {
         loginUserWatcher(),
         registrateUserWatcher(),
         logoutUserWatcher(),
+        checkAuthWatcher(),
     ]);
 }
