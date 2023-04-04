@@ -1,15 +1,48 @@
 .user-settings-form {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: auto;
-    grid-auto-rows: max-content;
+    display: flex;
+    flex-direction: column;
     row-gap: 14px;
     height: 100%;
     overflow-y: hidden;
 
+    :global {
+        .ant-form-item .ant-form-item-label > label {
+            color: themed(--darkGrey-rockBlue);
+        }
+
+        .ant-picker {
+            width: 100%;
+        }
+    }
+
     &-content {
-        height: 100%;
         overflow-y: auto;
         padding-right: 6px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-auto-rows: max-content;
+        row-gap: 14px;
+    }
+
+    &-photo-and-name {
+        display: grid;
+        grid-template-columns: max-content auto;
+        grid-gap: 14px;
+        align-items: center;
+
+        @media screen and (max-width: $ss-min) {
+            grid-template-columns: 100%;
+            justify-content: center;
+        }
+    }
+
+    &-location {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+    }
+
+    &-date-picker {
+        @include ant-picker-dropdown;
     }
 }

@@ -7,7 +7,7 @@ import {USER_PHOTO_DEFAULT_STYLES} from './constants';
 import styles from './styles.module.scss';
 
 export interface UserPhotoProps {
-    user: Nullable<Pick<User, 'name' | 'picture'>>;
+    user: Nullable<Partial<Pick<User, 'name' | 'picture'>>>;
     style?: CSSProperties;
 }
 
@@ -16,7 +16,7 @@ export const UserPhoto = ({
     style = USER_PHOTO_DEFAULT_STYLES,
 }: UserPhotoProps) => {
     if (user) {
-        const {name, picture} = user;
+        const {name = 'Нет фото', picture} = user;
 
         return (
             <div className={styles.userPhoto} style={style}>

@@ -1,0 +1,47 @@
+.user-photo-edit-mask {
+    position: absolute;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-auto-columns: auto;
+    grid-auto-flow: column;
+    column-gap: 20px;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: $sixtyPercentBlack;
+    border-radius: 50%;
+    transition: 0.2s ease-in-out;
+    opacity: 0;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    svg {
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+        opacity: 0.6;
+
+        path {
+            fill: $white;
+        }
+    }
+
+    &-wrapper {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        border-radius: inherit;
+    }
+}

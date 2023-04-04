@@ -95,3 +95,28 @@
         $colorHover: $white !important
     );
 }
+
+@mixin ant-picker-dropdown {
+    background: themed(--white-mirage) !important;
+
+    :global {
+        .ant-picker-panel-container {
+            background: themed(--white-mirage) !important;
+        }
+
+        .ant-picker-header,
+        .ant-picker-header button,
+        .ant-picker-cell,
+        .ant-picker-content th {
+            color: themed(--black-white) !important;
+        }
+
+        .ant-picker-today-btn {
+            color: themed(--blue-summerSky) !important;
+        }
+
+        .ant-picker-cell-selected > div {
+            background: themed(--blue-summerSky) !important;
+        }
+    }
+}

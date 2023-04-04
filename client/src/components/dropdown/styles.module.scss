@@ -1,5 +1,9 @@
 .dropdown {
     :global {
+        .ant-upload {
+            color: themed(--black-white);
+        }
+
         .ant-dropdown {
             &-arrow {
                 box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 10%) !important;

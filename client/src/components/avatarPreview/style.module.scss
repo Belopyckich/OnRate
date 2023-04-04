@@ -1,0 +1,89 @@
+.avatar-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 200;
+
+    @media screen and (max-width: $xl-min) {
+        align-items: end;
+    }
+
+    &-mask {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 200;
+        background-color: rgba(0, 0, 0, 0.45);
+    }
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 650px;
+        height: 650px;
+        overflow: hidden;
+        position: relative;
+        z-index: 200;
+        border-radius: 8px;
+        background: themed(--aliceBlue-mirage);
+
+        > img {
+            width: 100%;
+            height: calc(100% - 60px);
+            margin: auto;
+            object-fit: contain;
+            position: relative;
+            display: inline;
+            background-position: center;
+        }
+    }
+
+    &-button-close {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 5px;
+        right: 5px;
+        font-size: 18px;
+        color: $white;
+        background-color: rgba($gray, 0.4);
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    &-img {
+        position: absolute;
+        top: 0;
+        height: calc(100% - 60px);
+        width: 100%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        object-fit: cover;
+        filter: blur(70px);
+
+        &-black-list-user {
+            height: 100%;
+        }
+
+        > img {
+            width: 100%;
+            height: calc(100% - 60px);
+            object-position: center;
+        }
+    }
+}

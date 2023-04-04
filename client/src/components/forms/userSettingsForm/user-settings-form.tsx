@@ -1,8 +1,10 @@
+import {UserPhoto} from '@src/components/userPhoto/user-photo';
+import {UserPhotoEditMask} from '@src/components/userPhotoEditMask/user-photo-edit-mask';
 import {validateEmail} from '@src/helpers/validators/validators';
 import {AuthForm} from '@src/pages/AuthPage/constants';
 import {loginUser, registrateUser} from '@src/redux/app/actions';
 import {selectCurrentUser} from '@src/redux/app/selectors';
-import {Button, Form, Input} from 'antd';
+import {Button, DatePicker, Form, Input} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -11,7 +13,10 @@ import {
     USER_SETTINGS_FORM_FIELDS,
     USER_SETTINGS_FORM_LABELS,
 } from './constants';
-import {getUserSettingsFormPlaceholder} from './helpers';
+import {
+    getUserSettingsFormPlaceholder,
+    shouldUpdateUserSettingsField,
+} from './helpers';
 import {UserSettingsFormValues} from './interfaces';
 import styles from './styles.module.scss';
 
@@ -36,44 +41,77 @@ export const UserSettingsForm = () => {
             className={styles.userSettingsForm}
         >
             <div className={styles.userSettingsFormContent}>
-                <Form.Item
-                    label={
-                        USER_SETTINGS_FORM_LABELS[
-                            USER_SETTINGS_FORM_FIELDS.picture
-                        ]
-                    }
-                    name={USER_SETTINGS_FORM_FIELDS.picture}
-                    rules={[
-                        {
-                            required: true,
-                            message: getUserSettingsFormPlaceholder(
-                                USER_SETTINGS_FORM_FIELDS.picture,
-                            ),
-                        },
-                    ]}
-                >
-                    <Input allowClear={true} />
-                </Form.Item>
+                <div className={styles.userSettingsFormPhotoAndName}>
+                    <Form.Item
+                        noStyle
+                        shouldUpdate={shouldUpdateUserSettingsField([
+                            USER_SETTINGS_FORM_FIELDS.picture,
+                            USER_SETTINGS_FORM_FIELDS.name,
+                        ])}
+                    >
+                        {({getFieldsValue}) => {
+                            const {name, picture} = getFieldsValue();
 
-                <Form.Item
-                    label={
-                        USER_SETTINGS_FORM_LABELS[
-                            USER_SETTINGS_FORM_FIELDS.name
-                        ]
-                    }
-                    initialValue={user?.name}
-                    name={USER_SETTINGS_FORM_FIELDS.name}
-                    rules={[
-                        {
-                            required: true,
-                            message: getUserSettingsFormPlaceholder(
-                                USER_SETTINGS_FORM_FIELDS.name,
-                            ),
-                        },
-                    ]}
-                >
-                    <Input allowClear={true} />
-                </Form.Item>
+                            return (
+                                <Form.Item
+                                    noStyle
+                                    name={USER_SETTINGS_FORM_FIELDS.picture}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                getUserSettingsFormPlaceholder(
+                                                    USER_SETTINGS_FORM_FIELDS.picture,
+                                                ),
+                                        },
+                                    ]}
+                                >
+                                    <UserPhotoEditMask
+                                        src={picture?.thumbnail}
+                                        canManipulate={true}
+                                        style={{
+                                            width: '160px',
+                                            height: '160px',
+                                            fontSize: '160px',
+                                        }}
+                                    >
+                                        <UserPhoto
+                                            user={{
+                                                name,
+                                                picture,
+                                            }}
+                                            style={{
+                                                width: '160px',
+                                                height: '160px',
+                                                fontSize: '160px',
+                                            }}
+                                        />
+                                    </UserPhotoEditMask>
+                                </Form.Item>
+                            );
+                        }}
+                    </Form.Item>
+
+                    <Form.Item
+                        label={
+                            USER_SETTINGS_FORM_LABELS[
+                                USER_SETTINGS_FORM_FIELDS.name
+                            ]
+                        }
+                        initialValue={user?.name}
+                        name={USER_SETTINGS_FORM_FIELDS.name}
+                        rules={[
+                            {
+                                required: true,
+                                message: getUserSettingsFormPlaceholder(
+                                    USER_SETTINGS_FORM_FIELDS.name,
+                                ),
+                            },
+                        ]}
+                    >
+                        <Input allowClear={true} />
+                    </Form.Item>
+                </div>
 
                 <Form.Item
                     label={
@@ -95,45 +133,47 @@ export const UserSettingsForm = () => {
                     <Input allowClear={true} disabled={true} />
                 </Form.Item>
 
-                <Form.Item
-                    label={
-                        USER_SETTINGS_FORM_LABELS[
-                            USER_SETTINGS_FORM_FIELDS.country
-                        ]
-                    }
-                    name={USER_SETTINGS_FORM_FIELDS.country}
-                    initialValue={user?.location?.country}
-                    rules={[
-                        {
-                            required: true,
-                            message: getUserSettingsFormPlaceholder(
-                                USER_SETTINGS_FORM_FIELDS.country,
-                            ),
-                        },
-                    ]}
-                >
-                    <Input allowClear={true} />
-                </Form.Item>
+                <div className={styles.userSettingsFormLocation}>
+                    <Form.Item
+                        label={
+                            USER_SETTINGS_FORM_LABELS[
+                                USER_SETTINGS_FORM_FIELDS.country
+                            ]
+                        }
+                        name={USER_SETTINGS_FORM_FIELDS.country}
+                        initialValue={user?.location?.country}
+                        rules={[
+                            {
+                                required: true,
+                                message: getUserSettingsFormPlaceholder(
+                                    USER_SETTINGS_FORM_FIELDS.country,
+                                ),
+                            },
+                        ]}
+                    >
+                        <Input allowClear={true} />
+                    </Form.Item>
 
-                <Form.Item
-                    label={
-                        USER_SETTINGS_FORM_LABELS[
-                            USER_SETTINGS_FORM_FIELDS.city
-                        ]
-                    }
-                    name={USER_SETTINGS_FORM_FIELDS.city}
-                    initialValue={user?.location?.city}
-                    rules={[
-                        {
-                            required: true,
-                            message: getUserSettingsFormPlaceholder(
-                                USER_SETTINGS_FORM_FIELDS.city,
-                            ),
-                        },
-                    ]}
-                >
-                    <Input allowClear={true} />
-                </Form.Item>
+                    <Form.Item
+                        label={
+                            USER_SETTINGS_FORM_LABELS[
+                                USER_SETTINGS_FORM_FIELDS.city
+                            ]
+                        }
+                        name={USER_SETTINGS_FORM_FIELDS.city}
+                        initialValue={user?.location?.city}
+                        rules={[
+                            {
+                                required: true,
+                                message: getUserSettingsFormPlaceholder(
+                                    USER_SETTINGS_FORM_FIELDS.city,
+                                ),
+                            },
+                        ]}
+                    >
+                        <Input allowClear={true} />
+                    </Form.Item>
+                </div>
 
                 <Form.Item
                     label={
@@ -152,7 +192,11 @@ export const UserSettingsForm = () => {
                         },
                     ]}
                 >
-                    <Input allowClear={true} />
+                    <DatePicker
+                        onChange={(value) => console.log(value, 'onChange')}
+                        onOk={(value) => console.log(value, 'onOk')}
+                        popupClassName={styles.userSettingsFormDatePicker}
+                    />
                 </Form.Item>
 
                 <Form.Item
