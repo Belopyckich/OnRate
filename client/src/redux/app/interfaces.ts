@@ -11,12 +11,6 @@ export interface User {
 
 export type UserLocation = Pick<RandomUserLocation, 'city' | 'country'>;
 
-export interface UserInitials {
-    title: string;
-    first: string;
-    last: string;
-}
-
 export interface UserPicture {
     large: string;
     medium: string;

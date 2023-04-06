@@ -2,31 +2,47 @@ import UploadIcon from '@src/assets/photo-upload-icon.component.svg';
 import PhotoShowIcon from '@src/assets/show-photo-eye-icon.component.svg';
 import DeleteIcon from '@src/assets/trash.component.svg';
 import {Nullable} from '@src/typings';
-import {Tooltip} from 'antd';
+import {Tooltip, Upload} from 'antd';
 import {UploadType} from 'antd/es/upload/interface';
 import cn from 'classnames';
 import React, {CSSProperties, useState} from 'react';
 
 import {AvatarPreview} from '../avatarPreview/avatar-preview';
+import {UploadFileCallbackProps} from '../dialogs/imageEditorDialog/interfaces';
 import {Dropdown} from '../dropdown/dropdown';
 import {TextOverflow} from '../textOverflow/text-overflow';
-import {Upload} from '../uploader/upload';
+import {UserPhotoUpload} from '../uploader/upload';
 import {
     USER_PHOTO_EDIT_MASK_DROPDOWN_TITLES,
     UserPhotoEditMaskDropdownKeys,
 } from './constants';
 import styles from './style.module.scss';
 
-export interface UserPhotoEditMaskProps {
+export interface UserPhotoUploadEditMaskCanManipulateProps {
     children: React.ReactNode;
-    canManipulate?: boolean;
+    canManipulate: true;
     src?: Nullable<string>;
-    deleteFile?: () => void;
-    uploadFile?: () => void;
+    deleteFile: () => void;
+    uploadFile: (props: UploadFileCallbackProps) => void;
     uploadType?: UploadType;
     extraClassname?: string;
     style?: React.CSSProperties;
 }
+
+export interface UserPhotoUploadEditMaskCantManipulateProps {
+    children: React.ReactNode;
+    canManipulate?: undefined;
+    src?: Nullable<string>;
+    deleteFile?: undefined;
+    uploadFile?: undefined;
+    uploadType?: UploadType;
+    extraClassname?: string;
+    style?: React.CSSProperties;
+}
+
+export type UserPhotoEditMaskProps =
+    | UserPhotoUploadEditMaskCanManipulateProps
+    | UserPhotoUploadEditMaskCantManipulateProps;
 
 export const UserPhotoEditMask = ({
     deleteFile,
@@ -43,7 +59,7 @@ export const UserPhotoEditMask = ({
 
     const onShowAvatar = () => setIsAvatarPreview(true);
 
-    const menu = {
+    const menu = canManipulate && {
         items: [
             {
                 label: USER_PHOTO_EDIT_MASK_DROPDOWN_TITLES[
@@ -51,16 +67,17 @@ export const UserPhotoEditMask = ({
                 ],
                 key: UserPhotoEditMaskDropdownKeys.ShowPhoto,
                 icon: <PhotoShowIcon />,
+                onClick: onShowAvatar,
             },
             {
                 label: (
-                    <Upload>
+                    <UserPhotoUpload uploadFileCallback={uploadFile}>
                         {
                             USER_PHOTO_EDIT_MASK_DROPDOWN_TITLES[
                                 UserPhotoEditMaskDropdownKeys.ChangePhoto
                             ]
                         }
-                    </Upload>
+                    </UserPhotoUpload>
                 ),
                 key: UserPhotoEditMaskDropdownKeys.ChangePhoto,
                 icon: <UploadIcon />,
@@ -71,6 +88,7 @@ export const UserPhotoEditMask = ({
                 ],
                 key: UserPhotoEditMaskDropdownKeys.DeletePhoto,
                 icon: <DeleteIcon />,
+                onClick: deleteFile,
                 danger: true,
             },
         ],
@@ -86,9 +104,9 @@ export const UserPhotoEditMask = ({
                     {hasPhoto ? (
                         <PhotoShowIcon onClick={onShowAvatar} />
                     ) : (
-                        <Upload>
+                        <UserPhotoUpload uploadFileCallback={uploadFile}>
                             <UploadIcon onClick={uploadFile} />
-                        </Upload>
+                        </UserPhotoUpload>
                     )}
                 </div>
             )}
@@ -97,7 +115,7 @@ export const UserPhotoEditMask = ({
         </div>
     );
 
-    const photoWithDropdown = true ? (
+    const photoWithDropdown = hasPhoto ? (
         <>
             <Dropdown menu={menu} placement="bottom">
                 {photo}

@@ -1,152 +1,212 @@
 .app {
     height: 100%;
     width: 100%;
+}
 
-    :global {
-        .ant-form-item {
-            margin-bottom: 0;
+:global {
+    .ant-form-item {
+        margin-bottom: 0;
+    }
+
+    .ant-layout {
+        background: themed(--lightGrayishBlue-mostlyBlackBlue);
+        height: 100%;
+    }
+
+    .ant-layout-content {
+        height: calc(100vh - 56px);
+        overflow: auto;
+
+        @media screen and (max-width: $sm-min) {
+            padding: 24px 6px 6px;
         }
+    }
 
-        .ant-layout {
-            background: themed(--lightGrayishBlue-mostlyBlackBlue);
-            height: 100%;
-        }
+    .ant-btn-default {
+        @include btn;
+    }
 
-        .ant-layout-content {
-            height: calc(100vh - 56px);
-            overflow: auto;
+    .ant-btn-dangerous {
+        @include btn-danger;
+    }
 
-            @media screen and (max-width: $sm-min) {
-                padding: 24px 6px 6px;
-            }
-        }
+    .ant-btn-primary {
+        @include btn-primary;
+    }
 
-        .ant-btn-default {
-            @include btn;
-        }
+    .ant-btn-dangerous.ant-btn-primary {
+        @include btn-primary-dangerous;
+    }
 
-        .ant-btn-dangerous {
-            @include btn-danger;
-        }
+    .ant-layout .ant-layout-header {
+        padding-inline: 0 24px;
+        height: 56px;
+        line-height: normal;
+    }
 
-        .ant-btn-primary {
-            @include btn-primary;
-        }
+    .ant-picker .ant-picker-suffix {
+        color: themed(--nobel-rockBlue);
+    }
 
-        .ant-btn-dangerous.ant-btn-primary {
-            @include btn-primary-dangerous;
-        }
+    .ant-picker .ant-picker-input > input {
+        color: themed(--darkGrey-rockBlue);
 
-        .ant-layout .ant-layout-header {
-            padding-inline: 0 24px;
-            height: 56px;
-            line-height: normal;
-        }
-
-        .ant-picker .ant-picker-suffix {
-            color: themed(--nobel-rockBlue);
-        }
-
-        .ant-picker .ant-picker-input > input {
+        &::placeholder {
             color: themed(--darkGrey-rockBlue);
-
-            &::placeholder {
-                color: themed(--darkGrey-rockBlue);
-            }
         }
+    }
 
-        .ant-picker .ant-picker-input:hover .ant-picker-clear {
+    .ant-picker .ant-picker-input:hover .ant-picker-clear {
+        background-color: themed(--white-midnight);
+        color: themed(--nobel-rockBlue);
+    }
+
+    .ant-picker:not(.ant-picker-disabled).ant-picker-status-error {
+        background-color: themed(--white-midnight);
+
+        &:not([disabled]):hover {
             background-color: themed(--white-midnight);
-            color: themed(--nobel-rockBlue);
         }
+    }
 
-        .ant-picker:not(.ant-picker-disabled).ant-picker-status-error {
+    .ant-input,
+    .ant-picker {
+        background-color: themed(--white-midnight);
+        border: 1px solid themed(--alto-licorice);
+        color: themed(--darkGrey-rockBlue);
+
+        &-affix-wrapper,
+        &-affix-wrapper-disabled,
+        &-affix-wrapper-disabled:hover {
             background-color: themed(--white-midnight);
-
-            &:not([disabled]):hover {
-                background-color: themed(--white-midnight);
-            }
+            border: 1px solid themed(--alto-licorice);
         }
 
-        .ant-input,
-        .ant-picker {
+        &:focus {
+            border: 1px solid themed(--blue-bostonBlue);
+        }
+
+        &[disabled] {
             background-color: themed(--white-midnight);
             border: 1px solid themed(--alto-licorice);
             color: themed(--darkGrey-rockBlue);
-
-            &-affix-wrapper,
-            &-affix-wrapper-disabled,
-            &-affix-wrapper-disabled:hover {
-                background-color: themed(--white-midnight);
-                border: 1px solid themed(--alto-licorice);
-            }
-
-            &:focus {
-                border: 1px solid themed(--blue-bostonBlue);
-            }
-
-            &[disabled] {
-                background-color: themed(--white-midnight);
-                border: 1px solid themed(--alto-licorice);
-                color: themed(--darkGrey-rockBlue);
-                opacity: 0.6;
-            }
+            opacity: 0.6;
         }
+    }
 
-        .ant-dropdown-trigger {
-            cursor: pointer;
-        }
+    .rc-virtual-list-scrollbar-thumb {
+        background: themed(--alto-oxfordBlue) !important;
+    }
 
-        .ant-card {
-            background: themed(--white-mirage);
-            border: 1px solid themed(--mercury-blackPearl);
+    .ant-dropdown-trigger {
+        cursor: pointer;
+    }
+
+    .ant-card {
+        background: themed(--white-mirage);
+        border: 1px solid themed(--mercury-blackPearl);
+        height: 100%;
+        overflow-y: hidden;
+
+        &-body {
             height: 100%;
             overflow-y: hidden;
+        }
+    }
+
+    .ant-switch.ant-switch-checked,
+    .ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+        background: themed(--blue-bostonBlue);
+
+        &:hover {
+            background: themed(--blue-bostonBlue);
+        }
+    }
+
+    .ant-input-affix-wrapper .anticon.ant-input-password-icon,
+    .ant-input-affix-wrapper .ant-input-suffix,
+    .ant-input-affix-wrapper .ant-input-clear-icon {
+        color: themed(--nobel-rockBlue);
+
+        &:hover {
+            color: themed(--nobel-rockBlue);
+        }
+    }
+
+    .ant-picker-dropdown {
+        .ant-picker-panel-container {
+            background: themed(--white-mirage);
+        }
+
+        .ant-picker-header,
+        .ant-picker-header button,
+        .ant-picker-cell,
+        .ant-picker-content th {
+            color: themed(--black-white);
+        }
+
+        .ant-picker-today-btn {
+            color: themed(--blue-summerSky);
+        }
+
+        .ant-picker-cell-selected > div {
+            background: themed(--blue-summerSky);
+        }
+    }
+
+    .ant-modal {
+        .ant-modal {
+            &-content {
+                background: themed(--white-mirage);
+                padding: 0;
+            }
+
+            &-header {
+                padding: 16px 24px;
+                background: inherit;
+                margin: 0;
+                border-bottom: 1px solid themed(--nobel-rockBlue);
+            }
 
             &-body {
-                height: 100%;
-                overflow-y: hidden;
+                padding: 16px;
             }
-        }
 
-        .ant-switch.ant-switch-checked,
-        .ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
-            background: themed(--blue-bostonBlue);
-
-            &:hover {
-                background: themed(--blue-bostonBlue);
-            }
-        }
-
-        .ant-input-affix-wrapper .anticon.ant-input-password-icon,
-        .ant-input-affix-wrapper .ant-input-suffix,
-        .ant-input-affix-wrapper .ant-input-clear-icon {
-            color: themed(--nobel-rockBlue);
-
-            &:hover {
-                color: themed(--nobel-rockBlue);
+            &-title {
+                background: themed(--white-mirage);
             }
         }
     }
 
-    ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector,
+    .ant-select-dropdown {
+        background-color: themed(--white-midnight);
+        border: 1px solid themed(--alto-licorice);
+        color: themed(--darkGrey-rockBlue);
     }
 
-    ::-webkit-scrollbar-thumb {
-        background: themed(--alto-oxfordBlue);
-        border-radius: 10px;
+    .ant-select-dropdown
+        .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+        background-color: themed(--aliceBlue-tangaroa);
+        color: themed(--darkGrey-rockBlue);
     }
 
-    ::-webkit-scrollbar-corner {
-        background: themed(--white-mirage);
+    .ant-select .ant-select-arrow,
+    .ant-select-dropdown .ant-select-item {
+        color: themed(--darkGrey-rockBlue);
     }
 
-    * {
-        scrollbar-width: 10px;
-        scrollbar-color: themed(--alto-oxfordBlue) transparent;
-        scroll-padding: 0;
-        scrollbar-width: 5px;
+    .ant-select .ant-select-clear {
+        background-color: themed(--white-midnight);
+        color: themed(--darkGrey-rockBlue);
+
+        &:hover {
+            background-color: themed(--white-midnight);
+            color: themed(--darkGrey-rockBlue);
+        }
+    }
+
+    .ant-select-single.ant-select-open .ant-select-selection-item {
+        color: themed(--darkGrey-rockBlue);
     }
 }

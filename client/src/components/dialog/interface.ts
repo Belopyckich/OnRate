@@ -3,8 +3,9 @@ import React from 'react';
 
 export type DialogProps = Omit<
     ModalProps,
-    'open' | 'children' | 'closeIcon' | 'title' | 'footer'
+    'open' | 'children' | 'closeIcon' | 'title' | 'footer' | 'width'
 > & {
+    maxWidth: number;
     name: string;
     DialogBody: (props: object) => JSX.Element;
 };

@@ -40,9 +40,9 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         column-gap: 20px;
-    }
 
-    &-date-picker {
-        @include ant-picker-dropdown;
+        @media screen and (max-width: $ss-min) {
+            grid-template-columns: 100%;
+        }
     }
 }

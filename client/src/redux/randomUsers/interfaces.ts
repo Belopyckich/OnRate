@@ -1,4 +1,4 @@
-import {Dob, User, UserInitials, UserPicture} from '../app/interfaces';
+import {Dob, User, UserPicture} from '../app/interfaces';
 
 export interface RandomUser {
     email: string;
@@ -7,6 +7,12 @@ export interface RandomUser {
     location: RandomUserLocation;
     picture: UserPicture;
     dob: Dob;
+}
+
+export interface UserInitials {
+    title: string;
+    first: string;
+    last: string;
 }
 
 export interface RandomUserId {

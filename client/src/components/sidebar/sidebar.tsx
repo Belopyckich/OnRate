@@ -1,9 +1,11 @@
 import Icon from '@ant-design/icons';
 import {APP_ROUTES} from '@src/constants';
 import {checkIsMobile} from '@src/helpers/check-is-mobile';
+import {setIsSidebarOpen} from '@src/redux/app/actions';
 import {Menu} from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import React from 'react';
+import {useDispatch} from 'react-redux';
 import {useLocation, useNavigate} from 'react-router-dom';
 
 import KanbanIcon from '../../assets/kanban.component.svg';
@@ -19,6 +21,8 @@ export interface SidebarProps {
 }
 
 export const Sidebar = ({isSidebarOpen}: SidebarProps) => {
+    const dispatch = useDispatch();
+
     const isMobileSidebar = checkIsMobile(['ss', 'xs']);
 
     const {pathname} = useLocation();
@@ -60,7 +64,10 @@ export const Sidebar = ({isSidebarOpen}: SidebarProps) => {
                             ],
                         },
                     ]}
-                    onSelect={({key}) => history(key)}
+                    onSelect={({key}) => {
+                        dispatch(setIsSidebarOpen(false));
+                        history(key);
+                    }}
                 />
 
                 <ThemeSwitch isSidebarOpen={isSidebarOpen} />

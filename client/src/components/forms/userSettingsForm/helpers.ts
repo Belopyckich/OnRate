@@ -1,3 +1,5 @@
+import {CITIES} from '@src/constants/locations/locations';
+
 import {USER_SETTINGS_FORM_FIELDS} from './constants';
 import {UserSettingsFormValues} from './interfaces';
 
@@ -17,4 +19,34 @@ export const shouldUpdateUserSettingsField =
         }
 
         return false;
+    };
+
+export const shouldUpdateUserSettingsLocationField =
+    (setFieldsValue: (values: Partial<UserSettingsFormValues>) => void) =>
+    (previous: UserSettingsFormValues, current: UserSettingsFormValues) => {
+        const [prevCountry, prevCity, currCountry, currCity] = [
+            previous[USER_SETTINGS_FORM_FIELDS.country],
+            previous[USER_SETTINGS_FORM_FIELDS.city],
+            current[USER_SETTINGS_FORM_FIELDS.country],
+            current[USER_SETTINGS_FORM_FIELDS.city],
+        ];
+
+        const shouldUpdateCountry = prevCountry !== currCountry;
+        const shouldUpdateCity = prevCity !== currCity;
+
+        const shouldUpdate = shouldUpdateCountry || shouldUpdateCity;
+
+        if (shouldUpdate) {
+            setFieldsValue(
+                shouldUpdateCountry
+                    ? {
+                          [USER_SETTINGS_FORM_FIELDS.city]: currCountry
+                              ? CITIES[currCountry][0]
+                              : undefined,
+                      }
+                    : {},
+            );
+        }
+
+        return shouldUpdate;
     };

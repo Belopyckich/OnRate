@@ -96,27 +96,56 @@
     );
 }
 
-@mixin ant-picker-dropdown {
-    background: themed(--white-mirage) !important;
-
+@mixin modal-fit-content($mobileWidth: 708px, $top: 24px) {
     :global {
-        .ant-picker-panel-container {
-            background: themed(--white-mirage) !important;
+        .ant-modal {
+            display: flex;
+            flex-direction: column;
+            top: $top;
+            height: calc(100% - $top - $top);
+            max-width: $mobileWidth;
+            padding: 0;
+            overflow: hidden;
+
+            &-content {
+                display: grid;
+                grid-template-columns: 100%;
+                grid-template-rows: max-content auto;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            &-body {
+                padding: 0;
+                height: 100%;
+                overflow: hidden;
+            }
         }
 
-        .ant-picker-header,
-        .ant-picker-header button,
-        .ant-picker-cell,
-        .ant-picker-content th {
-            color: themed(--black-white) !important;
-        }
+        @media screen and (max-width: $mobileWidth) {
+            .ant-modal {
+                display: flex;
+                flex-direction: column;
+                height: calc(100% - $top);
+                justify-content: flex-end;
+                margin: 0;
+                max-width: 100%;
+                padding: 0;
+                top: $top;
 
-        .ant-picker-today-btn {
-            color: themed(--blue-summerSky) !important;
-        }
+                &-content {
+                    border-radius: 4px 4px 0 0;
+                    display: grid;
+                    grid-template-columns: 100%;
+                    grid-template-rows: max-content 1fr;
+                    overflow-y: hidden;
+                }
 
-        .ant-picker-cell-selected > div {
-            background: themed(--blue-summerSky) !important;
+                &-body {
+                    height: 100%;
+                    overflow-y: hidden;
+                }
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
-import Icon from '@ant-design/icons';
 import {State} from '@redux/reducers';
-import {selectDialog, selectDialogOpen} from '@src/redux/dialog/selectors';
+import {selectDialog} from '@src/redux/dialog/selectors';
 import {Modal} from 'antd';
+import cn from 'classnames';
 import React from 'react';
 import {useSelector} from 'react-redux';
 
@@ -10,7 +10,9 @@ import {DialogProps} from './interface';
 
 export const ConnectedDialog = ({
     name,
+    maxWidth,
     DialogBody,
+    wrapClassName,
     ...modalProps
 }: DialogProps) => {
     const dialog = useSelector((state: State) => selectDialog(state, name));
@@ -26,6 +28,11 @@ export const ConnectedDialog = ({
                 />
             }
             footer={''}
+            wrapClassName={wrapClassName}
+            width={'100%'}
+            style={{
+                maxWidth,
+            }}
             {...modalProps}
         >
             <DialogBody {...dialog?.dialogProps} />

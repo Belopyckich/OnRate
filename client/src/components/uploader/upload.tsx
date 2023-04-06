@@ -1,6 +1,9 @@
 import {Upload as AntdUpload, UploadProps} from 'antd';
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 
+import {showImageEditorDialog} from '../dialogs/imageEditorDialog/actions';
+import {UploadFileCallbackProps} from '../dialogs/imageEditorDialog/interfaces';
 import {
     MessageType,
     showNotification,
@@ -8,22 +11,26 @@ import {
 import {
     DEFAULT_FILE_MAX_SIZE,
     DEFAULT_IMAGE_FILE_TYPES_FOR_UPLOADER,
-    DEFAULT_IMAGE_MIN_RESOLUTION,
 } from './constants';
 import {
+    beforeUploadImageCheckings,
     checkFileFormat,
     checkFileSize,
-    drawImageToMinResolution,
-    setLoadedFileWithoutExifParams,
 } from './helpers';
 
-export const Upload = (props: UploadProps) => {
-    const [imageNaturalSideState, setImageNaturalSideState] = useState<{
-        width: number;
-        height: number;
-    }>();
-    const [loadedImage, setLoadedImage] = useState<HTMLImageElement>();
-    const [loadedFile, setLoadedFile] = useState<File>();
+export interface UserPhotoUploadProps
+    extends Omit<
+        UploadProps,
+        'multiple' | 'showUploadList' | 'openFileDialogOnClick' | 'beforeUpload'
+    > {
+    uploadFileCallback: (props: UploadFileCallbackProps) => void;
+}
+
+export const UserPhotoUpload = ({
+    uploadFileCallback,
+    ...props
+}: UserPhotoUploadProps) => {
+    const dispatch = useDispatch();
 
     const uploadProps: UploadProps = {
         ...props,
@@ -33,50 +40,6 @@ export const Upload = (props: UploadProps) => {
         openFileDialogOnClick: true,
         // ограничения из пропсов
         beforeUpload: (file: File) => {
-            const beforeUploadImageCheckings = (img: HTMLImageElement) => {
-                const loadedImageNaturalWidth = img.naturalWidth;
-                const loadedImageNaturalHeight = img.naturalHeight;
-
-                if (
-                    loadedImageNaturalWidth < DEFAULT_IMAGE_MIN_RESOLUTION ||
-                    loadedImageNaturalHeight < DEFAULT_IMAGE_MIN_RESOLUTION
-                ) {
-                    setImageNaturalSideState({
-                        width: loadedImageNaturalWidth,
-                        height: loadedImageNaturalHeight,
-                    });
-
-                    const drawnToMinResolutionImage = drawImageToMinResolution({
-                        image: img,
-                        minWidth: DEFAULT_IMAGE_MIN_RESOLUTION,
-                    });
-
-                    const updatedImage = new Image();
-
-                    updatedImage.src = drawnToMinResolutionImage;
-
-                    updatedImage.onload = () => {
-                        setLoadedImage(updatedImage);
-                        setLoadedFileWithoutExifParams({
-                            file,
-                            image: updatedImage,
-                            setLoadedFile,
-                        });
-                    };
-
-                    return false;
-                }
-
-                setLoadedImage(img);
-                setLoadedFileWithoutExifParams({
-                    file,
-                    image: img,
-                    setLoadedFile,
-                });
-
-                return false;
-            };
-
             if (checkFileFormat(file, DEFAULT_IMAGE_FILE_TYPES_FOR_UPLOADER)) {
                 return false;
             }
@@ -96,8 +59,15 @@ export const Upload = (props: UploadProps) => {
                     img.src = imgSrc;
 
                     img.onload = () => {
-                        resolve(beforeUploadImageCheckings(img));
-                        URL.revokeObjectURL(imgSrc);
+                        resolve();
+                        const data = beforeUploadImageCheckings(file, img);
+
+                        dispatch(
+                            showImageEditorDialog({
+                                ...data,
+                                uploadFileCallback,
+                            }),
+                        );
                     };
 
                     img.onerror = () => {
@@ -105,7 +75,6 @@ export const Upload = (props: UploadProps) => {
                             'Произошла ошибка при загрузке фотографии. Попробуйте выбрать другую фотографию',
                             MessageType.Error,
                         );
-                        URL.revokeObjectURL(imgSrc);
                     };
                 } catch (e) {
                     reject(e);

@@ -1,0 +1,50 @@
+.scroll-container {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+
+    &::-webkit-scrollbar {
+        height: 4px;
+        width: 4px;
+    }
+
+    &-vertical {
+        position: relative;
+
+        &-wrapper {
+            position: absolute;
+            overflow-y: overlay;
+            height: 100%;
+            width: 100%;
+
+            > :first-child {
+                padding-right: 12px;
+            }
+
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+        }
+
+        &-for-ios {
+            > :first-child {
+                padding-right: 12px;
+            }
+        }
+    }
+
+    &-horizontal {
+        height: auto;
+        overflow-x: auto;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &-without-scrollbar {
+        &::-webkit-scrollbar {
+            display: block;
+        }
+    }
+}

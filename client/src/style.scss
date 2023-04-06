@@ -46,78 +46,8 @@ html {
     line-height: unset;
 }
 
-:global {
-    .ant-form-item {
-        margin-bottom: 0;
-    }
-
-    .ant-layout {
-        background: themed(--lightGrayishBlue-mostlyBlackBlue);
-        height: 100%;
-    }
-
-    .ant-layout-content {
-        height: calc(100vh - 56px);
-        overflow: auto;
-
-        @media screen and (max-width: $sm-min) {
-            padding: 24px 6px 6px;
-        }
-    }
-
-    .ant-btn-default {
-        @include btn;
-    }
-
-    .ant-btn-dangerous {
-        @include btn-danger;
-    }
-
-    .ant-btn-primary {
-        @include btn-primary;
-    }
-
-    .ant-btn-dangerous.ant-btn-primary {
-        @include btn-primary-dangerous;
-    }
-
-    .ant-layout .ant-layout-header {
-        padding-inline: 0 24px;
-        height: 56px;
-        line-height: normal;
-    }
-
-    .ant-input {
-        background-color: themed(--white-midnight);
-        border: 1px solid themed(--alto-licorice);
-        color: themed(--darkGrey-rockBlue);
-
-        &-affix-wrapper {
-            background-color: themed(--white-midnight);
-            border: 1px solid themed(--alto-licorice);
-        }
-
-        &:focus {
-            border: 1px solid themed(--blue-bostonBlue);
-        }
-    }
-
-    .ant-input-affix-wrapper .anticon.ant-input-password-icon,
-    .ant-input-affix-wrapper .ant-input-suffix,
-    .ant-input-affix-wrapper .ant-input-clear-icon {
-        color: themed(--nobel-rockBlue);
-
-        &:hover {
-            color: themed(--nobel-rockBlue);
-        }
-    }
-
-    .ant-dropdown-menu {
-        background: themed(--white-mirage);
-    }
-}
-
 ::-webkit-scrollbar {
+    padding-right: 6px;
     width: 6px;
     height: 6px;
 }

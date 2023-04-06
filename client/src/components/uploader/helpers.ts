@@ -1,10 +1,9 @@
 import {messages} from '@src/constants/messages';
+import {Crop} from 'react-image-crop';
 
 import {showNotification} from '../showNotification/show-notification';
-import {
-    DrawImageToMinResolution,
-    SetLoadedFileWithoutExifParamsProps,
-} from './interfaces';
+import {DEFAULT_IMAGE_MIN_RESOLUTION} from './constants';
+import {DrawImageToMinResolution} from './interfaces';
 
 export const drawImageToMinResolution = ({
     image,
@@ -50,11 +49,12 @@ export const drawImageToMinResolution = ({
     return canvas.toDataURL('image/jpeg');
 };
 
-export const setLoadedFileWithoutExifParams = ({
-    file,
-    image,
-    setLoadedFile,
-}: SetLoadedFileWithoutExifParamsProps) => {
+export const setLoadedFileWithoutExifParams = (
+    file: File,
+    image: HTMLImageElement,
+) => {
+    let loadedFile = file;
+
     if (file && image) {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
@@ -72,12 +72,14 @@ export const setLoadedFileWithoutExifParams = ({
                     throw new Error();
                 }
 
-                setLoadedFile(new File([blob], file.name, {type: file.type}));
+                loadedFile = new File([blob], file.name, {type: file.type});
             },
             file.type,
             0.9,
         );
     }
+
+    return loadedFile;
 };
 
 export const checkFileFormat = (file: File, fileAcceptFormat: string) => {
@@ -131,4 +133,59 @@ export const checkFileExtensionAccessibilityHelper = (
         return true;
     }
     return false;
+};
+
+export const beforeUploadImageCheckings = (
+    file: File,
+    img: HTMLImageElement,
+) => {
+    let loadedImage: HTMLImageElement = img;
+    let loadedFile: File = file;
+    const initialCropParams: Crop = {
+        unit: '%',
+        width: 50,
+        height: 50,
+        x: 25,
+        y: 25,
+    };
+
+    const loadedImageNaturalWidth = img.naturalWidth;
+    const loadedImageNaturalHeight = img.naturalHeight;
+    const imageNaturalSlideState = {
+        width: loadedImageNaturalWidth,
+        height: loadedImageNaturalHeight,
+    };
+
+    if (
+        loadedImageNaturalWidth < DEFAULT_IMAGE_MIN_RESOLUTION ||
+        loadedImageNaturalHeight < DEFAULT_IMAGE_MIN_RESOLUTION
+    ) {
+        const drawnToMinResolutionImage = drawImageToMinResolution({
+            image: img,
+            minWidth: DEFAULT_IMAGE_MIN_RESOLUTION,
+        });
+
+        const updatedImage = new Image();
+
+        updatedImage.src = drawnToMinResolutionImage;
+
+        updatedImage.onload = () => {
+            loadedImage = updatedImage;
+            loadedFile = setLoadedFileWithoutExifParams(file, updatedImage);
+        };
+
+        const data = {
+            loadedImage: updatedImage,
+            imageNaturalSlideState,
+            loadedFile,
+        };
+
+        return data;
+    }
+
+    return {
+        loadedImage: loadedImage,
+        imageNaturalSlideState,
+        loadedFile: setLoadedFileWithoutExifParams(file, img),
+    };
 };

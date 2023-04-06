@@ -1,6 +1,18 @@
 .user-photo {
     height: 100%;
     width: 100%;
+    border-radius: 50%;
+
+    img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        border-radius: inherit;
+        top: 0;
+        width: 100%;
+    }
 
     &-empty {
         display: inline-flex;
@@ -24,7 +36,7 @@
             width: 100%;
             overflow: hidden;
             font-weight: 500;
-            border-radius: 50%;
+            border-radius: inherit;
             background: themed(--lightblue2-strongblue);
         }
     }

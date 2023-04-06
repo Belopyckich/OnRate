@@ -38,7 +38,7 @@ root.render(
                     <DndProvider options={HTML5toTouch}>
                         <ThemeProvider>
                             <ErrorBoundary>
-                                <StyleProvider hashPriority="high">
+                                <StyleProvider hashPriority="low">
                                     <App />
                                 </StyleProvider>
                             </ErrorBoundary>

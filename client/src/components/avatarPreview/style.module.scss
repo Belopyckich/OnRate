@@ -9,8 +9,8 @@
     left: 0;
     z-index: 200;
 
-    @media screen and (max-width: $xl-min) {
-        align-items: end;
+    @media screen and (max-width: $ss-min) {
+        align-items: flex-end;
     }
 
     &-mask {
@@ -35,6 +35,11 @@
         z-index: 200;
         border-radius: 8px;
         background: themed(--aliceBlue-mirage);
+
+        @media screen and (max-width: $xl-min) {
+            max-height: 400px;
+            max-width: 400px;
+        }
 
         > img {
             width: 100%;

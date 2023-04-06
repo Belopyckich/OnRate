@@ -45,7 +45,10 @@ export const UserDropdown = () => {
     return (
         <Dropdown menu={menu} trigger={['click']}>
             <div className={styles.userDropdown}>
-                <UserPhoto user={currentUser} />
+                <UserPhoto
+                    username={currentUser?.name}
+                    src={currentUser?.picture?.medium}
+                />
 
                 <TextOverflow
                     text={currentUser?.name}

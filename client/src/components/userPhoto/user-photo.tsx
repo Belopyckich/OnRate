@@ -7,29 +7,25 @@ import {USER_PHOTO_DEFAULT_STYLES} from './constants';
 import styles from './styles.module.scss';
 
 export interface UserPhotoProps {
-    user: Nullable<Partial<Pick<User, 'name' | 'picture'>>>;
+    username?: string;
+    src?: string;
     style?: CSSProperties;
 }
 
 export const UserPhoto = ({
-    user,
+    username = 'Нет фото',
+    src,
     style = USER_PHOTO_DEFAULT_STYLES,
 }: UserPhotoProps) => {
-    if (user) {
-        const {name = 'Нет фото', picture} = user;
-
-        return (
-            <div className={styles.userPhoto} style={style}>
-                {picture?.thumbnail ? (
-                    <img loading="lazy" src={picture.thumbnail} alt="" />
-                ) : (
-                    <div className={styles.userPhotoEmptyWrapper}>
-                        <div className={styles.userPhotoEmpty}>{name[0]}</div>
-                    </div>
-                )}
-            </div>
-        );
-    }
-
-    return null;
+    return (
+        <div className={styles.userPhoto} style={style}>
+            {src ? (
+                <img loading="lazy" src={src} alt="" />
+            ) : (
+                <div className={styles.userPhotoEmptyWrapper}>
+                    <div className={styles.userPhotoEmpty}>{username[0]}</div>
+                </div>
+            )}
+        </div>
+    );
 };

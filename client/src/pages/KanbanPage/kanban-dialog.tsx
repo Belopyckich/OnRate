@@ -10,6 +10,7 @@ export const KanbanDialog = () => (
         DialogBody={DialogBody}
         destroyOnClose={true}
         centered={true}
+        maxWidth={520}
     />
 );
 
