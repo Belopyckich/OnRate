@@ -14,19 +14,22 @@ import axios, {
 } from 'axios';
 import Cookies from 'js-cookie';
 
-import {baseConfig} from './config';
+import {EndpointConfigs, FORM_CONFIGS} from './config';
 
 const instanceList: {url: string; instance: AxiosInstance}[] = [];
 
 const findInstanceByUrl = (instanceUrl: string) =>
     instanceList.find(({url}) => instanceUrl === url);
 
-export const createApiEndpointInstance = (url: string): AxiosInstance => {
+export const createApiEndpointInstance = (
+    url: string,
+    endpointConfigs: EndpointConfigs = EndpointConfigs.base,
+): AxiosInstance => {
     // ищем созданный инстанс в списке
     const foundInstance = findInstanceByUrl(url);
     if (!foundInstance) {
         const config: AxiosRequestConfig = {
-            ...baseConfig,
+            ...FORM_CONFIGS[endpointConfigs],
             withCredentials: true,
             baseURL: `${API_URL}${url}`,
         };

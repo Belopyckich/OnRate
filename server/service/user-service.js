@@ -1,9 +1,10 @@
 const UserModel = require("../models/user-model");
+const FileModel = require("../models/file-model");
 const UserDto = require("../dtos/user-dto");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
-const mailService = require("./mail-service");
 const tokenService = require("./token-service");
+const fileService = require("./file-service");
 const ApiError = require("../exceptions/api-error");
 
 class UserService {
@@ -12,13 +13,13 @@ class UserService {
     const hasCandidateWithSameName = await UserModel.findOne({ name });
 
     if (hasCandidateWithSameEmail) {
-      throw new ApiError.BadRequest(
+      throw ApiError.BadRequest(
         `Пользователь с почтовым адресом ${email} уже существует`
       );
     }
 
     if (hasCandidateWithSameName) {
-      throw new ApiError.BadRequest(
+      throw ApiError.BadRequest(
         `Пользователь с таким именем ${name} уже существует`
       );
     }
@@ -52,7 +53,7 @@ class UserService {
     const user = await UserModel.findOne({ activationLink });
 
     if (!user) {
-      throw new ApiError.BadRequest("Неккоректная ссылка активации");
+      throw ApiError.BadRequest("Неккоректная ссылка активации");
     }
 
     user.isActivated = true;
@@ -78,6 +79,56 @@ class UserService {
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
     return { ...tokens, user: userDto };
+  }
+
+  async update(updatedUser) {
+    const { id, name, dob, location } = updatedUser;
+
+    const user = await UserModel.findById(id);
+
+    if (!user) {
+      throw ApiError.BadRequest("Пользователь не найден");
+    }
+
+    user.name = name;
+    user.dob = dob;
+    user.location = JSON.parse(location);
+
+    await user.save();
+
+    const userDto = new UserDto(user);
+
+    return userDto;
+  }
+
+  async uploadPhoto(file, _id) {
+    const user = await UserModel.findOne({ _id });
+    const oldFile = await FileModel.findOne({ user: _id });
+
+    if (!user) {
+      throw ApiError.BadRequest("Пользователь не найден");
+    }
+
+    const src = await fileService.uploadPhoto({
+      file,
+      _id,
+    });
+
+    if (oldFile) {
+      await fileService.deletePhoto(_id);
+    }
+
+    const picture = {
+      thumbnail: src,
+      medium: src,
+      large: src,
+    };
+
+    user.picture = picture;
+
+    await user.save();
+
+    return picture;
   }
 
   async logout(refreshToken) {

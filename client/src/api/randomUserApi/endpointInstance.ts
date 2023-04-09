@@ -1,10 +1,10 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 
-import {baseConfig} from '../config';
+import {EndpointConfigs, FORM_CONFIGS} from '../config';
 
 export const randomUserRequest = (): AxiosInstance => {
     const config: AxiosRequestConfig = {
-        ...baseConfig,
+        ...FORM_CONFIGS[EndpointConfigs.base],
         baseURL: `https:/randomuser.me/api`,
     };
 

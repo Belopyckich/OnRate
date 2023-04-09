@@ -20,7 +20,7 @@ import {TURKEY_CITIES} from './tk';
 import {UKRAINE_CITIES} from './ua';
 import {USA_CITIES} from './us';
 
-export enum Countries {
+export enum Country {
     Belarus = 'Belarus',
     Russia = 'Russia',
     Australia = 'Australia',
@@ -45,25 +45,25 @@ export enum Countries {
 }
 
 export const CITIES = {
-    [Countries.Australia]: AUSTRALIA_CITIES,
-    [Countries.Brazil]: BRAZIL_CITIES,
-    [Countries.German]: GERMAN_CITIES,
-    [Countries.Kazakhstan]: KAZAKHSTAN_CITIES,
-    [Countries.Denmark]: DENMARK_CITIES,
-    [Countries.Switzerland]: SWITZERLAND_CITIES,
-    [Countries.Spain]: SPAIN_CITIES,
-    [Countries.Finland]: FINLAND_CITIES,
-    [Countries.France]: FRANCE_CITIES,
-    [Countries.GreatBritain]: GREAT_BRITAIN_CITIES,
-    [Countries.Ireland]: IRELAND_CITIES,
-    [Countries.Mexico]: MEXICAN_CITIES,
-    [Countries.Netherlands]: NETHERLAND_CITIES,
-    [Countries.Norway]: NORWAY_CITIES,
-    [Countries.NewZealand]: NEW_ZEALAND_CITIES,
-    [Countries.Serbia]: SERBIAN_CITIES,
-    [Countries.Turkey]: TURKEY_CITIES,
-    [Countries.Ukraine]: UKRAINE_CITIES,
-    [Countries.USA]: USA_CITIES,
-    [Countries.Belarus]: BELARUS_CITIES,
-    [Countries.Russia]: RUSSIAN_CITIES,
+    [Country.Australia]: AUSTRALIA_CITIES,
+    [Country.Brazil]: BRAZIL_CITIES,
+    [Country.German]: GERMAN_CITIES,
+    [Country.Kazakhstan]: KAZAKHSTAN_CITIES,
+    [Country.Denmark]: DENMARK_CITIES,
+    [Country.Switzerland]: SWITZERLAND_CITIES,
+    [Country.Spain]: SPAIN_CITIES,
+    [Country.Finland]: FINLAND_CITIES,
+    [Country.France]: FRANCE_CITIES,
+    [Country.GreatBritain]: GREAT_BRITAIN_CITIES,
+    [Country.Ireland]: IRELAND_CITIES,
+    [Country.Mexico]: MEXICAN_CITIES,
+    [Country.Netherlands]: NETHERLAND_CITIES,
+    [Country.Norway]: NORWAY_CITIES,
+    [Country.NewZealand]: NEW_ZEALAND_CITIES,
+    [Country.Serbia]: SERBIAN_CITIES,
+    [Country.Turkey]: TURKEY_CITIES,
+    [Country.Ukraine]: UKRAINE_CITIES,
+    [Country.USA]: USA_CITIES,
+    [Country.Belarus]: BELARUS_CITIES,
+    [Country.Russia]: RUSSIAN_CITIES,
 };

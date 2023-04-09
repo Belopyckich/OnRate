@@ -19,10 +19,14 @@ const userState: AppState = {
 };
 
 export const appReducer = createReducer<AppState, Actions>(userState)
-    .handleAction(actions.setIsSidebarOpen, (state, {payload}) => ({
-        ...state,
-        isSidebarOpen: payload,
-    }))
+    .handleAction(actions.setIsSidebarOpen, (state, {payload}) =>
+        state.isSidebarOpen === payload
+            ? {...state}
+            : {
+                  ...state,
+                  isSidebarOpen: payload,
+              },
+    )
     .handleAction(actions.setUser, (state, {payload}) => ({
         ...state,
         user: payload,

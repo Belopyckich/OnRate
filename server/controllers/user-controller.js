@@ -2,12 +2,13 @@ const userService = require("../service/user-service");
 const { validationResult } = require("express-validator");
 const ApiError = require("../exceptions/api-error");
 const ResponseDto = require("../dtos/response-dto");
+const fileService = require("../service/file-service");
+const File = require("../models/file-model");
 
 class UserController {
   async registration(req, res, next) {
     try {
       const validationResults = validationResult(req);
-      console.log("🚀 ~ validationResults:", validationResults);
 
       if (!validationResults.isEmpty()) {
         return next(
@@ -18,6 +19,10 @@ class UserController {
       const { name, email, password } = req.body;
 
       const userData = await userService.registration(name, email, password);
+
+      await fileService.createDir(
+        new File({ user: userData.user.id, name: "" })
+      );
 
       res.cookie("accessToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -106,6 +111,30 @@ class UserController {
         })
       );
     } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateUser(req, res, next) {
+    try {
+      const user = req.body;
+
+      const userData = await userService.update(user);
+
+      const file = req.files?.file;
+
+      const picture = file
+        ? await userService.uploadPhoto(file, user.id)
+        : await fileService.deletePhoto(user.id);
+
+      return res.json(
+        new ResponseDto({
+          data: { ...userData, picture },
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
       next(error);
     }
   }

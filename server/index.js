@@ -1,14 +1,17 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const { default: mongoose } = require("mongoose");
 const router = require("./router/index");
 const errorMiddleware = require("./middlewares/error-middleware");
 
 const PORT = process.env.PORT || 3000;
+
 const app = express();
 
+app.use(fileUpload({}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -18,6 +21,7 @@ app.use(
   })
 );
 app.use("/api", router);
+app.use("/files", express.static("files"));
 app.use(errorMiddleware);
 
 const start = async () => {

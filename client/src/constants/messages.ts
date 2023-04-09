@@ -8,6 +8,8 @@ export const messages = {
     accessSuccess: 'Вы успешно вошли',
     logoutError: 'При попытке выхода произошла ошибка',
     logoutSuccess: 'Вы успешно вышли',
+    updateUserSuccess: 'Пользователь успешно обновлен',
+    updateUserError: 'Произошла ошибка обновления пользователя',
     registrateSuccess:
         'На ваш электронный адрес было послано сообщение о регистрации',
     registrateError: 'Произошла ошибка регистрации',

@@ -1,5 +1,6 @@
 import {AxiosInstance} from 'axios';
 
+import {EndpointConfigs} from './config';
 import {createApiEndpointInstance} from './endpointInstance';
 
 /**
@@ -8,10 +9,16 @@ import {createApiEndpointInstance} from './endpointInstance';
  */
 export enum EndpointsTypes {
     Auth = 'Auth',
+    User = 'User',
 }
 
-const endpointList: {[x in EndpointsTypes]: () => AxiosInstance} = {
-    [EndpointsTypes.Auth]: () => createApiEndpointInstance('/auth'),
+const endpointList: {
+    [x in EndpointsTypes]: (config: EndpointConfigs) => AxiosInstance;
+} = {
+    [EndpointsTypes.Auth]: (endpointConfig: EndpointConfigs) =>
+        createApiEndpointInstance('/auth', endpointConfig),
+    [EndpointsTypes.User]: (endpointConfig: EndpointConfigs) =>
+        createApiEndpointInstance('/user', endpointConfig),
 };
 
 export default endpointList;

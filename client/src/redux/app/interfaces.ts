@@ -1,4 +1,4 @@
-import {RandomUserLocation} from './../randomUsers/interfaces';
+import {Country} from '@src/constants/locations/locations';
 
 export interface User {
     email: string;
@@ -6,20 +6,22 @@ export interface User {
     name: string;
     location?: UserLocation;
     picture?: UserPicture;
-    dob?: Dob;
+    dob?: string;
 }
 
-export type UserLocation = Pick<RandomUserLocation, 'city' | 'country'>;
+export type UserForUpdate = Omit<User, 'picture'> & {
+    picture?: FormData;
+};
+
+export type UserLocation = {
+    city: string;
+    country: Country;
+};
 
 export interface UserPicture {
     large: string;
     medium: string;
     thumbnail: string;
-}
-
-export interface Dob {
-    date: string;
-    age: number;
 }
 
 export interface LoginResponse extends User {

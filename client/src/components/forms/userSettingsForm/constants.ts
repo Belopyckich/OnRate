@@ -4,8 +4,7 @@ export const USER_SETTINGS_FORM_FIELDS = {
     email: 'email',
     city: 'city',
     country: 'country',
-    date: 'date',
-    age: 'age',
+    dob: 'dob',
 } as const;
 
 export const USER_SETTINGS_FORM_LABELS = {
@@ -14,6 +13,13 @@ export const USER_SETTINGS_FORM_LABELS = {
     [USER_SETTINGS_FORM_FIELDS.city]: 'City',
     [USER_SETTINGS_FORM_FIELDS.country]: 'Country',
     [USER_SETTINGS_FORM_FIELDS.picture]: 'Picture',
-    [USER_SETTINGS_FORM_FIELDS.date]: 'Date',
-    [USER_SETTINGS_FORM_FIELDS.age]: 'Age',
+    [USER_SETTINGS_FORM_FIELDS.dob]: 'Date Of Birth',
 } as const;
+
+export const USER_PHOTO_SETTINGS_STYLES = {
+    width: '160px',
+    height: '160px',
+    fontSize: '160px',
+};
+
+export const MIN_AGE_DIFFERENCE = 14;

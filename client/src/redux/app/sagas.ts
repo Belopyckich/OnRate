@@ -1,8 +1,10 @@
+import {UpdateUserProps} from '@src/components/forms/userSettingsForm/interfaces';
 import {
     MessageType,
     showNotification,
 } from '@src/components/showNotification/show-notification';
 import {COOKIE_KEYS} from '@src/constants/cookie-keys';
+import {DATE_FORMAT} from '@src/constants/date-formats';
 import {messages} from '@src/constants/messages';
 import Cookies from 'js-cookie';
 import {all, call, put, select, takeLatest} from 'typed-redux-saga';
@@ -10,6 +12,7 @@ import {getType} from 'typesafe-actions';
 
 import {requestHandler} from '../request-handler';
 import * as actions from './actions';
+import {createUpdatedUserFormData} from './helpers';
 import * as requests from './requests';
 import {selectAccessToken} from './selectors';
 
@@ -30,6 +33,28 @@ function* loginUserWorker({payload}: ReturnType<typeof actions.loginUser>) {
 
 function* loginUserWatcher() {
     yield takeLatest(getType(actions.loginUser), loginUserWorker);
+}
+
+function* updateUserWorker({
+    payload: {user, callback},
+}: ReturnType<typeof actions.updateUser>) {
+    const response = yield* requestHandler({
+        request: call(
+            requests.updateUserRequest,
+            createUpdatedUserFormData(user),
+        ),
+        successMessage: messages.updateUserSuccess,
+        errorMessage: messages.updateUserError,
+    });
+
+    if (response?.data && response.success) {
+        yield* put(actions.setUser(response.data));
+        callback(response.data);
+    }
+}
+
+function* updateUserWatcher() {
+    yield takeLatest(getType(actions.updateUser), updateUserWorker);
 }
 
 function* checkAuthWorker() {
@@ -54,7 +79,6 @@ function* checkAuthWatcher() {
 
 function* logoutUserWorker() {
     const accessToken = yield* select(selectAccessToken);
-    console.log('🚀 ~ accessToken:', accessToken);
 
     if (accessToken && typeof accessToken === 'string') {
         const response = yield* requestHandler({
@@ -105,5 +129,6 @@ export default function* appWatchers() {
         registrateUserWatcher(),
         logoutUserWatcher(),
         checkAuthWatcher(),
+        updateUserWatcher(),
     ]);
 }

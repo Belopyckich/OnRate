@@ -17,6 +17,7 @@ function* getUsersWorker() {
                         ...user,
                         name: `${user.name.first} ${user.name.last}`,
                         id: user.id.value,
+                        dob: user.dob.date,
                     } as User),
             );
 

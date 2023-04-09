@@ -1,11 +1,10 @@
-import {
-    ScrollContainer,
-    ScrollMode,
-} from '@src/components/scrollContainer/scroll-container';
 import {UserPhotoUpload} from '@src/components/uploader/upload';
 import {UserPhoto} from '@src/components/userPhoto/user-photo';
 import {UserPhotoEditMask} from '@src/components/userPhotoEditMask/user-photo-edit-mask';
-import {CITIES, Countries} from '@src/constants/locations/locations';
+import {DATE_FORMAT} from '@src/constants/date-formats';
+import {CITIES, Country} from '@src/constants/locations/locations';
+import {updateUser} from '@src/redux/app/actions';
+import {User} from '@src/redux/app/interfaces';
 import {
     selectCurrentUser,
     selectCurrentUserForSettings,
@@ -17,11 +16,14 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {
+    MIN_AGE_DIFFERENCE,
+    USER_PHOTO_SETTINGS_STYLES,
     USER_SETTINGS_FORM_FIELDS,
     USER_SETTINGS_FORM_LABELS,
 } from './constants';
 import {
     getUserSettingsFormPlaceholder,
+    getUserSettingsFormValues,
     shouldUpdateUserSettingsField,
     shouldUpdateUserSettingsLocationField,
 } from './helpers';
@@ -37,18 +39,21 @@ export const UserSettingsForm = () => {
 
     const {setFieldsValue} = form;
 
-    const onFinish = (formValues: UserSettingsFormValues) => {
-        console.log(formValues, 'formValues');
-    };
+    const onFinish = (formValues: UserSettingsFormValues) =>
+        user &&
+        dispatch(
+            updateUser({
+                user: {...formValues, id: user.id},
+                callback: (user: User) => {
+                    const userSettingsFormValues =
+                        getUserSettingsFormValues(user);
 
-    useEffect(() => {
-        dispatch(getUsers());
-    }, []);
-
-    const t = Object.keys(Countries).map((value) => ({
-        value: value,
-        label: value,
-    }));
+                    if (userSettingsFormValues) {
+                        setFieldsValue(userSettingsFormValues);
+                    }
+                },
+            }),
+        );
 
     return (
         <Form
@@ -57,6 +62,7 @@ export const UserSettingsForm = () => {
             autoComplete="off"
             onFinish={onFinish}
             layout="vertical"
+            initialValues={user}
             className={styles.userSettingsForm}
         >
             <div className={styles.userSettingsFormContent}>
@@ -67,24 +73,21 @@ export const UserSettingsForm = () => {
                             USER_SETTINGS_FORM_FIELDS.picture,
                             USER_SETTINGS_FORM_FIELDS.name,
                         ])}
-                        initialValue={user?.picture.src}
                     >
-                        {({getFieldsValue, setFieldsValue}) => {
-                            const {name, picture} = getFieldsValue();
+                        {({getFieldValue}) => {
+                            const picture = getFieldValue(
+                                USER_SETTINGS_FORM_FIELDS.picture,
+                            );
+                            console.log('🚀 ~ picture:', picture);
+                            const name = getFieldValue(
+                                USER_SETTINGS_FORM_FIELDS.name,
+                            );
+                            console.log('🚀 ~ name:', name);
 
                             return (
-                                <Form.Item
+                                <Form.Item<UserSettingsFormValues>
                                     noStyle
                                     name={USER_SETTINGS_FORM_FIELDS.picture}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                getUserSettingsFormPlaceholder(
-                                                    USER_SETTINGS_FORM_FIELDS.picture,
-                                                ),
-                                        },
-                                    ]}
                                 >
                                     <UserPhotoEditMask
                                         src={picture?.src}
@@ -96,23 +99,15 @@ export const UserSettingsForm = () => {
                                         }
                                         deleteFile={() =>
                                             setFieldsValue({
-                                                picture: undefined,
+                                                picture: null,
                                             })
                                         }
-                                        style={{
-                                            width: '160px',
-                                            height: '160px',
-                                            fontSize: '160px',
-                                        }}
+                                        style={USER_PHOTO_SETTINGS_STYLES}
                                     >
                                         <UserPhoto
                                             username={name}
                                             src={picture?.src}
-                                            style={{
-                                                width: '160px',
-                                                height: '160px',
-                                                fontSize: '160px',
-                                            }}
+                                            style={USER_PHOTO_SETTINGS_STYLES}
                                         />
                                     </UserPhotoEditMask>
                                 </Form.Item>
@@ -120,13 +115,12 @@ export const UserSettingsForm = () => {
                         }}
                     </Form.Item>
 
-                    <Form.Item
+                    <Form.Item<UserSettingsFormValues>
                         label={
                             USER_SETTINGS_FORM_LABELS[
                                 USER_SETTINGS_FORM_FIELDS.name
                             ]
                         }
-                        initialValue={user?.name}
                         name={USER_SETTINGS_FORM_FIELDS.name}
                         rules={[
                             {
@@ -136,19 +130,19 @@ export const UserSettingsForm = () => {
                                 ),
                             },
                         ]}
+                        required={true}
                     >
                         <Input allowClear={true} />
                     </Form.Item>
                 </div>
 
-                <Form.Item
+                <Form.Item<UserSettingsFormValues>
                     label={
                         USER_SETTINGS_FORM_LABELS[
                             USER_SETTINGS_FORM_FIELDS.email
                         ]
                     }
                     name={USER_SETTINGS_FORM_FIELDS.email}
-                    initialValue={user?.email}
                     rules={[
                         {
                             required: true,
@@ -173,7 +167,7 @@ export const UserSettingsForm = () => {
 
                             return (
                                 <>
-                                    <Form.Item
+                                    <Form.Item<UserSettingsFormValues>
                                         label={
                                             USER_SETTINGS_FORM_LABELS[
                                                 USER_SETTINGS_FORM_FIELDS
@@ -181,10 +175,6 @@ export const UserSettingsForm = () => {
                                             ]
                                         }
                                         name={USER_SETTINGS_FORM_FIELDS.country}
-                                        initialValue={
-                                            user?.location?.country ||
-                                            Countries.Belarus
-                                        }
                                         rules={[
                                             {
                                                 required: true,
@@ -197,7 +187,7 @@ export const UserSettingsForm = () => {
                                     >
                                         <Select
                                             allowClear={true}
-                                            options={Object.keys(Countries).map(
+                                            options={Object.keys(Country).map(
                                                 (value) => ({
                                                     value: value,
                                                     label: value,
@@ -213,10 +203,6 @@ export const UserSettingsForm = () => {
                                             ]
                                         }
                                         name={USER_SETTINGS_FORM_FIELDS.city}
-                                        initialValue={
-                                            user?.location?.city ||
-                                            CITIES[Countries.Belarus]
-                                        }
                                         rules={[
                                             {
                                                 required: true,
@@ -238,7 +224,7 @@ export const UserSettingsForm = () => {
                                                           }),
                                                       )
                                                     : CITIES[
-                                                          Countries.Belarus
+                                                          Country.Belarus
                                                       ].map((value) => ({
                                                           value: value,
                                                           label: value,
@@ -252,45 +238,25 @@ export const UserSettingsForm = () => {
                     </Form.Item>
                 </div>
 
-                <Form.Item
+                <Form.Item<UserSettingsFormValues>
                     label={
-                        USER_SETTINGS_FORM_LABELS[
-                            USER_SETTINGS_FORM_FIELDS.date
-                        ]
+                        USER_SETTINGS_FORM_LABELS[USER_SETTINGS_FORM_FIELDS.dob]
                     }
-                    initialValue={user?.dob?.date}
-                    name={USER_SETTINGS_FORM_FIELDS.date}
+                    name={USER_SETTINGS_FORM_FIELDS.dob}
                     rules={[
                         {
                             required: true,
                             message: getUserSettingsFormPlaceholder(
-                                USER_SETTINGS_FORM_FIELDS.date,
+                                USER_SETTINGS_FORM_FIELDS.dob,
                             ),
                         },
                     ]}
                 >
                     <DatePicker
-                        onChange={(value) => console.log(value, 'onChange')}
-                        onOk={(value) => console.log(value, 'onOk')}
+                        disabledDate={(currentDate) =>
+                            currentDate.year() < MIN_AGE_DIFFERENCE
+                        }
                     />
-                </Form.Item>
-
-                <Form.Item
-                    label={
-                        USER_SETTINGS_FORM_LABELS[USER_SETTINGS_FORM_FIELDS.age]
-                    }
-                    initialValue={user?.dob?.age}
-                    name={USER_SETTINGS_FORM_FIELDS.age}
-                    rules={[
-                        {
-                            required: true,
-                            message: getUserSettingsFormPlaceholder(
-                                USER_SETTINGS_FORM_FIELDS.age,
-                            ),
-                        },
-                    ]}
-                >
-                    <Input allowClear={true} />
                 </Form.Item>
             </div>
 

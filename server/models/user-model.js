@@ -19,13 +19,7 @@ const UserSchema = new Schema({
     },
     required: false,
   },
-  dob: {
-    type: {
-      date: { type: String, unique: false, required: false },
-      age: { type: Number, unique: false, required: false },
-    },
-    required: false,
-  },
+  dob: { type: String, required: false },
   isActivated: { type: Boolean, default: false },
   activationLink: { type: String },
 });
