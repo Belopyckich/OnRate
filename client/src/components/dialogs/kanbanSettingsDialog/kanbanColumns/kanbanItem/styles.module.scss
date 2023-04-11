@@ -1,0 +1,21 @@
+.kanban-column-item {
+    padding: 4px 10px;
+    display: grid;
+    grid-template-columns: max-content auto max-content max-content;
+    grid-auto-flow: column;
+    align-items: center;
+    column-gap: 6px;
+    border-radius: 4px;
+
+    &-clicked-icon {
+        cursor: pointer;
+    }
+
+    &-is-light {
+        color: $graniteGray;
+    }
+
+    &-is-dark {
+        color: $white;
+    }
+}

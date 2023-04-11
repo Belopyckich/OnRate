@@ -2,7 +2,11 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        dropdown: string;
+        kanbanColumns: string;
+        kanbanColumnsAvailable: string;
+        kanbanColumnsAvailableContent: string;
+        kanbanColumnsAvailableTitle: string;
+        kanbanColumnsForm: string;
     }
 }
 

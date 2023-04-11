@@ -10,6 +10,7 @@ import {createApiEndpointInstance} from './endpointInstance';
 export enum EndpointsTypes {
     Auth = 'Auth',
     User = 'User',
+    Kanban = 'Kanban',
 }
 
 const endpointList: {
@@ -19,6 +20,8 @@ const endpointList: {
         createApiEndpointInstance('/auth', endpointConfig),
     [EndpointsTypes.User]: (endpointConfig: EndpointConfigs) =>
         createApiEndpointInstance('/user', endpointConfig),
+    [EndpointsTypes.Kanban]: (endpointConfig: EndpointConfigs) =>
+        createApiEndpointInstance('/kanban', endpointConfig),
 };
 
 export default endpointList;

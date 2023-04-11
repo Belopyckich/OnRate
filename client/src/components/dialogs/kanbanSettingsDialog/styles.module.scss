@@ -1,0 +1,32 @@
+.kanban-settings {
+    &-dialog {
+        @include modal-fit-content(950px, 50px);
+
+        :global {
+            .ant-tabs {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: 100%;
+                grid-template-rows: max-content 1fr;
+
+                &-content {
+                    height: 100%;
+
+                    &-holder {
+                        padding: 16px;
+                        overflow: hidden;
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+
+                &-tabpane {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

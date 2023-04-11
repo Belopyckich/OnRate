@@ -1,0 +1,9 @@
+.kanban-edit-or-create-dialog {
+    @include modal-fit-content(520px, 50px);
+
+    :global {
+        .ant-modal-body {
+            padding: 16px;
+        }
+    }
+}

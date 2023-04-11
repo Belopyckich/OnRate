@@ -38,13 +38,14 @@ export const createApiEndpointInstance = (
 
         instance.interceptors.request.use(async (value) => {
             const accessToken = await getAccessToken(store);
+            console.log('🚀 ~ accessToken:', accessToken);
 
             if (accessToken) {
                 return {
                     ...value,
                     headers: {
                         ...config.headers,
-                        Authorization: `Bearer ${getAccessToken(store)}`,
+                        Authorization: `Bearer ${accessToken}`,
                     },
                 } as InternalAxiosRequestConfig<any>;
             }

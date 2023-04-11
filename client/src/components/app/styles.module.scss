@@ -168,10 +168,6 @@
                 border-bottom: 1px solid themed(--nobel-rockBlue);
             }
 
-            &-body {
-                padding: 16px;
-            }
-
             &-title {
                 background: themed(--white-mirage);
             }
@@ -208,5 +204,79 @@
 
     .ant-select-single.ant-select-open .ant-select-selection-item {
         color: themed(--darkGrey-rockBlue);
+    }
+
+    .ant-upload {
+        color: themed(--black-white);
+    }
+
+    .ant-dropdown .ant-dropdown-menu {
+        padding: 0;
+        background-color: themed(--white-oxfordBlue);
+        cursor: pointer;
+
+        .ant-dropdown {
+            &-arrow {
+                box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 10%);
+                background: themed(--white-oxfordBlue);
+                z-index: auto;
+
+                &:before {
+                    background: themed(--white-oxfordBlue);
+                }
+            }
+
+            &-menu-item {
+                margin: 0;
+                height: 38px;
+                line-height: 38px;
+                color: themed(--darkGrey-rockBlue);
+
+                > span {
+                    color: themed(--black-white);
+                }
+
+                path {
+                    fill: themed(--blue-summerSky);
+                }
+
+                &-danger {
+                    path {
+                        fill: themed(--outrageousOrange-orangeRoughy);
+                    }
+
+                    > span {
+                        color: themed(--outrageousOrange-orangeRoughy);
+                    }
+                }
+
+                &:active,
+                &:hover {
+                    background-color: themed(--aliceBlue-fiord) !important;
+                    color: unset !important;
+                    border-radius: inherit;
+                }
+            }
+        }
+    }
+
+    .ant-tabs {
+        .ant-tabs-nav {
+            .ant-tabs-tab {
+                padding: 16px;
+            }
+        }
+
+        .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+            color: themed(--blue-summerSky);
+        }
+
+        .ant-tabs-ink-bar {
+            background: themed(--blue-summerSky);
+        }
+    }
+
+    .ant-divider-horizontal {
+        margin: 0;
     }
 }

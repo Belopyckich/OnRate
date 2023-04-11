@@ -1,0 +1,8 @@
+export const KANBAN_EDIT_OR_CREATE_COLUMN_DIALOG_NAME =
+    'KANBAN_EDIT_OR_CREATE_COLUMN_DIALOG_NAME';
+
+export const KANBAN_EDIT_COLUMN_DIALOG_TITLE = 'Редактировать колонку';
+
+export const KANBAN_CREATE_COLUMN_DIALOG_TITLE = 'Создать колонку';
+
+export const KANBAN_EDIT_OR_CREATE_COLUMN_DIALOG_WIDTH = 520;

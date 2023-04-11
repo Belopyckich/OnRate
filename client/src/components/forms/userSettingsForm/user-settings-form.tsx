@@ -78,11 +78,9 @@ export const UserSettingsForm = () => {
                             const picture = getFieldValue(
                                 USER_SETTINGS_FORM_FIELDS.picture,
                             );
-                            console.log('🚀 ~ picture:', picture);
                             const name = getFieldValue(
                                 USER_SETTINGS_FORM_FIELDS.name,
                             );
-                            console.log('🚀 ~ name:', name);
 
                             return (
                                 <Form.Item<UserSettingsFormValues>

@@ -6,23 +6,7 @@ import {KanbanState} from './interfaces';
 type Actions = ActionType<typeof actions>;
 
 const gamesState: KanbanState = {
-    columns: [
-        {
-            uid: 1,
-            title: 'Колонка 1',
-            color: 'rgb(255, 202, 47)',
-        },
-        {
-            uid: 2,
-            title: 'Колонка 2',
-            color: 'rgb(81, 154, 68)',
-        },
-        {
-            uid: 3,
-            title: 'Колонка 3',
-            color: 'rgb(255, 255, 255)',
-        },
-    ],
+    columns: [],
     kanbanBoardDeals: {
         ['1']: [
             {uid: 1, title: '1 задача', text: 'Текст первой задачи'},

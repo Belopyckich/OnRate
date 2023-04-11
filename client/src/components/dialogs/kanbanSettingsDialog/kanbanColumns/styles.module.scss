@@ -1,0 +1,51 @@
+.kanban-columns {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 100%;
+    grid-gap: 16px;
+    overflow: hidden;
+
+    @media screen and (max-width: 950px) {
+        grid-template-rows: 1fr max-content;
+        grid-template-columns: 100%;
+    }
+
+    &-available {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: max-content 1fr;
+        row-gap: 16px;
+
+        &-title {
+            color: themed(--darkGrey-rockBlue);
+        }
+
+        &-content {
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-auto-rows: max-content;
+            grid-auto-flow: row;
+            row-gap: 16px;
+
+            > div {
+                width: 100%;
+                overflow: hidden;
+            }
+        }
+    }
+
+    &-form {
+        background-color: themed(--aliceBlue-oxfordBlue);
+        padding: 24px;
+        width: calc(100% - 48px);
+        height: calc(100% - 48px);
+    }
+}

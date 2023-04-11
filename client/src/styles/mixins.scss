@@ -30,7 +30,10 @@
     color: $color;
     &:hover,
     &:focus,
-    &:active {
+    &:active,
+    &:not(:disabled):hover,
+    &:not(:disabled):focus,
+    &:not(:disabled):active {
         background: $bgHover;
         border: 1px solid $borderHover;
         color: $colorHover;
@@ -108,17 +111,16 @@
             overflow: hidden;
 
             &-content {
+                border-radius: 4px 4px 0 0;
                 display: grid;
                 grid-template-columns: 100%;
-                grid-template-rows: max-content auto;
-                height: 100%;
-                overflow: hidden;
+                grid-template-rows: max-content 1fr;
+                overflow-y: hidden;
             }
 
             &-body {
-                padding: 0;
                 height: 100%;
-                overflow: hidden;
+                overflow-y: hidden;
             }
         }
 
@@ -132,19 +134,6 @@
                 max-width: 100%;
                 padding: 0;
                 top: $top;
-
-                &-content {
-                    border-radius: 4px 4px 0 0;
-                    display: grid;
-                    grid-template-columns: 100%;
-                    grid-template-rows: max-content 1fr;
-                    overflow-y: hidden;
-                }
-
-                &-body {
-                    height: 100%;
-                    overflow-y: hidden;
-                }
             }
         }
     }

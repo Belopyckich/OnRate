@@ -2,15 +2,13 @@ import UploadIcon from '@src/assets/photo-upload-icon.component.svg';
 import PhotoShowIcon from '@src/assets/show-photo-eye-icon.component.svg';
 import DeleteIcon from '@src/assets/trash.component.svg';
 import {Nullable} from '@src/typings';
-import {Tooltip, Upload} from 'antd';
+import {Dropdown, Tooltip, Upload} from 'antd';
 import {UploadType} from 'antd/es/upload/interface';
 import cn from 'classnames';
 import React, {CSSProperties, useState} from 'react';
 
 import {AvatarPreview} from '../avatarPreview/avatar-preview';
 import {UploadFileCallbackProps} from '../dialogs/imageEditorDialog/interfaces';
-import {Dropdown} from '../dropdown/dropdown';
-import {TextOverflow} from '../textOverflow/text-overflow';
 import {UserPhotoUpload} from '../uploader/upload';
 import {
     USER_PHOTO_EDIT_MASK_DROPDOWN_TITLES,

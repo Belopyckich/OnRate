@@ -1,18 +1,43 @@
 import {COLOR_BLACK, COLOR_WHITE} from '@src/constants';
+import {Any} from '@src/typings';
+import Color from 'color';
+import {RGBColor} from 'react-color';
+
+import {devLog} from './dev-log';
 
 export const getRgbFromString = (color: string) => {
-    const colorString = color.includes('rgb') ? color : 'rgb(255,255,255)';
+    try {
+        const rgbColor: RGBColor = JSON.parse(color);
 
-    const rgb = colorString.substr(4).split(')')[0].split(',');
+        return rgbColor;
+    } catch (e) {
+        devLog(e, 'getRgbFromStringError');
 
-    return {
-        R: parseInt(rgb[0], 10),
-        G: parseInt(rgb[1], 10),
-        B: parseInt(rgb[2], 10),
-    };
+        return {
+            r: 255,
+            g: 255,
+            b: 255,
+        };
+    }
+};
+
+export const getRgbStyleFromString = (color: string) => {
+    try {
+        const rgbColor: RGBColor = JSON.parse(color);
+
+        return `rgb(${rgbColor.r},${rgbColor.g},${rgbColor.b})`;
+    } catch (e) {
+        devLog(e, 'getRgbStyleFromString');
+        return 'rgb(255,255,255)';
+    }
 };
 
 export const getOppositeTitleColor = (color: string) => {
-    const {R, G, B} = getRgbFromString(color);
-    return R * 0.299 + G * 0.587 + B * 0.114 > 186 ? COLOR_BLACK : COLOR_WHITE;
+    const {r, g, b} = getRgbFromString(color);
+    return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? COLOR_BLACK : COLOR_WHITE;
+};
+
+export const checkIsLightBackground = (background: Any) => {
+    const {r, g, b} = getRgbFromString(background);
+    return r > 230 && g > 230 && b > 230;
 };

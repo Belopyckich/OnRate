@@ -13,7 +13,9 @@ export interface Task {
 }
 
 export interface KanbanColumnProps {
-    uid: number;
+    _id: string;
     title: string;
     color: string;
+    position: number;
+    dealsCount: number;
 }

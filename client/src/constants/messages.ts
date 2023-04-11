@@ -19,4 +19,9 @@ export const messages = {
     emailSingle: 'Адрес электронной почты может быть только один',
     fileFormatError: 'Произошла ошибка. Этот формат файлов не поддерживается',
     fileSize: 'Размер файла не должен превышать',
+    kanbanCreateError: 'Произошла ошибка при создании колонки',
+    kanbanCreateSuccess: 'Колонка успешно создана',
+    getKanbanColumnsError: 'Произошла ошибка при получении колонок',
+    kanbanDeleteError: 'Произошла ошибка при удалении колонки',
+    kanbanDeleteSuccess: 'Колонка успешно удалена',
 };

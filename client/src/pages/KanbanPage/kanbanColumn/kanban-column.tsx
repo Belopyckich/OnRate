@@ -1,6 +1,9 @@
 import {EmptyBlock} from '@src/components/emptyBlock/empty-block';
 import {TextOverflow} from '@src/components/textOverflow/text-overflow';
-import {getOppositeTitleColor} from '@src/helpers/perfect-colors';
+import {
+    getOppositeTitleColor,
+    getRgbStyleFromString,
+} from '@src/helpers/perfect-colors';
 import {KanbanColumnProps} from '@src/redux/kanban/interfaces';
 import {selectKanbanBoardColumnDeals} from '@src/redux/kanban/selectors';
 import {State} from '@src/redux/reducers';
@@ -17,17 +20,17 @@ export interface KanbanColumnData {
 }
 
 export const KanbanColumn = ({column}: KanbanColumnData) => {
-    const {uid: columnUid, color: columnColor, title: columnTitle} = column;
+    const {_id: columnUid, color: columnColor, title: columnTitle} = column;
 
     const tasksList = useSelector((state: State) =>
-        selectKanbanBoardColumnDeals(state, columnUid),
+        selectKanbanBoardColumnDeals(state, Number(columnUid)),
     );
 
     return (
         <div className={styles.kanbanColumn}>
             <div
                 className={styles.kanbanColumnHeader}
-                style={{backgroundColor: columnColor}}
+                style={{backgroundColor: getRgbStyleFromString(columnColor)}}
             >
                 <TextOverflow
                     text={columnTitle}
@@ -37,7 +40,7 @@ export const KanbanColumn = ({column}: KanbanColumnData) => {
                 />
             </div>
 
-            <Droppable droppableId={columnUid.toString()}>
+            <Droppable droppableId={columnUid}>
                 {(provided: DroppableProvided) => (
                     <div
                         ref={provided.innerRef}
