@@ -105,7 +105,6 @@ export function* requestHandler<T extends SagaEffect>({
             ? data
             : messages.serverError;
     } catch (error) {
-        console.log(error, 'error');
         devLog(request, 'requestHandler');
 
         yield errorCallback

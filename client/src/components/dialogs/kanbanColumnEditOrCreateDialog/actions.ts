@@ -1,5 +1,5 @@
 import * as dialogActions from '@redux/dialog/actions';
-import {KanbanEditOrCreateFormProps} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
+import {KanbanEditOrCreateColumnFormProps} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
 
 import {
     KANBAN_CREATE_COLUMN_DIALOG_TITLE,
@@ -8,7 +8,7 @@ import {
 } from './constants';
 
 export const showKanbanEditOrCreateDialog = (
-    dialogProps: KanbanEditOrCreateFormProps,
+    dialogProps: KanbanEditOrCreateColumnFormProps,
 ) =>
     dialogActions.show({
         dialogConfig: {

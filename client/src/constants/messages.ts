@@ -24,4 +24,7 @@ export const messages = {
     getKanbanColumnsError: 'Произошла ошибка при получении колонок',
     kanbanDeleteError: 'Произошла ошибка при удалении колонки',
     kanbanDeleteSuccess: 'Колонка успешно удалена',
+    kanbanUpdateSuccess: 'Колонка успешно обновлена',
+    kanbanUpdateError: 'Произошла ошибка при обновлении колонки',
+    kanbanMoveError: 'Произошла ошибка при перетаскивании сделки',
 };

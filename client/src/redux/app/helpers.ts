@@ -30,7 +30,6 @@ export const createUpdatedUserFormData = ({
     );
 
     if (picture?.file || typeof picture === null) {
-        console.log(picture?.file, 'picture?.file');
         formData.append('file', picture?.file || JSON.stringify(null));
 
         if (picture?.cropParams) {

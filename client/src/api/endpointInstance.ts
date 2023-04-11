@@ -38,7 +38,6 @@ export const createApiEndpointInstance = (
 
         instance.interceptors.request.use(async (value) => {
             const accessToken = await getAccessToken(store);
-            console.log('🚀 ~ accessToken:', accessToken);
 
             if (accessToken) {
                 return {

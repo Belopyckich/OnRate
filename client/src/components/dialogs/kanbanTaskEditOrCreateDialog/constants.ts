@@ -1,0 +1,8 @@
+export const KANBAN_EDIT_OR_CREATE_TASK_DIALOG_NAME =
+    'KANBAN_EDIT_OR_CREATE_TASK_DIALOG_NAME';
+
+export const KANBAN_EDIT_TASK_DIALOG_TITLE = 'Редактировать задачу';
+
+export const KANBAN_CREATE_TASK_DIALOG_TITLE = 'Создать задачу';
+
+export const KANBAN_EDIT_OR_CREATE_TASK_DIALOG_WIDTH = 520;

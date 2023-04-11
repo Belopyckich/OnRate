@@ -13,13 +13,6 @@ import {deleteKanbanColumn} from '@src/redux/kanban/actions';
 import {KanbanColumnProps} from '@src/redux/kanban/interfaces';
 import cn from 'classnames';
 import React, {useState} from 'react';
-import {
-    DragDropContext,
-    Draggable,
-    DraggableProvided,
-    Droppable,
-} from 'react-beautiful-dnd';
-import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './styles.module.scss';
 
@@ -30,11 +23,11 @@ export interface KanbanColumnItemProps {
 }
 
 export const KanbanColumnItem = ({
-    column: {_id, title, color},
+    column,
     onEditClick,
     onDeleteClick,
 }: KanbanColumnItemProps) => {
-    const dispatch = useDispatch();
+    const {_id, title, color} = column;
 
     const isLightColumnBackground = checkIsLightBackground(color);
 
@@ -43,41 +36,25 @@ export const KanbanColumnItem = ({
         : styles.kanbanColumnItemIsDark;
 
     return (
-        <Draggable draggableId={_id} index={Number(_id)}>
-            {(providedDraggable: DraggableProvided) => (
-                <div
-                    ref={providedDraggable.innerRef}
-                    {...providedDraggable.draggableProps}
-                    {...providedDraggable.dragHandleProps}
-                >
-                    <div
-                        style={{backgroundColor: getRgbStyleFromString(color)}}
-                        className={cn(
-                            styles.kanbanColumnItem,
-                            columnItemStyles,
-                        )}
-                    >
-                        <Icon component={MoveIcon} />
+        <div
+            style={{backgroundColor: getRgbStyleFromString(color)}}
+            className={cn(styles.kanbanColumnItem, columnItemStyles)}
+        >
+            <Icon component={MoveIcon} />
 
-                        <TextOverflow
-                            text={title}
-                            extraClassName={columnItemStyles}
-                        />
+            <TextOverflow text={title} extraClassName={columnItemStyles} />
 
-                        <Icon
-                            component={PencilIcon}
-                            className={styles.kanbanColumnItemClickedIcon}
-                            onClick={() => onEditClick?.()}
-                        />
+            <Icon
+                component={PencilIcon}
+                className={styles.kanbanColumnItemClickedIcon}
+                onClick={() => onEditClick?.()}
+            />
 
-                        <Icon
-                            component={DeleteIcon}
-                            className={styles.kanbanColumnItemClickedIcon}
-                            onClick={() => onDeleteClick?.()}
-                        />
-                    </div>
-                </div>
-            )}
-        </Draggable>
+            <Icon
+                component={DeleteIcon}
+                className={styles.kanbanColumnItemClickedIcon}
+                onClick={() => onDeleteClick?.()}
+            />
+        </div>
     );
 };

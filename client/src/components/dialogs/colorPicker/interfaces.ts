@@ -15,7 +15,9 @@ export enum EColor {
     Custom = 'Custom',
 }
 
-export interface ColorPickerProps extends Omit<FormItemProps, 'name'> {
+export interface ColorPickerProps
+    extends Omit<FormItemProps, 'name' | 'initialValue'> {
+    initialValue?: RGBColor;
     name: string;
     form: FormInstance;
 }

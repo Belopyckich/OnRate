@@ -20,6 +20,8 @@ router.post("/user/update", userController.updateUser);
 router.get("/users", authMiddleware, userController.getUsers);
 router.post("/kanban/create-column", kanbanController.kanbanColumnCreate);
 router.post("/kanban/delete-column", kanbanController.kanbanColumnDelete);
+router.post("/kanban/edit-column", kanbanController.KanbanColumnEdit);
+router.post("/kanban/move-column", kanbanController.KanbanColumnMove);
 router.get("/kanban/columns", kanbanController.getKanbanColumns);
 
 module.exports = router;

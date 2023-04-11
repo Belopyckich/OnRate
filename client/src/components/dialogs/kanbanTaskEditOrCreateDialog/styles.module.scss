@@ -1,0 +1,10 @@
+.kanban-edit-or-create-task-dialog {
+    visibility: visible;
+    @include modal-fit-content(520px, 50px);
+
+    :global {
+        .ant-modal-body {
+            padding: 16px;
+        }
+    }
+}

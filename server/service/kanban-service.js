@@ -25,6 +25,54 @@ class KanbanService {
     }
   }
 
+  async editColumn(column, userId) {
+    try {
+      const { title, color, _id } = column;
+
+      const kanbanColumn = await KanbanColumnModel.findOne({
+        user: userId,
+        _id,
+      });
+
+      if (!kanbanColumn) {
+        throw ApiError.BadRequest("Колонка не найдена");
+      }
+
+      kanbanColumn.title = title;
+      kanbanColumn.color = color;
+
+      await kanbanColumn.save();
+
+      return kanbanColumn;
+    } catch (e) {
+      console.log(e);
+      throw ApiError.BadRequest("Произошла ошибка при создании колонки");
+    }
+  }
+
+  async moveColumn(columns, userId) {
+    try {
+      if (!columns?.length) {
+        throw ApiError.BadRequest("Колонки не найдены");
+      }
+
+      await columns.map(({ _id, position }) => {
+        KanbanColumnModel.findOneAndUpdate(
+          {
+            _id,
+            user: userId,
+          },
+          {
+            position,
+          }
+        );
+      });
+    } catch (e) {
+      console.log(e);
+      throw ApiError.BadRequest("Произошла ошибка при создании колонки");
+    }
+  }
+
   async deleteColumn(columnUid, _id) {
     try {
       const deletedColumn = await KanbanColumnModel.findOne({

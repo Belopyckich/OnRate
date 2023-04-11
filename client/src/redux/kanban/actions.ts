@@ -1,5 +1,9 @@
-import {KanbanColumnFormValues} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
+import {
+    CreateKanbanColumnProps,
+    EditKanbanColumnProps,
+} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
 import {KeyData} from '@src/typings';
+import {DropResult} from 'react-beautiful-dnd';
 import {createAction} from 'typesafe-actions';
 
 import {KanbanColumnProps, Task} from './interfaces';
@@ -12,7 +16,15 @@ export const setKanbanColumns = createAction('KANBAN/SET_KANBAN_COLUMNS')<
 
 export const createKanbanColumn = createAction(
     'KANBAN/CREATE_KANBAN_COLUMN',
-)<KanbanColumnFormValues>();
+)<CreateKanbanColumnProps>();
+
+export const editKanbanColumn = createAction(
+    'KANBAN/EDIT_KANBAN_COLUMN',
+)<EditKanbanColumnProps>();
+
+export const moveKanbanColumn = createAction('KANBAN/MOVE_KANBAN_COLUMN')<
+    Required<DropResult>
+>();
 
 export const deleteKanbanColumn = createAction(
     'KANBAN/DELETE_KANBAN_COLUMN',

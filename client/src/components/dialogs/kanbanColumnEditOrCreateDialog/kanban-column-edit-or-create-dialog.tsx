@@ -2,8 +2,11 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 import {closeImageEditorDialog} from '@components/dialogs/imageEditorDialog/actions';
 import {ConnectedDialog} from '@src/components/dialog/dialog';
-import {KanbanEditOrCreateFormProps} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
-import {KanbanEditOrCreateForm} from '@src/components/forms/kanbanEditOrCreateColumnForm/kanban-edit-or-create-column-form';
+import {
+    ColumnFormType,
+    KanbanEditOrCreateColumnFormProps,
+} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
+import {KanbanEditOrCreateColumnForm} from '@src/components/forms/kanbanEditOrCreateColumnForm/kanban-edit-or-create-column-form';
 import {Avatar, Button, Upload, UploadProps} from 'antd';
 import React, {useEffect, useState} from 'react';
 import ReactCrop, {Crop} from 'react-image-crop';
@@ -27,15 +30,33 @@ export const KanbanEditOrCreateColumnDialog = () => (
 );
 
 const KanbanEditOrCreateColumnDialogBody = ({
+    type,
     initialValue,
-}: KanbanEditOrCreateFormProps) => {
+    _id,
+}: KanbanEditOrCreateColumnFormProps) => {
     const dispatch = useDispatch();
 
-    return (
-        <KanbanEditOrCreateForm
+    return type === ColumnFormType.Create ? (
+        <KanbanEditOrCreateColumnForm
+            type={type}
+            onSubmitForm={() => {
+                dispatch(closeKanbanEditOrCreateDialog());
+            }}
+            onCloseForm={() => {
+                dispatch(closeKanbanEditOrCreateDialog());
+            }}
+        />
+    ) : (
+        <KanbanEditOrCreateColumnForm
+            type={type}
             initialValue={initialValue}
-            onSubmitForm={() => dispatch(closeKanbanEditOrCreateDialog())}
-            onCloseForm={() => dispatch(closeKanbanEditOrCreateDialog())}
+            _id={_id}
+            onSubmitForm={() => {
+                dispatch(closeKanbanEditOrCreateDialog());
+            }}
+            onCloseForm={() => {
+                dispatch(closeKanbanEditOrCreateDialog());
+            }}
         />
     );
 };
