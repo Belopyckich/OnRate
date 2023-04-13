@@ -1,24 +1,4 @@
 .color-picker {
-    &-item {
-        display: grid;
-        grid-template-columns: max-content 1fr;
-        align-items: center;
-        column-gap: 20px;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    &-icon {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-    }
-
-    &-custom-color {
-        padding: 6px 12px;
-        cursor: pointer;
-    }
-
     &-dialog {
         @include modal-fit-content(400px, 50px);
 

@@ -1,3 +1,4 @@
+import {ColorOption} from '@src/components/colorOption/color-option';
 import {TextOverflow} from '@src/components/textOverflow/text-overflow';
 import {Form, FormItemProps, Select} from 'antd';
 import FormItem from 'antd/es/form/FormItem';
@@ -61,31 +62,6 @@ export const ColorPicker = ({
         });
     };
 
-    const renderOption = (option: ColorSelection) => {
-        const {colorRGB, description} = option;
-
-        const background = `rgb(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b})`;
-
-        const boxShadow =
-            colorRGB.b !== 255
-                ? `0 0 5px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0.9)`
-                : '0 0 2px rgba(126, 126, 126, .9)';
-
-        return (
-            <div className={styles.colorPickerItem}>
-                <div
-                    className={styles.colorPickerIcon}
-                    style={{
-                        backgroundColor: background,
-                        boxShadow,
-                    }}
-                />
-
-                <TextOverflow text={description} />
-            </div>
-        );
-    };
-
     return (
         <Form.Item {...props}>
             <Select
@@ -115,7 +91,10 @@ export const ColorPicker = ({
                         value={options[key].colorType}
                         key={options[key].description}
                     >
-                        {renderOption(options[key])}
+                        <ColorOption
+                            colorRGB={options[key].colorRGB}
+                            description={options[key].description}
+                        />
                     </Select.Option>
                 ))}
             </Select>

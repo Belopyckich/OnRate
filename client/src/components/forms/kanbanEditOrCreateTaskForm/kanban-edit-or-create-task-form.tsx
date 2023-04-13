@@ -1,11 +1,17 @@
 import ColorPicker from '@src/components/dialogs/colorPicker/color-picker';
-import {createKanbanColumn, editKanbanColumn} from '@src/redux/kanban/actions';
+import {
+    createKanbanColumn,
+    createKanbanTask,
+    editKanbanColumn,
+    editKanbanTask,
+} from '@src/redux/kanban/actions';
 import {Button, Form, Input} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
 import {KANBAN_TASK_FORM, KANBAN_TASK_FORM_LABELS} from './constants';
+import {KanbanColumnSelect} from './fields/kanbanColumnSelect/kanban-column-select';
 import {
     KanbanEditOrCreateTaskFormProps,
     KanbanTaskFormValues,
@@ -28,12 +34,14 @@ export const KanbanEditOrCreateTaskForm = ({
         onSubmitForm?.();
 
         if (type === TaskFormType.Create) {
-            dispatch(createKanbanColumn(values));
+            dispatch(createKanbanTask(values));
         } else {
             dispatch(
-                editKanbanColumn({
+                editKanbanTask({
+                    ...initialValue,
                     ...values,
                     _id,
+                    oldColumn: initialValue.column,
                 }),
             );
         }
@@ -62,7 +70,6 @@ export const KanbanEditOrCreateTaskForm = ({
                 >
                     <Input allowClear={true} />
                 </Form.Item>
-
                 <Form.Item<KanbanTaskFormValues>
                     initialValue={initialValue?.description}
                     label={
@@ -73,6 +80,13 @@ export const KanbanEditOrCreateTaskForm = ({
                 >
                     <Input allowClear={true} />
                 </Form.Item>
+
+                <KanbanColumnSelect
+                    initialValue={initialValue?.column}
+                    label={KANBAN_TASK_FORM_LABELS[KANBAN_TASK_FORM.column]}
+                    name={KANBAN_TASK_FORM.column}
+                    required={true}
+                />
             </div>
 
             <div className={styles.kanbanEditOrCreateFormButtons}>

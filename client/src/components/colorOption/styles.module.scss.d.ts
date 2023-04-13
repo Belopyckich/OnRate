@@ -2,8 +2,8 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
-        colorPickerDialog: string;
-        colorPickerDialogButtons: string;
+        colorOption: string;
+        colorOptionIcon: string;
     }
 }
 

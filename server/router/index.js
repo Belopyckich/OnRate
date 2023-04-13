@@ -23,5 +23,10 @@ router.post("/kanban/delete-column", kanbanController.kanbanColumnDelete);
 router.post("/kanban/edit-column", kanbanController.KanbanColumnEdit);
 router.post("/kanban/move-column", kanbanController.KanbanColumnMove);
 router.get("/kanban/columns", kanbanController.getKanbanColumns);
+router.post("/kanban/create-task", kanbanController.kanbanTaskCreate);
+router.post("/kanban/edit-task", kanbanController.kanbanTaskEdit);
+router.post("/kanban/move-task", kanbanController.kanbanTaskMove);
+router.post("/kanban/delete-task", kanbanController.kanbanTaskDelete);
+router.post("/kanban/tasks-by-column", kanbanController.getKanbanTasksByColumn);
 
 module.exports = router;

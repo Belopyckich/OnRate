@@ -4,7 +4,10 @@ import {showKanbanSettingsDialog} from '@src/components/dialogs/kanbanSettingsDi
 import {showKanbanEditOrCreateTaskDialog} from '@src/components/dialogs/kanbanTaskEditOrCreateDialog/actions';
 import {ColumnFormType} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
 import {selectAccessToken} from '@src/redux/app/selectors';
-import {getKanbanColumns} from '@src/redux/kanban/actions';
+import {
+    getKanbanBoardColumns,
+    getKanbanColumns,
+} from '@src/redux/kanban/actions';
 import {Input} from 'antd';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -16,7 +19,7 @@ const KanbanPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getKanbanColumns());
+        dispatch(getKanbanBoardColumns());
     }, []);
 
     return (

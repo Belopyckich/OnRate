@@ -1,0 +1,14 @@
+.color-option {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+    column-gap: 20px;
+    width: 100%;
+    overflow: hidden;
+
+    &-icon {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+}

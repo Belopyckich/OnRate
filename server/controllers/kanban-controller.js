@@ -33,6 +33,122 @@ class KanbanController {
     }
   }
 
+  async kanbanTaskCreate(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      const kanbanTask = await KanbanService.createTask(
+        req.body,
+        tokenSchema.id
+      );
+
+      return res.json(
+        new ResponseDto({
+          data: kanbanTask,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
+  async kanbanTaskEdit(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      const columnTasksWhereTaskIsDeleted = await KanbanService.editTask(
+        req.body,
+        tokenSchema.id
+      );
+
+      return res.json(
+        new ResponseDto({
+          data: columnTasksWhereTaskIsDeleted,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
+  async kanbanTaskMove(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      const updatedTask = await KanbanService.moveTask(
+        req.body,
+        tokenSchema.id
+      );
+
+      return res.json(
+        new ResponseDto({
+          data: updatedTask,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
+  async kanbanTaskDelete(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      const columnTasksWhereTaskIsDeleted = await KanbanService.deleteTask(
+        req.body,
+        tokenSchema.id
+      );
+
+      return res.json(
+        new ResponseDto({
+          data: columnTasksWhereTaskIsDeleted,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
   async kanbanColumnDelete(req, res, next) {
     try {
       const accessToken = req.headers.authorization.split(" ")[1];
@@ -133,6 +249,34 @@ class KanbanController {
       return res.json(
         new ResponseDto({
           data: kanbanColumns,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
+  async getKanbanTasksByColumn(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      const kanbanTasks = await KanbanService.getTasksByColumns(
+        tokenSchema.id,
+        req.body.column
+      );
+
+      return res.json(
+        new ResponseDto({
+          data: kanbanTasks,
           success: true,
         })
       );

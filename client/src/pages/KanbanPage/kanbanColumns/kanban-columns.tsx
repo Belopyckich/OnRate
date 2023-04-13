@@ -2,6 +2,7 @@ import {ButtonWithIcon} from '@src/components/buttonWithIcon/button-with-icon';
 import {showKanbanSettingsDialog} from '@src/components/dialogs/kanbanSettingsDialog/actions';
 import {EmptyBlock} from '@src/components/emptyBlock/empty-block';
 import {devLog} from '@src/helpers/dev-log';
+import {moveKanbanTask} from '@src/redux/kanban/actions';
 import {selectKanbanColumns} from '@src/redux/kanban/selectors';
 import {Button, Input} from 'antd';
 import React, {useMemo} from 'react';
@@ -16,7 +17,6 @@ export const KanbanColumns = () => {
     const dispatch = useDispatch();
 
     const kanbanColumns = useSelector(selectKanbanColumns);
-    console.log('🚀 ~ kanbanColumns:', kanbanColumns);
 
     const columnsListMemo = useMemo(
         () =>
@@ -28,7 +28,9 @@ export const KanbanColumns = () => {
 
     return kanbanColumns.length ? (
         <div className={styles.kanbanColumns}>
-            <DragDropContext onDragEnd={() => devLog('hello')}>
+            <DragDropContext
+                onDragEnd={(result) => dispatch(moveKanbanTask(result))}
+            >
                 {columnsListMemo}
             </DragDropContext>
         </div>

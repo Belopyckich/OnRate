@@ -3,14 +3,8 @@ import {RGBColor} from 'react-color';
 
 export interface KanbanState {
     columns: KanbanColumnProps[];
-    kanbanBoardDeals: KeyData<Task[]>;
+    kanbanBoardColumns: KeyData<KanbanBoardColumn>;
     isLoading: boolean;
-}
-
-export interface Task {
-    uid: number;
-    title: string;
-    text: string;
 }
 
 export interface KanbanColumnProps {
@@ -21,8 +15,26 @@ export interface KanbanColumnProps {
     dealsCount: number;
 }
 
+export interface KanbanTaskProps {
+    _id: string;
+    title: string;
+    description: string;
+    position: number;
+    column: string;
+}
+
+export interface KanbanBoardColumn {
+    tasks: KanbanTaskProps[];
+    isLoading: boolean;
+}
+
 export type KanbanColumnPropsFromDb = Omit<KanbanColumnProps, 'color'> & {
     color: RGBColor & {
         _id: string;
     };
 };
+
+export interface SetKanbanBoardColumnProps {
+    column_uid: string;
+    data: Partial<KanbanBoardColumn>;
+}
