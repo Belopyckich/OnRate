@@ -3,6 +3,7 @@ import {ButtonWithIcon} from '@src/components/buttonWithIcon/button-with-icon';
 import {showKanbanSettingsDialog} from '@src/components/dialogs/kanbanSettingsDialog/actions';
 import {showKanbanEditOrCreateTaskDialog} from '@src/components/dialogs/kanbanTaskEditOrCreateDialog/actions';
 import {ColumnFormType} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
+import {TaskFormType} from '@src/components/forms/kanbanEditOrCreateTaskForm/interfaces';
 import {selectAccessToken} from '@src/redux/app/selectors';
 import {
     getKanbanBoardColumns,
@@ -25,17 +26,18 @@ const KanbanPage = () => {
     return (
         <div className={styles.kanbanPage}>
             <div className={styles.kanbanPageFilter}>
-                <Input />
+                <Input placeholder={'Поиск'} />
                 <ButtonWithIcon
                     title="Добавить задачу"
                     onClick={() =>
                         dispatch(
                             showKanbanEditOrCreateTaskDialog({
-                                type: ColumnFormType.Create,
+                                type: TaskFormType.Create,
                             }),
                         )
                     }
                 />
+
                 <ButtonWithIcon
                     title="Настройка"
                     component={SettingsIcon}

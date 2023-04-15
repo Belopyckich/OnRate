@@ -40,4 +40,16 @@ $basicBtnSize: 32px;
         font-size: 12px;
         padding: 4px 12px;
     }
+
+    &-without-styles {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &-icon {
+            path {
+                fill: themed(--blue-summerSky);
+            }
+        }
+    }
 }

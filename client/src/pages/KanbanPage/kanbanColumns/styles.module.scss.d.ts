@@ -3,7 +3,6 @@
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         kanbanColumns: string;
-        kanbanColumnsEmptyBlock: string;
     }
 }
 

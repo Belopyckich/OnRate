@@ -3,8 +3,6 @@
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         userSettingsPage: string;
-        userSettingsPageDescription: string;
-        userSettingsPageDescriptionText: string;
     }
 }
 

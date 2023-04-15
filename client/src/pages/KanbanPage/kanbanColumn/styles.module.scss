@@ -4,17 +4,46 @@
     background-color: themed(--white-mirage);
     box-shadow: 0 0 5px themed(--alto-zeus);
     display: grid;
-    row-gap: 12px;
     grid-template-columns: 100%;
     grid-template-rows: max-content 1fr;
     overflow: hidden;
     border-radius: 10px;
 
     &-header {
-        height: 42px;
-        padding: 10px;
-        position: relative;
+        padding: 8px 12px;
+        height: 38px;
+        display: grid;
+        column-gap: 16px;
+        grid-template-columns: 1fr max-content;
+        overflow: hidden;
+
+        &-title {
+            font-weight: 500;
+        }
+
+        &-icon {
+            cursor: pointer;
+
+            path {
+                fill: $white;
+            }
+
+            &-dark {
+                path {
+                    fill: $black;
+                }
+            }
+        }
+    }
+
+    &-footer {
         text-align: center;
+
+        &-icon {
+            path {
+                fill: themed(--blue-summerSky);
+            }
+        }
     }
 
     &-content {
@@ -31,7 +60,32 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            padding: 10px;
+            padding: 12px;
         }
     }
+
+    &-empty-block {
+        grid-template-columns: 200px;
+
+        &-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: themed(--black-white);
+            padding-bottom: 4px;
+        }
+
+        &-description {
+            color: themed(--black-white);
+        }
+    }
+}
+
+.kanban-empty-column {
+    border: 2px dashed themed(--lightblue2-blueBayoux);
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -10,7 +10,7 @@ import {
     selectCurrentUserForSettings,
 } from '@src/redux/app/selectors';
 import {getUsers} from '@src/redux/randomUsers/actions';
-import {Button, DatePicker, Form, Input, Select} from 'antd';
+import {Button, DatePicker, Divider, Form, Input, Select} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -66,72 +66,101 @@ export const UserSettingsForm = () => {
             className={styles.userSettingsForm}
         >
             <div className={styles.userSettingsFormContent}>
-                <div className={styles.userSettingsFormPhotoAndName}>
-                    <Form.Item
-                        noStyle
-                        shouldUpdate={shouldUpdateUserSettingsField([
+                <div className={styles.userSettingsFormTitle}>
+                    Личные данные
+                </div>
+
+                <Form.Item
+                    noStyle
+                    shouldUpdate={shouldUpdateUserSettingsField([
+                        USER_SETTINGS_FORM_FIELDS.picture,
+                        USER_SETTINGS_FORM_FIELDS.name,
+                    ])}
+                >
+                    {({getFieldValue}) => {
+                        const picture = getFieldValue(
                             USER_SETTINGS_FORM_FIELDS.picture,
+                        );
+                        const name = getFieldValue(
                             USER_SETTINGS_FORM_FIELDS.name,
-                        ])}
-                    >
-                        {({getFieldValue}) => {
-                            const picture = getFieldValue(
-                                USER_SETTINGS_FORM_FIELDS.picture,
-                            );
-                            const name = getFieldValue(
-                                USER_SETTINGS_FORM_FIELDS.name,
-                            );
+                        );
 
-                            return (
-                                <Form.Item<UserSettingsFormValues>
-                                    noStyle
-                                    name={USER_SETTINGS_FORM_FIELDS.picture}
+                        return (
+                            <Form.Item<UserSettingsFormValues>
+                                noStyle
+                                name={USER_SETTINGS_FORM_FIELDS.picture}
+                            >
+                                <UserPhotoEditMask
+                                    src={picture?.src}
+                                    canManipulate={true}
+                                    uploadFile={(props) =>
+                                        setFieldsValue({
+                                            picture: props,
+                                        })
+                                    }
+                                    deleteFile={() =>
+                                        setFieldsValue({
+                                            picture: null,
+                                        })
+                                    }
+                                    style={USER_PHOTO_SETTINGS_STYLES}
                                 >
-                                    <UserPhotoEditMask
+                                    <UserPhoto
+                                        username={name}
                                         src={picture?.src}
-                                        canManipulate={true}
-                                        uploadFile={(props) =>
-                                            setFieldsValue({
-                                                picture: props,
-                                            })
-                                        }
-                                        deleteFile={() =>
-                                            setFieldsValue({
-                                                picture: null,
-                                            })
-                                        }
                                         style={USER_PHOTO_SETTINGS_STYLES}
-                                    >
-                                        <UserPhoto
-                                            username={name}
-                                            src={picture?.src}
-                                            style={USER_PHOTO_SETTINGS_STYLES}
-                                        />
-                                    </UserPhotoEditMask>
-                                </Form.Item>
-                            );
-                        }}
-                    </Form.Item>
+                                    />
+                                </UserPhotoEditMask>
+                            </Form.Item>
+                        );
+                    }}
+                </Form.Item>
 
-                    <Form.Item<UserSettingsFormValues>
-                        label={
-                            USER_SETTINGS_FORM_LABELS[
-                                USER_SETTINGS_FORM_FIELDS.name
-                            ]
+                <Form.Item<UserSettingsFormValues>
+                    label={
+                        USER_SETTINGS_FORM_LABELS[
+                            USER_SETTINGS_FORM_FIELDS.name
+                        ]
+                    }
+                    name={USER_SETTINGS_FORM_FIELDS.name}
+                    rules={[
+                        {
+                            required: true,
+                            message: getUserSettingsFormPlaceholder(
+                                USER_SETTINGS_FORM_FIELDS.name,
+                            ),
+                        },
+                    ]}
+                    required={true}
+                >
+                    <Input allowClear={true} />
+                </Form.Item>
+
+                <Form.Item<UserSettingsFormValues>
+                    label={
+                        USER_SETTINGS_FORM_LABELS[USER_SETTINGS_FORM_FIELDS.dob]
+                    }
+                    name={USER_SETTINGS_FORM_FIELDS.dob}
+                    rules={[
+                        {
+                            required: true,
+                            message: getUserSettingsFormPlaceholder(
+                                USER_SETTINGS_FORM_FIELDS.dob,
+                            ),
+                        },
+                    ]}
+                >
+                    <DatePicker
+                        disabledDate={(currentDate) =>
+                            currentDate.year() < MIN_AGE_DIFFERENCE
                         }
-                        name={USER_SETTINGS_FORM_FIELDS.name}
-                        rules={[
-                            {
-                                required: true,
-                                message: getUserSettingsFormPlaceholder(
-                                    USER_SETTINGS_FORM_FIELDS.name,
-                                ),
-                            },
-                        ]}
-                        required={true}
-                    >
-                        <Input allowClear={true} />
-                    </Form.Item>
+                    />
+                </Form.Item>
+
+                <Divider />
+
+                <div className={styles.userSettingsFormTitle}>
+                    Контактные данные
                 </div>
 
                 <Form.Item<UserSettingsFormValues>
@@ -153,108 +182,84 @@ export const UserSettingsForm = () => {
                     <Input allowClear={true} disabled={true} />
                 </Form.Item>
 
-                <div className={styles.userSettingsFormLocation}>
-                    <Form.Item
-                        noStyle
-                        shouldUpdate={shouldUpdateUserSettingsLocationField(
-                            setFieldsValue,
-                        )}
-                    >
-                        {({getFieldsValue}) => {
-                            const {country} = getFieldsValue();
+                <Form.Item
+                    noStyle
+                    shouldUpdate={shouldUpdateUserSettingsLocationField(
+                        setFieldsValue,
+                    )}
+                >
+                    {({getFieldsValue}) => {
+                        const {country} = getFieldsValue();
 
-                            return (
-                                <>
-                                    <Form.Item<UserSettingsFormValues>
-                                        label={
-                                            USER_SETTINGS_FORM_LABELS[
-                                                USER_SETTINGS_FORM_FIELDS
-                                                    .country
-                                            ]
-                                        }
-                                        name={USER_SETTINGS_FORM_FIELDS.country}
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    getUserSettingsFormPlaceholder(
-                                                        USER_SETTINGS_FORM_FIELDS.country,
-                                                    ),
-                                            },
-                                        ]}
-                                    >
-                                        <Select
-                                            allowClear={true}
-                                            options={Object.keys(Country).map(
-                                                (value) => ({
-                                                    value: value,
-                                                    label: value,
-                                                }),
-                                            )}
-                                        />
-                                    </Form.Item>
+                        return (
+                            <>
+                                <Form.Item<UserSettingsFormValues>
+                                    label={
+                                        USER_SETTINGS_FORM_LABELS[
+                                            USER_SETTINGS_FORM_FIELDS.country
+                                        ]
+                                    }
+                                    name={USER_SETTINGS_FORM_FIELDS.country}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                getUserSettingsFormPlaceholder(
+                                                    USER_SETTINGS_FORM_FIELDS.country,
+                                                ),
+                                        },
+                                    ]}
+                                >
+                                    <Select
+                                        allowClear={true}
+                                        options={Object.keys(Country).map(
+                                            (value) => ({
+                                                value: value,
+                                                label: value,
+                                            }),
+                                        )}
+                                    />
+                                </Form.Item>
 
-                                    <Form.Item
-                                        label={
-                                            USER_SETTINGS_FORM_LABELS[
-                                                USER_SETTINGS_FORM_FIELDS.city
-                                            ]
-                                        }
-                                        name={USER_SETTINGS_FORM_FIELDS.city}
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    getUserSettingsFormPlaceholder(
-                                                        USER_SETTINGS_FORM_FIELDS.city,
-                                                    ),
-                                            },
-                                        ]}
-                                    >
-                                        <Select
-                                            allowClear={true}
-                                            options={
-                                                country
-                                                    ? CITIES[country].map(
-                                                          (value) => ({
-                                                              value: value,
-                                                              label: value,
-                                                          }),
-                                                      )
-                                                    : CITIES[
-                                                          Country.Belarus
-                                                      ].map((value) => ({
+                                <Form.Item
+                                    label={
+                                        USER_SETTINGS_FORM_LABELS[
+                                            USER_SETTINGS_FORM_FIELDS.city
+                                        ]
+                                    }
+                                    name={USER_SETTINGS_FORM_FIELDS.city}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                getUserSettingsFormPlaceholder(
+                                                    USER_SETTINGS_FORM_FIELDS.city,
+                                                ),
+                                        },
+                                    ]}
+                                >
+                                    <Select
+                                        allowClear={true}
+                                        options={
+                                            country
+                                                ? CITIES[country].map(
+                                                      (value) => ({
                                                           value: value,
                                                           label: value,
-                                                      }))
-                                            }
-                                        />
-                                    </Form.Item>
-                                </>
-                            );
-                        }}
-                    </Form.Item>
-                </div>
-
-                <Form.Item<UserSettingsFormValues>
-                    label={
-                        USER_SETTINGS_FORM_LABELS[USER_SETTINGS_FORM_FIELDS.dob]
-                    }
-                    name={USER_SETTINGS_FORM_FIELDS.dob}
-                    rules={[
-                        {
-                            required: true,
-                            message: getUserSettingsFormPlaceholder(
-                                USER_SETTINGS_FORM_FIELDS.dob,
-                            ),
-                        },
-                    ]}
-                >
-                    <DatePicker
-                        disabledDate={(currentDate) =>
-                            currentDate.year() < MIN_AGE_DIFFERENCE
-                        }
-                    />
+                                                      }),
+                                                  )
+                                                : CITIES[Country.Belarus].map(
+                                                      (value) => ({
+                                                          value: value,
+                                                          label: value,
+                                                      }),
+                                                  )
+                                        }
+                                    />
+                                </Form.Item>
+                            </>
+                        );
+                    }}
                 </Form.Item>
             </div>
 

@@ -4,15 +4,8 @@
     overflow-x: auto;
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 240px;
+    grid-auto-columns: 290px;
     grid-template-rows: 100%;
     column-gap: 16px;
     padding-bottom: 6px;
-
-    &-empty-block {
-        display: grid;
-        grid-auto-flow: row;
-        width: 200px;
-        row-gap: 16px;
-    }
 }

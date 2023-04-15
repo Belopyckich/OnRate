@@ -38,6 +38,19 @@
         @include btn-primary-dangerous;
     }
 
+    .ant-btn-link {
+        color: themed(--blue-summerSky);
+
+        &:hover,
+        &:focus,
+        &:active,
+        &:not(:disabled):hover,
+        &:not(:disabled):focus,
+        &:not(:disabled):active {
+            color: themed(--dodgerLightBlue-aquaBlue);
+        }
+    }
+
     .ant-layout .ant-layout-header {
         padding-inline: 0 24px;
         height: 56px;
@@ -91,6 +104,10 @@
             border: 1px solid themed(--alto-licorice);
             color: themed(--darkGrey-rockBlue);
             opacity: 0.6;
+        }
+
+        &::placeholder {
+            color: themed(--darkGrey-rockBlue);
         }
     }
 
@@ -278,5 +295,6 @@
 
     .ant-divider-horizontal {
         margin: 0;
+        color: themed(--whiteSmoke-fiord);
     }
 }

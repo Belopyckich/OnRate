@@ -1,7 +1,7 @@
 .kanban-task {
     background-color: themed(--white-midnight);
-    border: 1px solid themed(--mercury-blackPearl);
-    border-radius: 4px;
+    border: 1px solid themed(--alto-blueBayoux);
+    border-radius: 8px;
     box-shadow: 0 0 5px themed(--alto-zeus);
     cursor: pointer;
     padding: 16px 12px 12px;
@@ -11,12 +11,24 @@
     row-gap: 4px;
     grid-auto-flow: row;
 
-    &-title {
-        color: themed(--black-white);
+    &-header {
+        display: grid;
+        grid-template-columns: 1fr max-content max-content;
+        column-gap: 10px;
+
+        &-text {
+            color: themed(--black-white);
+            font-weight: 500;
+        }
+
+        &-icon {
+            color: themed(--nobel-disaturatedBlue);
+        }
     }
 
     &-text {
         color: themed(--darkGrey-rockBlue);
         word-break: break-all;
+        font-size: 13px;
     }
 }

@@ -2,6 +2,8 @@
 // Please do not change this file!
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
+        authLayout: string;
+        authLayoutDark: string;
         mainLayout: string;
         mainLayoutContent: string;
         mainLayoutContentCollapsed: string;

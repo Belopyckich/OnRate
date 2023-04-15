@@ -3,8 +3,10 @@
 declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         kanbanTask: string;
+        kanbanTaskHeader: string;
+        kanbanTaskHeaderIcon: string;
+        kanbanTaskHeaderText: string;
         kanbanTaskText: string;
-        kanbanTaskTitle: string;
     }
 }
 

@@ -352,8 +352,7 @@ function* moveKanbanTaskWorker({
 
     const response = yield* requestHandler({
         request: call(requests.moveKanbanTaskRequest, payload),
-        successMessage: messages.kanbanTaskCreateSuccess,
-        errorMessage: messages.kanbanTaskCreateError,
+        errorMessage: messages.kanbanTaskMoveError,
     });
 
     if (response?.success) {

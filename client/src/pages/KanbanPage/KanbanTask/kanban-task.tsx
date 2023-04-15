@@ -1,14 +1,15 @@
-import {ButtonWithIcon} from '@src/components/buttonWithIcon/button-with-icon';
+import Icon from '@ant-design/icons';
+import EditTaskIcon from '@src/assets/pencil-icon.component.svg';
+import DeleteTaskIcon from '@src/assets/trash.component.svg';
 import {showKanbanEditOrCreateTaskDialog} from '@src/components/dialogs/kanbanTaskEditOrCreateDialog/actions';
 import {ColumnFormType} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
+import {TaskFormType} from '@src/components/forms/kanbanEditOrCreateTaskForm/interfaces';
 import {TextOverflow} from '@src/components/textOverflow/text-overflow';
 import {deleteKanbanTask, editKanbanTask} from '@src/redux/kanban/actions';
 import {KanbanTaskProps} from '@src/redux/kanban/interfaces';
 import {selectKanbanColumns} from '@src/redux/kanban/selectors';
 import {Button, Input} from 'antd';
 import React, {useMemo} from 'react';
-import {DragDropContext} from 'react-beautiful-dnd';
-import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 
 import {KanbanColumn} from '../kanbanColumn/kanban-column';
@@ -23,31 +24,34 @@ export const KanbanTask = ({task}: KanbanTaskElementProps) => {
 
     return (
         <div className={styles.kanbanTask}>
-            <TextOverflow text={task.title} />
+            <div className={styles.kanbanTaskHeader}>
+                <TextOverflow
+                    text={task.title}
+                    extraClassName={styles.kanbanTaskHeaderText}
+                />
 
-            <div className={styles.kanbanTaskText}>{task.description}</div>
+                <Icon
+                    component={EditTaskIcon}
+                    onClick={() =>
+                        dispatch(
+                            showKanbanEditOrCreateTaskDialog({
+                                type: TaskFormType.Edit,
+                                _id: task._id,
+                                initialValue: task,
+                            }),
+                        )
+                    }
+                    className={styles.kanbanTaskHeaderIcon}
+                />
 
-            <div className={styles.kanbanTaskText}>
-                Position:{task.position}
+                <Icon
+                    component={DeleteTaskIcon}
+                    onClick={() => dispatch(deleteKanbanTask(task))}
+                    className={styles.kanbanTaskHeaderIcon}
+                />
             </div>
 
-            <Button onClick={() => dispatch(deleteKanbanTask(task))}>
-                удалить
-            </Button>
-
-            <Button
-                onClick={() =>
-                    dispatch(
-                        showKanbanEditOrCreateTaskDialog({
-                            type: ColumnFormType.Edit,
-                            _id: task._id,
-                            initialValue: task,
-                        }),
-                    )
-                }
-            >
-                изменить
-            </Button>
+            <div className={styles.kanbanTaskText}>{task.description}</div>
         </div>
     );
 };

@@ -7,7 +7,7 @@ import {
     KANBAN_EDIT_OR_CREATE_COLUMN_DIALOG_NAME,
 } from './constants';
 
-export const showKanbanEditOrCreateDialog = (
+export const showKanbanEditOrCreateColumnDialog = (
     dialogProps: KanbanEditOrCreateColumnFormProps,
 ) =>
     dialogActions.show({
@@ -20,5 +20,5 @@ export const showKanbanEditOrCreateDialog = (
         dialogProps,
     });
 
-export const closeKanbanEditOrCreateDialog = () =>
+export const closeKanbanEditOrCreateColumnDialog = () =>
     dialogActions.close(KANBAN_EDIT_OR_CREATE_COLUMN_DIALOG_NAME);

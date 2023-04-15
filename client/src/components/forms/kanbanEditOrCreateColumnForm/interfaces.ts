@@ -28,7 +28,7 @@ export type KanbanEditOrCreateColumnFormProps =
             | {
                   type: ColumnFormType.Create;
                   _id?: undefined;
-                  initialValue?: undefined;
+                  initialValue?: KanbanColumnFormValues;
               }
             | {
                   type: ColumnFormType.Edit;

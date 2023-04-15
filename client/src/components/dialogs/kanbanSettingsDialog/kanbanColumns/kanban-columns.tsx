@@ -15,7 +15,7 @@ import {
 } from 'react-beautiful-dnd';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {showKanbanEditOrCreateDialog} from '../../kanbanColumnEditOrCreateDialog/actions';
+import {showKanbanEditOrCreateColumnDialog} from '../../kanbanColumnEditOrCreateDialog/actions';
 import {KanbanColumnItem} from './kanbanItem/kanban-columns';
 import styles from './styles.module.scss';
 
@@ -68,7 +68,7 @@ export const KanbanColumnsList = () => {
                                                     key={column._id}
                                                     onEditClick={() =>
                                                         dispatch(
-                                                            showKanbanEditOrCreateDialog(
+                                                            showKanbanEditOrCreateColumnDialog(
                                                                 {
                                                                     type: ColumnFormType.Edit,
                                                                     _id: column._id,

@@ -8,11 +8,7 @@ import {useForm} from 'antd/es/form/Form';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {
-    AUTH_FORM_FIELDS,
-    AUTH_FORM_LABELS,
-    AUTH_FORM_PLACEHOLDERS,
-} from './constants';
+import {AUTH_FORM_FIELDS, AUTH_FORM_PLACEHOLDERS} from './constants';
 import {LoginFormProps, UserForm} from './interfaces';
 import styles from './styles.module.scss';
 
@@ -35,7 +31,6 @@ export const LoginForm = ({setAuthForm}: LoginFormProps) => {
             className={styles.loginForm}
         >
             <Form.Item
-                label={AUTH_FORM_LABELS[AUTH_FORM_FIELDS.email]}
                 name={AUTH_FORM_FIELDS.email}
                 rules={[
                     {
@@ -47,11 +42,13 @@ export const LoginForm = ({setAuthForm}: LoginFormProps) => {
                     },
                 ]}
             >
-                <Input allowClear={true} />
+                <Input
+                    placeholder={AUTH_FORM_PLACEHOLDERS[AUTH_FORM_FIELDS.email]}
+                    allowClear={true}
+                />
             </Form.Item>
 
             <Form.Item
-                label={AUTH_FORM_LABELS[AUTH_FORM_FIELDS.password]}
                 name={AUTH_FORM_FIELDS.password}
                 rules={[
                     {
@@ -61,20 +58,23 @@ export const LoginForm = ({setAuthForm}: LoginFormProps) => {
                     },
                 ]}
             >
-                <Input.Password />
+                <Input.Password
+                    placeholder={
+                        AUTH_FORM_PLACEHOLDERS[AUTH_FORM_FIELDS.password]
+                    }
+                    allowClear={true}
+                />
             </Form.Item>
 
-            <Button htmlType="submit">Log In</Button>
+            <Button htmlType="submit" type="primary">
+                Вход
+            </Button>
 
-            <div className={styles.loginFormDescription}>
-                Don’t have an account?
-                <Button
-                    type="link"
-                    onClick={() => setAuthForm(AuthForm.SignIn)}
-                >
-                    Sign up
-                </Button>
-            </div>
+            <div className={styles.loginFormDescription}>Забыли пароль ?</div>
+
+            <Button type="link" onClick={() => setAuthForm(AuthForm.SignIn)}>
+                Регистрация
+            </Button>
         </Form>
     );
 };

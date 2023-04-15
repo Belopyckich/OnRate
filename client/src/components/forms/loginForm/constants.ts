@@ -3,12 +3,7 @@ export const AUTH_FORM_FIELDS = {
     password: 'password',
 } as const;
 
-export const AUTH_FORM_LABELS = {
-    email: 'Email',
-    password: 'Password',
-} as const;
-
 export const AUTH_FORM_PLACEHOLDERS = {
-    email: 'Please enter Email',
-    password: 'Please enter Password',
+    [AUTH_FORM_FIELDS.email]: 'Введите емэил',
+    [AUTH_FORM_FIELDS.password]: 'Введите пароль',
 } as const;

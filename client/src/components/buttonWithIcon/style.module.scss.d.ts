@@ -6,6 +6,8 @@ declare namespace StyleModuleScssNamespace {
         buttonWithIconDisabled: string;
         buttonWithIconIcon: string;
         buttonWithIconTitle: string;
+        buttonWithIconWithoutStyles: string;
+        buttonWithIconWithoutStylesIcon: string;
     }
 }
 

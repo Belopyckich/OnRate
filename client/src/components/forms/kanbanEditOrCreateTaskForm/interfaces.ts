@@ -29,15 +29,13 @@ export type KanbanEditOrCreateTaskFormProps = BasicEditOrCreateTaskFormProps &
         | {
               type: TaskFormType.Create;
               _id?: undefined;
-              initialValue?: undefined;
+              initialValue?: KanbanTaskFormValues &
+                  Partial<Pick<KanbanTaskProps, 'position'>>;
           }
         | {
               type: TaskFormType.Edit;
               _id: string;
               initialValue: KanbanTaskFormValues &
-                  Pick<
-                      KanbanTaskProps,
-                      'column' | 'description' | 'position' | 'title'
-                  >;
+                  Partial<Pick<KanbanTaskProps, 'position'>>;
           }
     );

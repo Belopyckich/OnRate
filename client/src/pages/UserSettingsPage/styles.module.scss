@@ -2,32 +2,17 @@
     height: 100%;
     overflow-y: hidden;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 1600px;
+    grid-template-columns: 100%;
 
-    @media screen and (max-width: $xl-min) {
-        grid-template-columns: 100%;
-    }
-
-    &-description {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-
-        > svg {
-            width: 370px;
-            height: 370px;
+    :global {
+        .ant-form-vertical .ant-form-item-row {
+            max-width: 290px;
+            width: 100%;
         }
 
-        @media screen and (max-width: $xl-min) {
-            display: none;
-        }
-
-        &-text {
-            color: themed(--darkGrey-rockBlue);
-            padding: 0 20px;
-            text-align: center;
+        .ant-btn {
+            max-width: 290px;
+            width: 100%;
         }
     }
 }

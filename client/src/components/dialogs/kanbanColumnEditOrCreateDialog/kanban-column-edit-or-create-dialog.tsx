@@ -12,7 +12,7 @@ import React, {useEffect, useState} from 'react';
 import ReactCrop, {Crop} from 'react-image-crop';
 import {useDispatch} from 'react-redux';
 
-import {closeKanbanEditOrCreateDialog} from './actions';
+import {closeKanbanEditOrCreateColumnDialog} from './actions';
 import {
     KANBAN_EDIT_OR_CREATE_COLUMN_DIALOG_NAME,
     KANBAN_EDIT_OR_CREATE_COLUMN_DIALOG_WIDTH,
@@ -40,10 +40,10 @@ const KanbanEditOrCreateColumnDialogBody = ({
         <KanbanEditOrCreateColumnForm
             type={type}
             onSubmitForm={() => {
-                dispatch(closeKanbanEditOrCreateDialog());
+                dispatch(closeKanbanEditOrCreateColumnDialog());
             }}
             onCloseForm={() => {
-                dispatch(closeKanbanEditOrCreateDialog());
+                dispatch(closeKanbanEditOrCreateColumnDialog());
             }}
         />
     ) : (
@@ -52,10 +52,10 @@ const KanbanEditOrCreateColumnDialogBody = ({
             initialValue={initialValue}
             _id={_id}
             onSubmitForm={() => {
-                dispatch(closeKanbanEditOrCreateDialog());
+                dispatch(closeKanbanEditOrCreateColumnDialog());
             }}
             onCloseForm={() => {
-                dispatch(closeKanbanEditOrCreateDialog());
+                dispatch(closeKanbanEditOrCreateColumnDialog());
             }}
         />
     );

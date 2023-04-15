@@ -5,7 +5,16 @@ declare namespace StylesModuleScssNamespace {
         kanbanColumn: string;
         kanbanColumnContent: string;
         kanbanColumnContentWrap: string;
+        kanbanColumnEmptyBlock: string;
+        kanbanColumnEmptyBlockDescription: string;
+        kanbanColumnEmptyBlockTitle: string;
+        kanbanColumnFooter: string;
+        kanbanColumnFooterIcon: string;
         kanbanColumnHeader: string;
+        kanbanColumnHeaderIcon: string;
+        kanbanColumnHeaderIconDark: string;
+        kanbanColumnHeaderTitle: string;
+        kanbanEmptyColumn: string;
     }
 }
 

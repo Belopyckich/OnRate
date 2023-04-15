@@ -2,11 +2,14 @@
     display: grid;
     grid-template-columns: 100%;
     grid-auto-rows: max-content;
-    row-gap: 14px;
+    row-gap: 20px;
 
     &-description {
         display: flex;
         align-items: center;
         justify-content: center;
+        color: themed(--black-white);
+        font-size: 13px;
+        cursor: pointer;
     }
 }

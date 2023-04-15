@@ -8,12 +8,11 @@ export const USER_SETTINGS_FORM_FIELDS = {
 } as const;
 
 export const USER_SETTINGS_FORM_LABELS = {
-    [USER_SETTINGS_FORM_FIELDS.name]: 'Name',
-    [USER_SETTINGS_FORM_FIELDS.email]: 'Email',
-    [USER_SETTINGS_FORM_FIELDS.city]: 'City',
-    [USER_SETTINGS_FORM_FIELDS.country]: 'Country',
-    [USER_SETTINGS_FORM_FIELDS.picture]: 'Picture',
-    [USER_SETTINGS_FORM_FIELDS.dob]: 'Date Of Birth',
+    [USER_SETTINGS_FORM_FIELDS.name]: 'Имя',
+    [USER_SETTINGS_FORM_FIELDS.email]: 'Емэйл',
+    [USER_SETTINGS_FORM_FIELDS.city]: 'Город',
+    [USER_SETTINGS_FORM_FIELDS.country]: 'Страна',
+    [USER_SETTINGS_FORM_FIELDS.dob]: 'Дата рождения',
 } as const;
 
 export const USER_PHOTO_SETTINGS_STYLES = {

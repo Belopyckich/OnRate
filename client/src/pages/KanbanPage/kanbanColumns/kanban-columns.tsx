@@ -1,7 +1,5 @@
-import {ButtonWithIcon} from '@src/components/buttonWithIcon/button-with-icon';
-import {showKanbanSettingsDialog} from '@src/components/dialogs/kanbanSettingsDialog/actions';
-import {EmptyBlock} from '@src/components/emptyBlock/empty-block';
-import {devLog} from '@src/helpers/dev-log';
+import {showKanbanEditOrCreateTaskDialog} from '@src/components/dialogs/kanbanTaskEditOrCreateDialog/actions';
+import {TaskFormType} from '@src/components/forms/kanbanEditOrCreateTaskForm/interfaces';
 import {moveKanbanTask} from '@src/redux/kanban/actions';
 import {selectKanbanColumns} from '@src/redux/kanban/selectors';
 import {Button, Input} from 'antd';
@@ -11,6 +9,7 @@ import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 
 import {KanbanColumn} from '../kanbanColumn/kanban-column';
+import {KanbanEmptyColumn} from '../kanbanColumn/kanban-empty-column';
 import styles from './styles.module.scss';
 
 export const KanbanColumns = () => {
@@ -21,33 +20,49 @@ export const KanbanColumns = () => {
     const columnsListMemo = useMemo(
         () =>
             kanbanColumns.map((column) => (
-                <KanbanColumn column={column} key={column._id} />
+                <KanbanColumn
+                    column={column}
+                    key={column._id}
+                    addTask={() =>
+                        dispatch(
+                            showKanbanEditOrCreateTaskDialog({
+                                type: TaskFormType.Create,
+                                initialValue: {
+                                    column: column._id,
+                                },
+                            }),
+                        )
+                    }
+                />
             )),
         [kanbanColumns],
     );
 
-    return kanbanColumns.length ? (
+    return (
         <div className={styles.kanbanColumns}>
-            <DragDropContext
-                onDragEnd={(result) => dispatch(moveKanbanTask(result))}
-            >
-                {columnsListMemo}
-            </DragDropContext>
+            {Boolean(kanbanColumns.length) && (
+                <DragDropContext
+                    onDragEnd={(result) => {
+                        if (!result.destination) {
+                            return;
+                        }
+
+                        if (
+                            result.destination.droppableId ===
+                                result.source.droppableId &&
+                            result.destination.index === result.source.index
+                        ) {
+                            return;
+                        }
+
+                        dispatch(moveKanbanTask(result));
+                    }}
+                >
+                    {columnsListMemo}
+                </DragDropContext>
+            )}
+
+            <KanbanEmptyColumn />
         </div>
-    ) : (
-        <EmptyBlock
-            description={
-                <span className={styles.kanbanColumnsEmptyBlock}>
-                    Нет доступных колонок. Вы можете добавить новые колонки в
-                    настройках.
-                    <Button
-                        type="primary"
-                        onClick={() => dispatch(showKanbanSettingsDialog())}
-                    >
-                        Добавить колонки
-                    </Button>
-                </span>
-            }
-        />
     );
 };

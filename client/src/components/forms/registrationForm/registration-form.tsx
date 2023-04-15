@@ -6,11 +6,7 @@ import {useForm} from 'antd/es/form/Form';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {
-    SIGNUP_FORM_FIELDS,
-    SIGNUP_FORM_LABELS,
-    SIGNUP_FORM_PLACEHOLDERS,
-} from './constants';
+import {SIGNUP_FORM_FIELDS, SIGNUP_FORM_PLACEHOLDERS} from './constants';
 import {LoginFormProps, RegistrateUserForm} from './interfaces';
 import styles from './styles.module.scss';
 
@@ -33,7 +29,6 @@ export const RegistrationForm = ({setAuthForm}: LoginFormProps) => {
             className={styles.registrationForm}
         >
             <Form.Item
-                label={SIGNUP_FORM_LABELS[SIGNUP_FORM_FIELDS.name]}
                 name={SIGNUP_FORM_FIELDS.name}
                 rules={[
                     {
@@ -43,11 +38,15 @@ export const RegistrationForm = ({setAuthForm}: LoginFormProps) => {
                     },
                 ]}
             >
-                <Input allowClear={true} />
+                <Input
+                    allowClear={true}
+                    placeholder={
+                        SIGNUP_FORM_PLACEHOLDERS[SIGNUP_FORM_FIELDS.name]
+                    }
+                />
             </Form.Item>
 
             <Form.Item
-                label={SIGNUP_FORM_LABELS[SIGNUP_FORM_FIELDS.email]}
                 name={SIGNUP_FORM_FIELDS.email}
                 rules={[
                     {
@@ -60,11 +59,15 @@ export const RegistrationForm = ({setAuthForm}: LoginFormProps) => {
                     },
                 ]}
             >
-                <Input allowClear={true} />
+                <Input
+                    allowClear={true}
+                    placeholder={
+                        SIGNUP_FORM_PLACEHOLDERS[SIGNUP_FORM_FIELDS.email]
+                    }
+                />
             </Form.Item>
 
             <Form.Item
-                label={SIGNUP_FORM_LABELS[SIGNUP_FORM_FIELDS.password]}
                 name={SIGNUP_FORM_FIELDS.password}
                 rules={[
                     {
@@ -76,17 +79,25 @@ export const RegistrationForm = ({setAuthForm}: LoginFormProps) => {
                     },
                 ]}
             >
-                <Input.Password allowClear={true} />
+                <Input.Password
+                    allowClear={true}
+                    placeholder={
+                        SIGNUP_FORM_PLACEHOLDERS[SIGNUP_FORM_FIELDS.password]
+                    }
+                />
             </Form.Item>
 
-            <Button htmlType="submit">Sign Up</Button>
+            <Button htmlType="submit" type="primary">
+                Зарегистрироваться
+            </Button>
 
             <div className={styles.registrationFormDescription}>
-                Do you have an account?
-                <Button type="link" onClick={() => setAuthForm(AuthForm.LogIn)}>
-                    Log in
-                </Button>
+                Есть аккаунт ?
             </div>
+
+            <Button type="link" onClick={() => setAuthForm(AuthForm.LogIn)}>
+                Войти
+            </Button>
         </Form>
     );
 };

@@ -4,8 +4,7 @@ declare namespace StylesModuleScssNamespace {
     export interface IStylesModuleScss {
         userSettingsForm: string;
         userSettingsFormContent: string;
-        userSettingsFormLocation: string;
-        userSettingsFormPhotoAndName: string;
+        userSettingsFormTitle: string;
     }
 }
 
