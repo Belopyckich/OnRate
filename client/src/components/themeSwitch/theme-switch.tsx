@@ -7,7 +7,7 @@ import React, {useContext} from 'react';
 import styles from './styles.module.scss';
 
 export interface ThemeSwitchProps {
-    isSidebarOpen: boolean;
+    isSidebarOpen?: boolean;
 }
 
 export const ThemeSwitch = ({isSidebarOpen}: ThemeSwitchProps) => {

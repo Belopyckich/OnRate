@@ -7,6 +7,9 @@ import {
     ENVIRONMENT_SETTINGS_TAB_TITLE,
     EnvironmentSettingsTab,
 } from './constants';
+import styles from './styles.module.scss';
+import {SetThemeTab} from './tabs/setThemeTab/set-theme-tab';
+import {UserSettingsTab} from './tabs/userSettingsTab/user-settings-tab';
 
 const EnvironmentSettingsPage = () => {
     const [activeTab, setActiveTab] = useState(
@@ -14,9 +17,8 @@ const EnvironmentSettingsPage = () => {
     );
 
     return (
-        <Card>
+        <Card className={styles.environmentSettingsPage}>
             <Tabs
-                animated={true}
                 onChange={(tabKey: EnvironmentSettingsTab) =>
                     setActiveTab(tabKey)
                 }
@@ -30,11 +32,7 @@ const EnvironmentSettingsPage = () => {
                     }
                     key={EnvironmentSettingsTab.UserSettings}
                 >
-                    {
-                        ENVIRONMENT_SETTINGS_TAB_TITLE[
-                            EnvironmentSettingsTab.UserSettings
-                        ]
-                    }
+                    <UserSettingsTab />
                 </TabPane>
 
                 <TabPane
@@ -45,11 +43,7 @@ const EnvironmentSettingsPage = () => {
                     }
                     key={EnvironmentSettingsTab.SetTheme}
                 >
-                    {
-                        ENVIRONMENT_SETTINGS_TAB_TITLE[
-                            EnvironmentSettingsTab.SetTheme
-                        ]
-                    }
+                    <SetThemeTab />
                 </TabPane>
             </Tabs>
         </Card>

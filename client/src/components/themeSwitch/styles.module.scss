@@ -7,6 +7,10 @@
     justify-items: center;
     font-size: 12px;
 
+    span {
+        color: themed(--darkGrey-rockBlue);
+    }
+
     &-folded {
         justify-content: center;
     }
