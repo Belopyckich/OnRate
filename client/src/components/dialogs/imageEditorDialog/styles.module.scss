@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: 100%;
     row-gap: 16px;
+    padding: 16px;
 
     &-description {
         color: themed(--darkGrey-rockBlue);
