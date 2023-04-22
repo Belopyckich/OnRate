@@ -1,6 +1,12 @@
 import Icon from '@ant-design/icons';
 import EditTaskIcon from '@src/assets/pencil-icon.component.svg';
 import DeleteTaskIcon from '@src/assets/trash.component.svg';
+import {
+    ModalType,
+    callModal,
+    dangerousModalConfig,
+    defaultModalConfig,
+} from '@src/components/callModal/call-modal';
 import {showKanbanEditOrCreateTaskDialog} from '@src/components/dialogs/kanbanTaskEditOrCreateDialog/actions';
 import {ColumnFormType} from '@src/components/forms/kanbanEditOrCreateColumnForm/interfaces';
 import {TaskFormType} from '@src/components/forms/kanbanEditOrCreateTaskForm/interfaces';
@@ -46,7 +52,21 @@ export const KanbanTask = ({task}: KanbanTaskElementProps) => {
 
                 <Icon
                     component={DeleteTaskIcon}
-                    onClick={() => dispatch(deleteKanbanTask(task))}
+                    onClick={() =>
+                        callModal({
+                            modalType: ModalType.Confirm,
+                            modalConfig: {
+                                ...dangerousModalConfig.modalConfig,
+                                content:
+                                    'Вы действительно хотите удалить задачу',
+                                okText: 'Удалить',
+                                cancelText: 'Отмена',
+                                onOk() {
+                                    dispatch(deleteKanbanTask(task));
+                                },
+                            },
+                        })
+                    }
                     className={styles.kanbanTaskHeaderIcon}
                 />
             </div>

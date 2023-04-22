@@ -1,0 +1,79 @@
+%callable-modal {
+    :global {
+        .anticon:not(.anticon-close) {
+            color: transparent !important;
+        }
+
+        .ant-modal-confirm-body .ant-modal-confirm-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .ant-modal-confirm-body > .ant-modal-confirm-content {
+            color: themed(--graniteGray-paleBlue);
+            font-size: 15px;
+        }
+
+        .ant-modal-confirm-body .ant-modal-confirm-title {
+            color: themed(--black-white);
+        }
+
+        .ant-modal-body {
+            padding: 32px 32px 24px;
+        }
+
+        .ant-modal-content {
+            border-radius: 5px;
+        }
+
+        .ant-modal-confirm-body > .ant-modal-confirm-content {
+            margin-top: 20px;
+        }
+
+        .ant-modal-confirm-body > .anticon {
+            > svg {
+                color: themed(--blue-bostonBlue);
+                fill: none;
+                width: 22px;
+                height: 22px;
+            }
+        }
+        .ant-modal-confirm-btns {
+            display: flex;
+            flex-direction: row-reverse;
+            > button {
+                margin-top: 8px;
+                margin-left: 8px;
+                min-width: 116px;
+            }
+        }
+    }
+}
+
+.callable-modal-default {
+    @extend %callable-modal;
+    :global {
+        .ant-modal-confirm-body > .anticon {
+            > svg {
+                color: themed(--blue-bostonBlue);
+                fill: none;
+                width: 22px;
+                height: 22px;
+            }
+        }
+    }
+}
+
+.callable-modal-dangerous {
+    @extend %callable-modal;
+    :global {
+        .ant-modal-confirm-body > .anticon {
+            > svg {
+                color: themed(--outrageousOrange-orangeRoughy);
+                fill: none;
+                width: 22px;
+                height: 22px;
+            }
+        }
+    }
+}
