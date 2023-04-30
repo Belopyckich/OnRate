@@ -120,17 +120,18 @@ class UserController {
     try {
       const user = req.body;
 
-      const userData = await userService.update(user);
-
       const file = req.files?.file;
+      console.log("🚀 ~ file:", file);
 
       const picture = file
         ? await userService.uploadPhoto(file, user.id)
         : await fileService.deletePhoto(user.id);
 
+      const userData = await userService.update(user);
+
       return res.json(
         new ResponseDto({
-          data: { ...userData, picture },
+          data: { ...userData, picture: picture },
           success: true,
         })
       );
@@ -165,7 +166,7 @@ class UserController {
 
       return res.json(
         new ResponseDto({
-          data: userData,
+          data: userData.startPage,
           success: true,
         })
       );

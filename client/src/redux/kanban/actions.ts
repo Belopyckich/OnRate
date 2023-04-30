@@ -14,6 +14,7 @@ import {
     KanbanBoardColumn,
     KanbanColumnProps,
     KanbanTaskProps,
+    MoveColumnTasksProps,
     SetKanbanBoardColumnProps,
 } from './interfaces';
 
@@ -54,6 +55,14 @@ export const moveKanbanTask = createAction('KANBAN/MOVE_KANBAN_TASK')<
 export const editKanbanTask = createAction(
     'KANBAN/EDIT_KANBAN_TASK',
 )<EditKanbanTaskProps>();
+
+export const duplicateKanbanColumn = createAction(
+    'KANBAN/DUPLICATE_KANBAN_COLUMN',
+)<string>();
+
+export const moveColumnTasks = createAction(
+    'KANBAN/MOVE_COLUMN_TASKS',
+)<MoveColumnTasksProps>();
 
 export const deleteKanbanTask = createAction('KANBAN/DELETE_KANBAN_TASK')<
     Pick<KanbanTaskProps, '_id' | 'column'>

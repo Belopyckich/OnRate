@@ -22,6 +22,10 @@ export const UserSettingsTab = () => {
     const currentUserEnvironmentSettings = useSelector(
         selectCurrentUserEnvironmentSettings,
     );
+    console.log(
+        '🚀 ~ currentUserEnvironmentSettings:',
+        currentUserEnvironmentSettings,
+    );
 
     const options = [
         {label: SIDEBAR_TITLE[APP_ROUTES.KANBAN], value: APP_ROUTES.KANBAN},

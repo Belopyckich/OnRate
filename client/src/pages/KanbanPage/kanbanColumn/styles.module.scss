@@ -82,10 +82,12 @@
 
 .kanban-empty-column {
     border: 2px dashed themed(--lightblue2-blueBayoux);
+    background-color: var(--white-mirage);
     height: 100%;
     width: 100%;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }

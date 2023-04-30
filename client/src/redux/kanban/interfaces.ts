@@ -23,6 +23,11 @@ export interface KanbanTaskProps {
     column: string;
 }
 
+export interface MoveColumnTasksProps {
+    sourceColumn: string;
+    destinationColumn: string;
+}
+
 export interface KanbanBoardColumn {
     tasks: KanbanTaskProps[];
     isLoading: boolean;

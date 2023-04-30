@@ -20,7 +20,6 @@ interface AuthProps {
 const MainLayout = ({children}: AuthProps) => {
     const isSidebarOpen = useSelector(selectIsSidebarOpen);
     const userBackground = useSelector(selectCurrentUserBackground);
-    console.log('🚀 ~ userBackground:', userBackground);
 
     return (
         <Layout className={styles.mainLayout}>

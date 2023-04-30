@@ -9,6 +9,7 @@ import {
     KanbanColumnProps,
     KanbanColumnPropsFromDb,
     KanbanTaskProps,
+    MoveColumnTasksProps,
 } from './interfaces';
 
 export const createKanbanColumnRequest = (
@@ -61,6 +62,18 @@ export const editKanbanColumnRequest = (
 ) =>
     endpointRequest(EndpointsTypes.Kanban)
         .post<ApiResponse<KanbanColumnPropsFromDb>>(`/edit-column`, column)
+        .then(extractData);
+
+export const duplicateKanbanColumnRequest = (columnId: string) =>
+    endpointRequest(EndpointsTypes.Kanban)
+        .post<ApiResponse<KanbanColumnPropsFromDb>>(`/duplicate-column`, {
+            columnId,
+        })
+        .then(extractData);
+
+export const moveColumnTasksRequest = (props: MoveColumnTasksProps) =>
+    endpointRequest(EndpointsTypes.Kanban)
+        .post<ApiResponse<KanbanTaskProps[]>>(`/move-tasks`, props)
         .then(extractData);
 
 export const moveKanbanColumnRequest = (

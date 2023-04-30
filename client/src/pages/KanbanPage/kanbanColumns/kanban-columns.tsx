@@ -1,6 +1,17 @@
+import {
+    ModalType,
+    callModal,
+    dangerousModalConfig,
+} from '@src/components/callModal/call-modal';
 import {showKanbanEditOrCreateTaskDialog} from '@src/components/dialogs/kanbanTaskEditOrCreateDialog/actions';
+import {showMoveColumnTasksDialog} from '@src/components/dialogs/moveColumnTasksDialog/actions';
 import {TaskFormType} from '@src/components/forms/kanbanEditOrCreateTaskForm/interfaces';
-import {moveKanbanTask} from '@src/redux/kanban/actions';
+import {showNotification} from '@src/components/showNotification/show-notification';
+import {
+    deleteKanbanColumn,
+    duplicateKanbanColumn,
+    moveKanbanTask,
+} from '@src/redux/kanban/actions';
 import {selectKanbanColumns} from '@src/redux/kanban/selectors';
 import {Button, Input} from 'antd';
 import React, {useMemo} from 'react';
@@ -32,6 +43,39 @@ export const KanbanColumns = () => {
                                 },
                             }),
                         )
+                    }
+                    moveTasks={() => {
+                        if (kanbanColumns.length < 2) {
+                            showNotification(
+                                'Нет доступной колонки для перемещения',
+                            );
+                        } else if (column.dealsCount < 1) {
+                            showNotification('Нет задач для перемещения');
+                        } else {
+                            dispatch(
+                                showMoveColumnTasksDialog({
+                                    sourceColumn: column._id,
+                                }),
+                            );
+                        }
+                    }}
+                    deleteTask={() =>
+                        callModal({
+                            modalType: ModalType.Confirm,
+                            modalConfig: {
+                                ...dangerousModalConfig.modalConfig,
+                                content:
+                                    'Вы действительно хотите удалить колонку',
+                                okText: 'Удалить',
+                                cancelText: 'Отмена',
+                                onOk() {
+                                    dispatch(deleteKanbanColumn(column._id));
+                                },
+                            },
+                        })
+                    }
+                    duplicateTask={() =>
+                        dispatch(duplicateKanbanColumn(column._id))
                     }
                 />
             )),

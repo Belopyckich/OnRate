@@ -2,6 +2,11 @@ import Icon from '@ant-design/icons';
 import EmptyColumnIcon from '@src/assets/empty-column.component.svg';
 import ExtendIcon from '@src/assets/extend-icon.component.svg';
 import PlusIcon from '@src/assets/plus.component.svg';
+import {
+    ModalType,
+    callModal,
+    dangerousModalConfig,
+} from '@src/components/callModal/call-modal';
 import {EmptyBlock} from '@src/components/emptyBlock/empty-block';
 import {TextOverflow} from '@src/components/textOverflow/text-overflow';
 import {COLOR_BLACK} from '@src/constants';
@@ -35,12 +40,19 @@ import styles from './styles.module.scss';
 export interface KanbanColumnData {
     column: KanbanColumnProps;
     addTask: () => void;
+    deleteTask: () => void;
+    moveTasks: () => void;
+    duplicateTask: () => void;
 }
 
-export const KanbanColumn = ({column, addTask}: KanbanColumnData) => {
+export const KanbanColumn = ({
+    column,
+    addTask,
+    deleteTask,
+    moveTasks,
+    duplicateTask,
+}: KanbanColumnData) => {
     const {_id: columnUid, color: columnColor, title: columnTitle} = column;
-
-    const dispatch = useDispatch();
 
     const tasksList = useSelector((state: State) =>
         selectKanbanBoardColumn(state, columnUid),
@@ -62,12 +74,14 @@ export const KanbanColumn = ({column, addTask}: KanbanColumnData) => {
                     KanbanColumnDropdownKeys.DuplicateColumn
                 ],
                 key: KanbanColumnDropdownKeys.DuplicateColumn,
+                onClick: duplicateTask,
             },
             {
                 label: KANBAN_COLUMN_DROPDOWN_TITLES[
                     KanbanColumnDropdownKeys.MoveTasks
                 ],
                 key: KanbanColumnDropdownKeys.MoveTasks,
+                onClick: moveTasks,
             },
             {
                 label: KANBAN_COLUMN_DROPDOWN_TITLES[
@@ -75,7 +89,7 @@ export const KanbanColumn = ({column, addTask}: KanbanColumnData) => {
                 ],
                 key: KanbanColumnDropdownKeys.DeleteTasks,
                 danger: true,
-                onClick: () => dispatch(deleteKanbanColumn(column._id)),
+                onClick: deleteTask,
             },
         ],
     };

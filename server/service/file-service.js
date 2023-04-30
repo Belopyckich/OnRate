@@ -2,11 +2,12 @@ const fs = require("fs");
 const File = require("../models/file-model");
 const ApiError = require("../exceptions/api-error");
 const FileModel = require("../models/file-model");
+const UserModel = require("../models/user-model");
 
 class FileService {
   createDir(file) {
     const filePath = `${process.env.FILE_PATH}\\${file.user}\\${file.path}`;
-    console.log("🚀 ~ filePath:", filePath);
+
     return new Promise((resolve, reject) => {
       try {
         if (!fs.existsSync(filePath)) {
@@ -74,6 +75,16 @@ class FileService {
     fs.unlinkSync(path);
 
     await userPhoto.deleteOne();
+
+    const user = await UserModel.findById(_id);
+
+    user.picture = {
+      large: undefined,
+      medium: undefined,
+      thumbnail: undefined,
+    };
+
+    await user.save();
 
     return undefined;
   }

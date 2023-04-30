@@ -39,7 +39,6 @@ const KanbanEditOrCreateColumnDialogBody = ({
     initialValue,
     _id,
 }: KanbanEditOrCreateTaskFormProps) => {
-    console.log('🚀 ~ initialValue:', initialValue);
     const dispatch = useDispatch();
 
     return type === TaskFormType.Create ? (

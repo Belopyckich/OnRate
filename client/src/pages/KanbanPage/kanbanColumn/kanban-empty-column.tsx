@@ -14,17 +14,19 @@ export const KanbanEmptyColumn = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className={styles.kanbanEmptyColumn}>
+        <div
+            className={styles.kanbanEmptyColumn}
+            onClick={() =>
+                dispatch(
+                    showKanbanEditOrCreateColumnDialog({
+                        type: ColumnFormType.Create,
+                    }),
+                )
+            }
+        >
             <ButtonWithIcon
                 type={ButtonWithIconType.WithoutStyles}
                 title={'Добавить колонку'}
-                onClick={() =>
-                    dispatch(
-                        showKanbanEditOrCreateColumnDialog({
-                            type: ColumnFormType.Create,
-                        }),
-                    )
-                }
             />
         </div>
     );

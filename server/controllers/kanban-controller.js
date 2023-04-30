@@ -233,6 +233,64 @@ class KanbanController {
     }
   }
 
+  async KanbanColumnDuplicate(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      const updatedColumn = await KanbanService.duplicateColumn(
+        req.body.columnId,
+        tokenSchema.id
+      );
+
+      return res.json(
+        new ResponseDto({
+          data: updatedColumn,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
+  async KanbanColumnTasksMove(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      const destinationColumnTasks = await KanbanService.moveColumnTasks(
+        req.body,
+        tokenSchema.id
+      );
+
+      return res.json(
+        new ResponseDto({
+          data: destinationColumnTasks,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
   async getKanbanColumns(req, res, next) {
     try {
       const accessToken = req.headers.authorization.split(" ")[1];

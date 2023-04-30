@@ -1,0 +1,5 @@
+export const MOVE_COLUMN_TASKS_DIALOG_NAME = 'MOVE_COLUMN_TASKS_DIALOG_NAME';
+
+export const MOVE_COLUMN_TASKS_DIALOG_TITLE = 'Перемещение задач';
+
+export const MOVE_COLUMN_TASKS_DIALOG_WIDTH = 400;

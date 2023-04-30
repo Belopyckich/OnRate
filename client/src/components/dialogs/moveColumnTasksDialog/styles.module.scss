@@ -1,0 +1,17 @@
+$move-column-tasks-dialog-width: 400px;
+
+.move-column-tasks-dialog {
+    @media screen and (max-width: ($move-column-tasks-dialog-width - 1px)) {
+        @include modal-fit-content($move-column-tasks-dialog-width, 50px);
+    }
+
+    :global {
+        .ant-modal-body {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: 1fr max-content;
+            row-gap: 16px;
+        }
+    }
+}

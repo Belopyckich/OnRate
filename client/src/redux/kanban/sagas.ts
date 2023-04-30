@@ -508,6 +508,72 @@ function* editKanbanColumnWatcher() {
     yield takeLatest(getType(actions.editKanbanColumn), editKanbanColumnWorker);
 }
 
+function* duplicateKanbanColumnWorker({
+    payload,
+}: ReturnType<typeof actions.duplicateKanbanColumn>) {
+    const response = yield* requestHandler({
+        request: call(requests.duplicateKanbanColumnRequest, payload),
+        successMessage: messages.kanbanColumnDuplicateSuccess,
+        errorMessage: messages.kanbanColumnDuplicateError,
+    });
+
+    if (response?.data) {
+        const columns = yield* select(selectKanbanColumns);
+
+        yield* put(
+            actions.setKanbanColumns([
+                ...columns,
+                formatColumnsDataFromDb(response.data),
+            ]),
+        );
+
+        yield* put(actions.getKanbanTasksByColumn(response.data._id));
+    }
+}
+
+function* duplicateKanbanColumnWatcher() {
+    yield takeLatest(
+        getType(actions.duplicateKanbanColumn),
+        duplicateKanbanColumnWorker,
+    );
+}
+
+function* moveColumnTasksWorker({
+    payload,
+}: ReturnType<typeof actions.moveColumnTasks>) {
+    const response = yield* requestHandler({
+        request: call(requests.moveColumnTasksRequest, payload),
+        successMessage: messages.kanbanColumnTasksMovedSuccess,
+        errorMessage: messages.kanbanColumnTasksMovedError,
+    });
+
+    if (response?.success && response.data) {
+        yield* put(
+            actions.setKanbanBoardColumn({
+                column_uid: payload.sourceColumn,
+                data: {
+                    tasks: [],
+                    isLoading: false,
+                },
+            }),
+        );
+
+        yield* put(
+            actions.setKanbanBoardColumn({
+                column_uid: payload.destinationColumn,
+                data: {
+                    tasks: response.data,
+                    isLoading: false,
+                },
+            }),
+        );
+    }
+}
+
+function* moveColumnTasksWatcher() {
+    yield takeLatest(getType(actions.moveColumnTasks), moveColumnTasksWorker);
+}
+
 function* getKanbanColumnsWorker() {
     const response = yield* requestHandler({
         request: call(requests.getKanbanColumnsRequest),
@@ -614,5 +680,7 @@ export default function* kanbanWatchers() {
         getKanbanBoardColumnsWatcher(),
         getKanbanTasksByColumnWatcher(),
         moveKanbanTaskWatcher(),
+        duplicateKanbanColumnWatcher(),
+        moveColumnTasksWatcher(),
     ]);
 }

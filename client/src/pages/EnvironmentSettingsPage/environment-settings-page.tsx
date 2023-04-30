@@ -22,29 +22,23 @@ const EnvironmentSettingsPage = () => {
                     setActiveTab(tabKey)
                 }
                 activeKey={activeTab}
-            >
-                <TabPane
-                    tab={
-                        ENVIRONMENT_SETTINGS_TAB_TITLE[
+                items={[
+                    {
+                        key: EnvironmentSettingsTab.UserSettings,
+                        label: ENVIRONMENT_SETTINGS_TAB_TITLE[
                             EnvironmentSettingsTab.UserSettings
-                        ]
-                    }
-                    key={EnvironmentSettingsTab.UserSettings}
-                >
-                    <UserSettingsTab />
-                </TabPane>
-
-                <TabPane
-                    tab={
-                        ENVIRONMENT_SETTINGS_TAB_TITLE[
+                        ],
+                        children: <UserSettingsTab />,
+                    },
+                    {
+                        key: EnvironmentSettingsTab.SetTheme,
+                        label: ENVIRONMENT_SETTINGS_TAB_TITLE[
                             EnvironmentSettingsTab.SetTheme
-                        ]
-                    }
-                    key={EnvironmentSettingsTab.SetTheme}
-                >
-                    <SetThemeTab />
-                </TabPane>
-            </Tabs>
+                        ],
+                        children: <SetThemeTab />,
+                    },
+                ]}
+            />
         </Card>
     );
 };

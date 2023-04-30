@@ -23,7 +23,6 @@ export const KanbanColumnsList = () => {
     const dispatch = useDispatch();
 
     const kanbanColumns = useSelector(selectKanbanColumns);
-    console.log('🚀 ~ kanbanColumns:', kanbanColumns);
 
     const onDragEnd = (result: DropResult) => {
         if (!result.destination) {

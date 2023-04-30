@@ -112,7 +112,6 @@ function* setUserStartPageWatcher() {
 function* getBackgroundsWorker() {
     const response = yield* requestHandler({
         request: call(requests.getBackgroundsRequest),
-        successMessage: messages.updateUserSuccess,
         errorMessage: messages.updateUserError,
     });
 

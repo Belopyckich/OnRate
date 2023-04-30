@@ -13,7 +13,7 @@ class KanbanService {
         title,
         color,
         position: kanbanColumns?.length || 0,
-        dealsCount: 0,
+        dealsCount: column?.dealsCount || 0,
         user: _id,
       });
 
@@ -111,7 +111,6 @@ class KanbanService {
           _id: newColumn,
           user: userId,
         });
-        console.log("🚀 ~ columnWhereTaskIsMovedIn:", columnWhereTaskIsMovedIn);
 
         columnWhereTaskIsMovedIn.dealsCount =
           columnWhereTaskIsMovedIn.dealsCount + 1;
@@ -312,6 +311,93 @@ class KanbanService {
     } catch (e) {
       console.log(e);
       throw ApiError.BadRequest("Произошла ошибка при создании колонки");
+    }
+  }
+
+  async duplicateColumn(columnId, userId) {
+    try {
+      const duplicatedColumn = await KanbanColumnModel.findOne({
+        user: userId,
+        _id: columnId,
+      });
+
+      if (!duplicatedColumn) {
+        throw ApiError.BadRequest("Колонка не найдена");
+      }
+
+      const kanbanColumn = await this.createColumn(
+        {
+          title: duplicatedColumn.title,
+          color: duplicatedColumn.color,
+          dealsCount: duplicatedColumn.dealsCount,
+        },
+        userId
+      );
+
+      await KanbanTaskModel.find({
+        user: userId,
+        column: columnId,
+      }).then((tasks) =>
+        tasks.map(async (task) => {
+          const { title, description } = task;
+
+          const createdTask = await this.createTask(
+            {
+              title,
+              description,
+              column: kanbanColumn,
+            },
+            userId
+          );
+
+          return createdTask;
+        })
+      );
+
+      return kanbanColumn;
+    } catch (e) {
+      console.log(e);
+      throw ApiError.BadRequest("Произошла ошибка при дуплировании колонки");
+    }
+  }
+
+  async moveColumnTasks(data, userId) {
+    try {
+      const { sourceColumn, destinationColumn } = data;
+
+      if (!sourceColumn || !destinationColumn) {
+        throw ApiError.BadRequest("Колонка не найдена");
+      }
+
+      await KanbanTaskModel.find({
+        column: sourceColumn,
+        user: userId,
+      }).then((tasks) =>
+        tasks.map((task, index) => {
+          task.position = index;
+          task.column = destinationColumn;
+          task.save();
+
+          return task;
+        })
+      );
+
+      const columnTasks = await KanbanTaskModel.find({
+        column: destinationColumn,
+        user: userId,
+      }).then((tasks) =>
+        tasks.map((task, index) => {
+          task.position = index;
+          task.save();
+
+          return task;
+        })
+      );
+
+      return columnTasks;
+    } catch (e) {
+      console.log(e);
+      throw ApiError.BadRequest("Произошла ошибка при перемещении задач");
     }
   }
 
