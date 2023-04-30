@@ -7,4 +7,6 @@ export interface ThemeProviderProps {
 export interface ThemeSwitcherContextProps {
     theme: Theme;
     switchTheme: (theme: Theme) => void;
+    isChangedThemeBySystem: boolean;
+    setIsChangedThemeBySystem: (value: boolean) => void;
 }

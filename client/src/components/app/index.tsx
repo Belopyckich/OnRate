@@ -3,7 +3,7 @@ import {checkAuth} from '@src/redux/app/actions';
 import {selectCurrentUser} from '@src/redux/app/selectors';
 import React, {lazy, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Navigate, Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes, useNavigate} from 'react-router-dom';
 
 import {AppRouteElement} from '../appRouteElement/app-route-element';
 import {MainContent} from '../main/main-component';
@@ -20,10 +20,16 @@ export const App = () => {
 
     const currentUser = useSelector(selectCurrentUser);
 
+    const history = useNavigate();
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        dispatch(checkAuth());
+        dispatch(
+            checkAuth({
+                onCallback: (path) => history(path),
+            }),
+        );
     }, []);
 
     useEffect(() => {

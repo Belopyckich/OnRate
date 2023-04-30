@@ -34,6 +34,8 @@ class UserService {
       activationLink,
       //Когда настрою почту надо будет убрать
       isActivated: true,
+      background: "",
+      startPage: "/kanban",
     });
 
     // Пока закомичена в связи с блокировкой емэила
@@ -93,6 +95,42 @@ class UserService {
     user.name = name;
     user.dob = dob;
     user.location = JSON.parse(location);
+
+    await user.save();
+
+    const userDto = new UserDto(user);
+
+    return userDto;
+  }
+
+  async setUserStartPage(data) {
+    const { id, startPage } = data;
+
+    const user = await UserModel.findById(id);
+
+    if (!user) {
+      throw ApiError.BadRequest("Пользователь не найден");
+    }
+
+    user.startPage = startPage;
+
+    await user.save();
+
+    const userDto = new UserDto(user);
+
+    return userDto;
+  }
+
+  async setUserBackground(data) {
+    const { id, background } = data;
+
+    const user = await UserModel.findById(id);
+
+    if (!user) {
+      throw ApiError.BadRequest("Пользователь не найден");
+    }
+
+    user.background = background;
 
     await user.save();
 

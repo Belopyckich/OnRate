@@ -6,6 +6,8 @@ module.exports = class UserDto {
   picture;
   dob;
   isActivated;
+  startPage;
+  background;
 
   constructor(model) {
     this.email = model.email;
@@ -15,5 +17,7 @@ module.exports = class UserDto {
     this.picture = model.picture;
     this.dob = model.dob;
     this.isActivated = model.isActivated;
+    this.startPage = model.startPage;
+    this.background = model.background;
   }
 };

@@ -1,0 +1,29 @@
+.background-item {
+    cursor: pointer;
+    width: inherit;
+    height: inherit;
+
+    &-active {
+        border: 1px solid themed(--blue-summerSky);
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    &-default {
+        background-color: themed(--athensGray-woodsmoke);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: themed(--black-white);
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    &-wrapper {
+        height: 264px;
+        object-fit: cover;
+        position: relative;
+        width: 100%;
+    }
+}

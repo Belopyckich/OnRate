@@ -22,6 +22,8 @@ const UserSchema = new Schema({
   dob: { type: String, required: false },
   isActivated: { type: Boolean, default: false },
   activationLink: { type: String },
+  startPage: { type: String },
+  background: { type: String },
 });
 
 module.exports = model("User", UserSchema);

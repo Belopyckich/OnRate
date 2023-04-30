@@ -1,6 +1,9 @@
 import {MainHeader} from '@src/components/header/header';
 import {Sidebar} from '@src/components/sidebar/sidebar';
-import {selectIsSidebarOpen} from '@src/redux/app/selectors';
+import {
+    selectCurrentUserBackground,
+    selectIsSidebarOpen,
+} from '@src/redux/app/selectors';
 import {Layout} from 'antd';
 import cn from 'classnames';
 import React from 'react';
@@ -16,6 +19,8 @@ interface AuthProps {
 
 const MainLayout = ({children}: AuthProps) => {
     const isSidebarOpen = useSelector(selectIsSidebarOpen);
+    const userBackground = useSelector(selectCurrentUserBackground);
+    console.log('🚀 ~ userBackground:', userBackground);
 
     return (
         <Layout className={styles.mainLayout}>
@@ -25,6 +30,9 @@ const MainLayout = ({children}: AuthProps) => {
                 <MainHeader />
 
                 <Content
+                    style={{
+                        backgroundImage: `url(${userBackground})`,
+                    }}
                     className={cn(styles.mainLayoutContent, {
                         [styles.mainLayoutContentCollapsed]: isSidebarOpen,
                     })}

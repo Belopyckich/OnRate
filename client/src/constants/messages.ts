@@ -12,6 +12,8 @@ export const messages = {
     updateUserError: 'Произошла ошибка обновления пользователя',
     registrateSuccess:
         'На ваш электронный адрес было послано сообщение о регистрации',
+    updateBackgroundSuccess: 'Тема пользователя успешно обновлена',
+    updateBackgroundError: 'Произошла ошибка при обновлении темы',
     registrateError: 'Произошла ошибка регистрации',
     accessError: 'Произошла ошибка авторизации',
     serverError: 'Ошибка на сервере',

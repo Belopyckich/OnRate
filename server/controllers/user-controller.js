@@ -2,6 +2,7 @@ const userService = require("../service/user-service");
 const { validationResult } = require("express-validator");
 const ApiError = require("../exceptions/api-error");
 const ResponseDto = require("../dtos/response-dto");
+const TokenSchema = require("../models/token-model");
 const fileService = require("../service/file-service");
 const File = require("../models/file-model");
 
@@ -130,6 +131,72 @@ class UserController {
       return res.json(
         new ResponseDto({
           data: { ...userData, picture },
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
+  async setUserStartPage(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      if (!req.body.startPage) {
+        return ApiError.BadRequest(
+          "Произошла ошибка при смене стартовой страницы"
+        );
+      }
+
+      const userData = await userService.setUserStartPage({
+        id: tokenSchema.user,
+        startPage: req.body.startPage,
+      });
+
+      return res.json(
+        new ResponseDto({
+          data: userData,
+          success: true,
+        })
+      );
+    } catch (error) {
+      console.log(error, "error");
+      next(error);
+    }
+  }
+
+  async setUserBackground(req, res, next) {
+    try {
+      const accessToken = req.headers.authorization.split(" ")[1];
+
+      const background = req.body.background || "";
+
+      const tokenSchema = await TokenSchema.findOne({
+        refreshToken: accessToken,
+      });
+
+      if (!tokenSchema) {
+        return ApiError.UnauthorizedError();
+      }
+
+      await userService.setUserBackground({
+        id: tokenSchema.user,
+        background,
+      });
+
+      return res.json(
+        new ResponseDto({
+          data: background,
           success: true,
         })
       );

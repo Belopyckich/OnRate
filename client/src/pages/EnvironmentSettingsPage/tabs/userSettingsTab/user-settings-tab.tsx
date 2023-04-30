@@ -1,13 +1,27 @@
 import {SIDEBAR_TITLE} from '@src/components/sidebar/constants';
 import {ThemeSwitch} from '@src/components/themeSwitch/theme-switch';
 import {APP_ROUTES} from '@src/constants';
+import {setUserStartPage} from '@src/redux/app/actions';
+import {
+    selectCurrentUser,
+    selectCurrentUserEnvironmentSettings,
+} from '@src/redux/app/selectors';
+import {ThemeContext} from '@src/themes/theme-provider';
 import {Checkbox, Radio} from 'antd';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './styles.module.scss';
 
 export const UserSettingsTab = () => {
-    const [startPage, setStartPage] = useState();
+    const dispatch = useDispatch();
+
+    const {isChangedThemeBySystem, setIsChangedThemeBySystem} =
+        useContext(ThemeContext);
+
+    const currentUserEnvironmentSettings = useSelector(
+        selectCurrentUserEnvironmentSettings,
+    );
 
     const options = [
         {label: SIDEBAR_TITLE[APP_ROUTES.KANBAN], value: APP_ROUTES.KANBAN},
@@ -35,8 +49,10 @@ export const UserSettingsTab = () => {
 
                 <Radio.Group
                     options={options}
-                    onChange={(event) => setStartPage(event.target.value)}
-                    value={startPage}
+                    onChange={(event) =>
+                        dispatch(setUserStartPage(event.target.value))
+                    }
+                    value={currentUserEnvironmentSettings?.startPage}
                 />
             </div>
 
@@ -53,7 +69,14 @@ export const UserSettingsTab = () => {
 
                 <ThemeSwitch isSidebarOpen={true} />
 
-                <Checkbox>Использовать настройку системы</Checkbox>
+                <Checkbox
+                    checked={isChangedThemeBySystem}
+                    onChange={(e) =>
+                        setIsChangedThemeBySystem(e.target.checked)
+                    }
+                >
+                    Использовать настройку системы
+                </Checkbox>
             </div>
         </div>
     );

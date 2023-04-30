@@ -53,11 +53,13 @@ export const reorderTasksInColumns = (
             newSourceColumnTasks: sourceColumnTasks.map((column, index) => ({
                 ...column,
                 position: index,
+                column: source.droppableId,
             })),
             newDestinationColumnTasks: destinationColumnTasks.map(
                 (column, index) => ({
                     ...column,
                     position: index,
+                    column: destination.droppableId,
                 }),
             ),
         };

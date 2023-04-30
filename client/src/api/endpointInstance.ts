@@ -16,17 +16,28 @@ import Cookies from 'js-cookie';
 
 import {EndpointConfigs, FORM_CONFIGS} from './config';
 
-const instanceList: {url: string; instance: AxiosInstance}[] = [];
+const instanceList: {
+    url: string;
+    endpointConfigs: EndpointConfigs;
+    instance: AxiosInstance;
+}[] = [];
 
-const findInstanceByUrl = (instanceUrl: string) =>
-    instanceList.find(({url}) => instanceUrl === url);
+const findInstanceByUrl = (
+    instanceUrl: string,
+    currentEndpointConfigs: EndpointConfigs,
+) =>
+    instanceList.find(
+        ({url, endpointConfigs}) =>
+            instanceUrl === url && endpointConfigs === currentEndpointConfigs,
+    );
 
 export const createApiEndpointInstance = (
     url: string,
     endpointConfigs: EndpointConfigs = EndpointConfigs.base,
 ): AxiosInstance => {
     // ищем созданный инстанс в списке
-    const foundInstance = findInstanceByUrl(url);
+    const foundInstance = findInstanceByUrl(url, endpointConfigs);
+
     if (!foundInstance) {
         const config: AxiosRequestConfig = {
             ...FORM_CONFIGS[endpointConfigs],
@@ -53,7 +64,7 @@ export const createApiEndpointInstance = (
         });
 
         // Заносим инстанс в список, чтобы потом не создавать его заново
-        instanceList.push({url, instance});
+        instanceList.push({url, endpointConfigs, instance});
 
         return instance;
     }

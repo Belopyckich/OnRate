@@ -9,6 +9,11 @@ export interface User {
     dob?: string;
 }
 
+export interface UserEnvironmentSettings {
+    startPage: string;
+    background: string;
+}
+
 export type UserForUpdate = Omit<User, 'picture'> & {
     picture?: FormData;
 };
@@ -31,10 +36,14 @@ export interface LoginResponse extends User {
 export interface AuthorizeResponse {
     accessToken: string;
     refreshToken: string;
-    user: User;
+    user: User & UserEnvironmentSettings;
 }
 
 export interface ApiResponse<T> {
     success: boolean;
     data?: T;
+}
+
+export interface CheckIsAuthActionProps {
+    onCallback: (path: string) => void;
 }

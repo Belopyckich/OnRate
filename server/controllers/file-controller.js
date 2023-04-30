@@ -26,22 +26,25 @@ class FileController {
     }
   }
 
-  async getFiles(req, res) {
+  async getBackgrounds(req, res) {
     try {
-      const files = await File.find({
-        user: req.user.id,
-        parent: req.query.parent,
-      });
+      const backgrounds = [
+        `${process.env.API_URL}/${process.env.FILE_DIR}/background/background_1.jpg`,
+        `${process.env.API_URL}/${process.env.FILE_DIR}/background/background_2.jpg`,
+        `${process.env.API_URL}/${process.env.FILE_DIR}/background/background_3.jpg`,
+        `${process.env.API_URL}/${process.env.FILE_DIR}/background/background_4.jpg`,
+        `${process.env.API_URL}/${process.env.FILE_DIR}/background/background_5.jpg`,
+      ];
 
       return res.json(
         new ResponseDto({
-          data: { files },
+          data: backgrounds,
           success: true,
         })
       );
     } catch (e) {
       console.log(e);
-      return ApiError.BadRequest("Ошибка при получении файлов");
+      return ApiError.BadRequest("Ошибка при получении тем");
     }
   }
 

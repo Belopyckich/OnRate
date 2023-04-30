@@ -1,4 +1,3 @@
-import {APP_ROUTES} from '@src/constants';
 import {Card, Tabs} from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
 import React, {useState} from 'react';

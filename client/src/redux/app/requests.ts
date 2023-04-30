@@ -23,6 +23,21 @@ export const logoutRequest = (token: string) =>
         })
         .then(extractData);
 
+export const setUserStartPageRequest = (startPage: string) =>
+    endpointRequest(EndpointsTypes.User)
+        .post<ApiResponse<string>>(`/set-start-page`, {startPage})
+        .then(extractData);
+
+export const setUserBackgroundRequest = (background: string) =>
+    endpointRequest(EndpointsTypes.User)
+        .post<ApiResponse<string>>(`/set-background`, {background})
+        .then(extractData);
+
+export const getBackgroundsRequest = () =>
+    endpointRequest(EndpointsTypes.User)
+        .get<ApiResponse<string[]>>(`/get-backgrounds`)
+        .then(extractData);
+
 export const registrateRequest = (user: RegistrateUserForm) =>
     endpointRequest(EndpointsTypes.Auth)
         .post<ApiResponse<AuthorizeResponse>>(`/registration`, user)

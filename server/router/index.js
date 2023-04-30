@@ -4,6 +4,7 @@ const kanbanController = require("../controllers/kanban-controller");
 const router = new Router();
 const { body } = require("express-validator");
 const authMiddleware = require("../middlewares/auth-middleware");
+const fileController = require("../controllers/file-controller");
 
 router.post(
   "/auth/registration",
@@ -17,6 +18,9 @@ router.post("/auth/logout", userController.logout);
 router.get("/auth/activate/:link", userController.activate);
 router.get("/auth/refresh", userController.refresh);
 router.post("/user/update", userController.updateUser);
+router.get("/user/get-backgrounds", fileController.getBackgrounds);
+router.post("/user/set-start-page", userController.setUserStartPage);
+router.post("/user/set-background", userController.setUserBackground);
 router.get("/users", authMiddleware, userController.getUsers);
 router.post("/kanban/create-column", kanbanController.kanbanColumnCreate);
 router.post("/kanban/delete-column", kanbanController.kanbanColumnDelete);
