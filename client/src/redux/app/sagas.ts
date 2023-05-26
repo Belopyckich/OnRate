@@ -158,7 +158,6 @@ function* checkAuthWorker({payload}: ReturnType<typeof actions.checkAuth>) {
     const response = yield* requestHandler({
         request: call(requests.checkAuthRequest),
         successMessage: messages.accessSuccess,
-        errorMessage: messages.accessError,
     });
 
     if (response?.data && response.success) {

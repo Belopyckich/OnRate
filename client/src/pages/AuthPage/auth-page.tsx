@@ -13,14 +13,18 @@ import styles from './styles.module.scss';
 const AuthPage = () => {
     const [authForm, setAuthForm] = useState(AuthForm.LogIn);
 
+    const isAuthForm = authForm === AuthForm.LogIn;
+
     return (
         <div className={styles.authPage}>
             <div className={styles.authPageForm}>
                 <Icon component={LogoIcon} className={styles.authPageLogo} />
 
-                <div className={styles.authPageTitle}>Авторизация</div>
+                <div className={styles.authPageTitle}>
+                    {isAuthForm ? 'Авторизация' : 'Регистрация'}
+                </div>
 
-                {authForm === AuthForm.LogIn ? (
+                {isAuthForm ? (
                     <LoginForm setAuthForm={setAuthForm} />
                 ) : (
                     <RegistrationForm setAuthForm={setAuthForm} />
