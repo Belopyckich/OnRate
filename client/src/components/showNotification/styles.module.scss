@@ -1,19 +1,19 @@
 .notification {
-    background: themed(--white-mirage);
+    background: themed(--white-mirage) !important;
 
     :global {
         .ant-notification-notice {
             &-message {
-                color: themed(--black-white);
+                color: themed(--black-white) !important;
             }
 
             &-description {
-                color: themed(--darkGrey-rockBlue);
+                color: themed(--darkGrey-rockBlue) !important;
             }
 
             &-close,
             &-close:hover {
-                color: themed(--black-white);
+                color: themed(--black-white) !important;
             }
         }
     }

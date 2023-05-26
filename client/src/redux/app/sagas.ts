@@ -7,6 +7,7 @@ import {APP_ROUTES} from '@src/constants';
 import {COOKIE_KEYS} from '@src/constants/cookie-keys';
 import {DATE_FORMAT} from '@src/constants/date-formats';
 import {messages} from '@src/constants/messages';
+import {devLog} from '@src/helpers/dev-log';
 import Cookies from 'js-cookie';
 import {all, call, put, select, takeLatest} from 'typed-redux-saga';
 import {getType} from 'typesafe-actions';
@@ -155,37 +156,40 @@ function* setUserBackgroundWatcher() {
 }
 
 function* checkAuthWorker({payload}: ReturnType<typeof actions.checkAuth>) {
-    const response = yield* requestHandler({
-        request: call(requests.checkAuthRequest),
-        successMessage: messages.accessSuccess,
-    });
+    try {
+        const response = yield* call(requests.checkAuthRequest);
 
-    if (response?.data && response.success) {
-        const {user, refreshToken} = response.data;
+        if (response?.data && response.success) {
+            const {user, refreshToken} = response.data;
 
-        Cookies.set(COOKIE_KEYS.accessToken, refreshToken);
-        payload.onCallback(user.startPage || APP_ROUTES.KANBAN);
-        yield* put(actions.setAccessToken(refreshToken));
+            Cookies.set(COOKIE_KEYS.accessToken, refreshToken);
+            payload.onCallback(user.startPage || APP_ROUTES.KANBAN);
+            yield* put(actions.setAccessToken(refreshToken));
 
-        yield* put(
-            actions.setUser({
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                location: user.location,
-                picture: user.picture,
-                dob: user.dob,
-            }),
-        );
+            yield* put(
+                actions.setUser({
+                    id: user.id,
+                    email: user.email,
+                    name: user.name,
+                    location: user.location,
+                    picture: user.picture,
+                    dob: user.dob,
+                }),
+            );
 
-        yield* put(
-            actions.setUserEnvironmentSettings({
-                startPage: user.startPage,
-                background: user.background,
-            }),
-        );
+            yield* put(
+                actions.setUserEnvironmentSettings({
+                    startPage: user.startPage,
+                    background: user.background,
+                }),
+            );
 
-        yield* put(actions.getBackgrounds());
+            showNotification(messages.accessSuccess, MessageType.Success);
+
+            yield* put(actions.getBackgrounds());
+        }
+    } catch (e) {
+        devLog(e);
     }
 }
 

@@ -13,6 +13,7 @@ export enum EndpointConfigs {
 
 export const FORM_CONFIGS: EndpointConfigData = {
     [EndpointConfigs.base]: {
+        withCredentials: true,
         paramsSerializer: {
             serialize: (params) =>
                 qs.stringify(params, {arrayFormat: 'brackets'}),
