@@ -558,15 +558,7 @@ function* moveColumnTasksWorker({
             }),
         );
 
-        yield* put(
-            actions.setKanbanBoardColumn({
-                column_uid: payload.destinationColumn,
-                data: {
-                    tasks: response.data,
-                    isLoading: false,
-                },
-            }),
-        );
+        yield put(actions.getKanbanTasksByColumn(payload.destinationColumn));
     }
 }
 
